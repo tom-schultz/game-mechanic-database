@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://5q1x0obrn06c"]
+
+[ext_resource type="Texture2D" uid="uid://buaw5gnsrpuec" path="res://Textures/backdrop.png" id="1_f1xpw"]
+[ext_resource type="Texture2D" uid="uid://cbq11jmrf3hdm" path="res://Textures/rod.png" id="2_owb4w"]
+[ext_resource type="Texture2D" uid="uid://s0k5e8sn5uqf" path="res://Textures/line.png" id="3_4ittn"]
+[ext_resource type="Texture2D" uid="uid://dwsenvitek7ux" path="res://Textures/bobber.png" id="4_lry1k"]
+[ext_resource type="Texture2D" uid="uid://31uin1jkqhaw" path="res://Textures/water.png" id="5_ce5yk"]
+[ext_resource type="Script" path="res://Scenes/Bobber.gd" id="6_t4pq5"]
+[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Textures/mechanic_frame.png" id="7_eep0l"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Mechanic" type="Node2D" parent="."]
+
+[node name="Backdrop" type="Sprite2D" parent="Mechanic"]
+position = Vector2(648, 344)
+scale = Vector2(0.72549, 0.712798)
+texture = ExtResource("1_f1xpw")
+
+[node name="Water" type="Sprite2D" parent="Mechanic/Backdrop"]
+z_index = 3
+position = Vector2(-200.197, 210.438)
+scale = Vector2(1.60158, 0.886647)
+texture = ExtResource("5_ce5yk")
+
+[node name="Rod" type="Sprite2D" parent="Mechanic"]
+z_index = 2
+position = Vector2(608, 247)
+rotation = -0.831802
+scale = Vector2(0.759745, 0.784208)
+texture = ExtResource("2_owb4w")
+
+[node name="Line" type="Sprite2D" parent="Mechanic/Rod"]
+z_index = 1
+z_as_relative = false
+position = Vector2(-124.15, -14.9654)
+rotation = 0.816004
+scale = Vector2(0.32349, 1.29776)
+skew = 0.0315495
+texture = ExtResource("3_4ittn")
+
+[node name="Bobber" type="Sprite2D" parent="Mechanic/Rod"]
+z_index = 2
+z_as_relative = false
+position = Vector2(-223.359, 72.9943)
+rotation = 0.816004
+scale = Vector2(0.311974, 0.314573)
+skew = 0.0315493
+texture = ExtResource("4_lry1k")
+script = ExtResource("6_t4pq5")
+
+[node name="MechanicFrame" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(648, 344)
+scale = Vector2(0.975, 1.06667)
+texture = ExtResource("7_eep0l")
+metadata/_edit_lock_ = true
