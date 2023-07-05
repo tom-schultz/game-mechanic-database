@@ -44,6 +44,7 @@ const FishState = {
 func _ready():
 	starting_pos = position
 	target_pos = position
+	fish_cooldown = fish_state_config.NONE.change_cooldown
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
