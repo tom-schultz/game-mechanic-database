@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://dldhpgic7l2ek"]
+
+[ext_resource type="Script" path="res://Core/Scripts/LibraryUI.gd" id="1_l1ius"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_31g2g"]
+[ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_qx4lr"]
+[ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_skv0h"]
+[ext_resource type="Texture2D" uid="uid://blhxf1ivp051" path="res://Shared/Textures/space_key_light-default-000.png" id="5_v5o5t"]
+
+[node name="Library UI" type="CanvasLayer" node_paths=PackedStringArray("config_container", "description_label")]
+script = ExtResource("1_l1ius")
+config_container = NodePath("TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
+description_label = NodePath("TabContainer/Description/Description Text")
+
+[node name="Title" type="Label" parent="."]
+offset_top = 8.0
+offset_right = 432.0
+offset_bottom = 53.0
+theme = ExtResource("2_31g2g")
+text = "Bobber Fishing"
+label_settings = ExtResource("3_qx4lr")
+horizontal_alignment = 1
+
+[node name="Category" type="Label" parent="."]
+offset_top = 48.0
+offset_right = 432.0
+offset_bottom = 75.0
+theme = ExtResource("2_31g2g")
+text = "Timed Button Press"
+label_settings = ExtResource("4_skv0h")
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="."]
+offset_left = 16.0
+offset_top = 88.0
+offset_right = 416.0
+offset_bottom = 704.0
+
+[node name="Description" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+theme = ExtResource("2_31g2g")
+
+[node name="Description Text" type="Label" parent="TabContainer/Description"]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_31g2g")
+text = "Lorem Ipsum"
+horizontal_alignment = 1
+autowrap_mode = 2
+text_overrun_behavior = 4
+
+[node name="Controls" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_31g2g")
+
+[node name="Space Bar" type="Sprite2D" parent="TabContainer/Controls"]
+position = Vector2(176, 216)
+texture = ExtResource("5_v5o5t")
+
+[node name="Configuration" type="MarginContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_31g2g")
+
+[node name="Scroll Container" type="ScrollContainer" parent="TabContainer/Configuration"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Configuration/Scroll Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_31g2g")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Configuration/Scroll Container/MarginContainer"]
+layout_mode = 2
+columns = 2

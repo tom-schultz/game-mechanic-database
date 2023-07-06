@@ -11,9 +11,8 @@ config_version=5
 [application]
 
 config/name="minor-mechanic-library"
-run/main_scene="res://Scenes/bobber_fishing.tscn"
+run/main_scene="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
 
 [display]
 
