@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8q272lc4ms25"]
+
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="1_axrwr"]
+[ext_resource type="Texture2D" uid="uid://blhxf1ivp051" path="res://Shared/Textures/space_key_light-default-000.png" id="2_hp246"]
+[ext_resource type="Texture2D" uid="uid://bhc8atini4gpj" path="res://Shared/Textures/key_light-default-000.png" id="3_ysubm"]
+[ext_resource type="Texture2D" uid="uid://bdcokjtgialwv" path="res://Shared/Textures/key_light2-default-000.png" id="4_pipgd"]
+[ext_resource type="Texture2D" uid="uid://dxyus6mr4fkk2" path="res://Shared/Textures/key_light3-default-000.png" id="5_rc2w0"]
+
+[node name="BobberFishingControls" type="GridContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_axrwr")
+columns = 2
+
+[node name="Action Button" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_axrwr")
+text = "Action Button"
+
+[node name="Action Button Image" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme = ExtResource("1_axrwr")
+texture = ExtResource("2_hp246")
+
+[node name="No Fish" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_axrwr")
+text = "Trigger No Fish"
+
+[node name="No Fish Image" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme = ExtResource("1_axrwr")
+texture = ExtResource("3_ysubm")
+
+[node name="Nibble" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_axrwr")
+text = "Trigger Nibble
+"
+
+[node name="Nibble Image" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme = ExtResource("1_axrwr")
+texture = ExtResource("4_pipgd")
+
+[node name="Bite" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_axrwr")
+text = "Trigger No Fish"
+
+[node name="Bite Image" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme = ExtResource("1_axrwr")
+texture = ExtResource("5_rc2w0")

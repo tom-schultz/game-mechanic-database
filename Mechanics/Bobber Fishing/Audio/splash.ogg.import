@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dt60ud23y6hqq"
+path="res://.godot/imported/splash.ogg-7ab55ca4b8ead3cec7850079e5a7c349.oggvorbisstr"
+
+[deps]
+
+source_file="res://Mechanics/Bobber Fishing/Audio/splash.ogg"
+dest_files=["res://.godot/imported/splash.ogg-7ab55ca4b8ead3cec7850079e5a7c349.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

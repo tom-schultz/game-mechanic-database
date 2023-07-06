@@ -1,26 +1,40 @@
-[gd_scene load_steps=10 format=3 uid="uid://5q1x0obrn06c"]
+[gd_scene load_steps=18 format=3 uid="uid://5q1x0obrn06c"]
 
 [ext_resource type="Texture2D" uid="uid://buaw5gnsrpuec" path="res://Mechanics/Bobber Fishing/Textures/backdrop.png" id="1_064c6"]
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingCfg.gd" id="1_a7j1g"]
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="2_0gvbo"]
+[ext_resource type="PackedScene" uid="uid://c8q272lc4ms25" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="2_exwg3"]
 [ext_resource type="Texture2D" uid="uid://31uin1jkqhaw" path="res://Mechanics/Bobber Fishing/Textures/water.png" id="2_q2qlh"]
 [ext_resource type="Texture2D" uid="uid://cbq11jmrf3hdm" path="res://Mechanics/Bobber Fishing/Textures/rod.png" id="3_1uvfa"]
 [ext_resource type="Texture2D" uid="uid://s0k5e8sn5uqf" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="4_dom40"]
 [ext_resource type="PackedScene" uid="uid://ov5d7efltiud" path="res://Mechanics/Bobber Fishing/Scenes/bobber.tscn" id="6_h0d5b"]
 [ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Shared/Textures/mechanic_frame.png" id="7_6c4dv"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/ui.tscn" id="8_grm2o"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="10_vb4xo"]
+[ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Mechanics/Bobber Fishing/Audio/bloop.wav" id="11_1v1jb"]
+[ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Mechanics/Bobber Fishing/Audio/splash.ogg" id="12_6f3gp"]
+[ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Mechanics/Bobber Fishing/Audio/score.wav" id="12_w8x5u"]
+[ext_resource type="FontFile" uid="uid://c2vykx1wbbvi4" path="res://Shared/Fonts/NotoSans-Bold.ttf" id="14_iywq1"]
+[ext_resource type="AudioStream" uid="uid://8jaidc1aninr" path="res://Mechanics/Bobber Fishing/Audio/park_ambience_birds.wav" id="15_acqhr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ccpoh"]
+font = ExtResource("14_iywq1")
+font_size = 29
+font_color = Color(0.941176, 0.964706, 0.941176, 1)
 
 [node name="Node" type="Node"]
 
-[node name="BobberFishingCfg" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
-script = ExtResource("1_a7j1g")
-library_ui = NodePath("../Library UI")
-
-[node name="Bobber Fishing" type="Sprite2D" parent="."]
+[node name="Bobber Fishing" type="Sprite2D" parent="." node_paths=PackedStringArray("cfg")]
 position = Vector2(848, 360)
 scale = Vector2(1.3, 1.43334)
 texture = ExtResource("7_6c4dv")
 script = ExtResource("2_0gvbo")
+cfg = NodePath("Config")
+
+[node name="Config" type="Node" parent="Bobber Fishing" node_paths=PackedStringArray("library_ui")]
+script = ExtResource("1_a7j1g")
+controls = ExtResource("2_exwg3")
+library_ui = NodePath("../../Library UI")
 
 [node name="Backdrop" type="Sprite2D" parent="Bobber Fishing"]
 position = Vector2(6.10352e-05, -0.000915527)
@@ -50,10 +64,40 @@ scale = Vector2(0.32349, 1.29776)
 skew = 0.0315495
 texture = ExtResource("4_dom40")
 
-[node name="Bobber" parent="Bobber Fishing" node_paths=PackedStringArray("cfg") instance=ExtResource("6_h0d5b")]
+[node name="Bobber" parent="Bobber Fishing" node_paths=PackedStringArray("cfg", "sfx_player") instance=ExtResource("6_h0d5b")]
 z_index = 1
 position = Vector2(-62.3845, 64.8832)
 scale = Vector2(0.307692, 0.279069)
-cfg = NodePath("../../BobberFishingCfg")
+cfg = NodePath("../Config")
+sfx_player = NodePath("../../SFX Player")
+splash_sfx = ExtResource("12_6f3gp")
+bloop_sfx = ExtResource("11_1v1jb")
+bite_score_sfx = ExtResource("12_w8x5u")
+
+[node name="Score" type="Label" parent="Bobber Fishing"]
+offset_left = -313.846
+offset_top = -228.836
+offset_right = 314.154
+offset_bottom = -202.836
+theme = ExtResource("10_vb4xo")
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="Fisherman" type="Label" parent="Bobber Fishing"]
+offset_left = 86.1539
+offset_top = -156.278
+offset_right = 209.154
+offset_bottom = -95.2784
+theme = ExtResource("10_vb4xo")
+text = "ఠ ͟ಠ"
+label_settings = SubResource("LabelSettings_ccpoh")
+horizontal_alignment = 1
 
 [node name="Library UI" parent="." instance=ExtResource("8_grm2o")]
+
+[node name="SFX Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_6f3gp")
+
+[node name="Music Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_acqhr")
+autoplay = true

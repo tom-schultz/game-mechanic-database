@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dau0o1i1jldji"
+path="res://.godot/imported/bloop.wav-838c50ef2eb1cdc49fe92854e343541d.sample"
+
+[deps]
+
+source_file="res://Mechanics/Bobber Fishing/Audio/bloop.wav"
+dest_files=["res://.godot/imported/bloop.wav-838c50ef2eb1cdc49fe92854e343541d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

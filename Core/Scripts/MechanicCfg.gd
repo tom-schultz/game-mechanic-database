@@ -1,7 +1,7 @@
 extends Node
 class_name MechanicCfg
 
-@export var library_ui: CanvasLayer
+@export var library_ui :CanvasLayer
 var config_container : Container
 var property_prefix = "cfg_"
 var theme
@@ -9,6 +9,9 @@ var theme
 func load_description(desc_path):
 	var file = FileAccess.open(desc_path, FileAccess.READ)
 	library_ui.set_description(file.get_as_text())
+	
+func load_controls(controls):
+	library_ui.set_controls(controls)
 
 func build_config_ui():
 	config_container = library_ui.get_config_container()
@@ -18,7 +21,7 @@ func build_config_ui():
 	var grid
 	
 	for config_item in config_list:
-		if (config_item.type == TYPE_DICTIONARY):
+		if (typeof(config_item.value) == TYPE_DICTIONARY):
 			_build_dict_grid(config_item.config_key, config_item.human_name, config_item.value)
 		else:
 			_build_label(config_container, config_item.human_name)
@@ -37,7 +40,6 @@ func _build_config_list():
 		config_array.append({
 			config_key = prop_name,
 			human_name = _human_readable_name(prop_name),
-			type = property["type"],
 			value = get(property["name"])
 		})
 	
@@ -54,6 +56,8 @@ func _human_readable_name(property_name:String):
 	return name.trim_suffix(" ")
 
 func _build_dict_grid(config_key, dict_label, dict):
+	_build_label(config_container, "")
+	_build_label(config_container, "")
 	_build_label(config_container, dict_label)
 	_build_label(config_container, "")
 	
@@ -65,9 +69,6 @@ func _build_dict_grid(config_key, dict_label, dict):
 		else:
 			_build_label(config_container, key)
 			_build_spin_box(config_container, new_config_key, dict[key])
-	
-	_build_label(config_container, "")
-	_build_label(config_container, "")
 
 func _build_label(container, label_text):
 		var label = Label.new()

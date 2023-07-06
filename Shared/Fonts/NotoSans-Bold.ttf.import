@@ -1,0 +1,39 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://c2vykx1wbbvi4"
+path="res://.godot/imported/NotoSans-Bold.ttf-f8f9e0fc47996ad793732b65196e653b.fontdata"
+
+[deps]
+
+source_file="res://Shared/Fonts/NotoSans-Bold.ttf"
+dest_files=["res://.godot/imported/NotoSans-Bold.ttf-f8f9e0fc47996ad793732b65196e653b.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=true
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=false
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[Resource("res://Shared/Fonts/NotoSansCanadianAboriginal-VariableFont_wght.ttf"), Resource("res://Shared/Fonts/NotoSansKannada-VariableFont_wdth,wght.ttf"), Resource("res://Shared/Fonts/NotoSansTelugu-VariableFont_wdth,wght.ttf")]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0),
+"variation_embolden": 0.0
+}]
+language_support={}
+script_support={}
+opentype_features={}
