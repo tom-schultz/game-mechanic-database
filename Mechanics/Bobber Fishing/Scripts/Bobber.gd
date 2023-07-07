@@ -1,9 +1,7 @@
 extends Sprite2D
 class_name Bobber
 
-signal fish_caught()
-
-@export var cfg: MechanicCfg
+@export var cfg: BobberFishingConfig
 @export var sfx_player: AudioStreamPlayer
 @export var splash_sfx: AudioStream
 @export var bloop_sfx: AudioStream
@@ -23,12 +21,14 @@ const FishState = {
 	BITE = "Bite"
 }
 
+signal fish_caught()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fish_state = FishState.NOFISH
 	starting_pos = position
 	target_pos = position
-	fish_cooldown = cfg.c_state_config[fish_state].change_cooldown
+	fish_cooldown = cfg.state_config[fish_state].change_cooldown
 	fish_state = FishState.NOFISH
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,22 +53,22 @@ func update_fish_state(delta):
 	next_state_check = time + 1000
 	var rand = randf()
 	
-	if (rand <= cfg.c_state_config.Bite.random_weight):
+	if (rand <= cfg.state_config.Bite.random_weight):
 		set_state(FishState.BITE, false)
-	elif (rand <=  cfg.c_state_config.Bite.random_weight + cfg.c_state_config.Nibble.random_weight):
+	elif (rand <=  cfg.state_config.Bite.random_weight + cfg.state_config.Nibble.random_weight):
 		set_state(FishState.NIBBLE, false)
 		
 func move_bobber(delta):
 	if (is_bobbing):
-		counter += cfg.c_bob_speed * delta
-		position = starting_pos + cfg.c_bob_distance * sin(counter) * Vector2.UP
+		counter += cfg.bob_speed * delta
+		position = starting_pos + cfg.bob_distance * sin(counter) * Vector2.UP
 	elif (!position.is_equal_approx(target_pos)):
 		var y_dist = abs(target_pos.y - starting_pos.y)
 		
 		if fish_state == FishState.NOFISH:
-			y_dist = cfg.c_state_config.Bite.pos_y_offset
+			y_dist = cfg.state_config.Bite.pos_y_offset
 			
-		var pos_delta = y_dist * delta / cfg.c_state_change_time
+		var pos_delta = y_dist * delta / cfg.state_change_time
 		position = position.move_toward(target_pos, pos_delta)
 		
 		if (position.is_equal_approx(target_pos)):
@@ -90,17 +90,17 @@ func hit():
 	
 func set_state(new_state, is_hit):
 	if is_hit:
-		fish_cooldown = cfg.c_state_config[fish_state].hit_cooldown
+		fish_cooldown = cfg.state_config[fish_state].hit_cooldown
 	else:
-		fish_cooldown = cfg.c_state_config[new_state].change_cooldown
+		fish_cooldown = cfg.state_config[new_state].change_cooldown
 	
 	if (fish_state != new_state):
-		target_pos = starting_pos + cfg.c_state_config[new_state].pos_y_offset * Vector2.DOWN
+		target_pos = starting_pos + cfg.state_config[new_state].pos_y_offset * Vector2.DOWN
 		fish_state = new_state
 		counter = 0
 		is_bobbing = false
 		next_state_check = Time.get_ticks_msec() + fish_cooldown * 1000 + 1000
 	elif (fish_state == FishState.NOFISH):
-		target_pos = starting_pos + cfg.c_bob_distance * Vector2.UP
+		target_pos = starting_pos + cfg.bob_distance * Vector2.UP
 		counter = PI / 2
 		is_bobbing = false

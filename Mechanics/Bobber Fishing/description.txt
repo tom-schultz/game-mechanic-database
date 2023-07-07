@@ -1,5 +1,5 @@
 Bobber fishing is a classic timed button press mechanic. The player watches the bobber and presses the action button at the right time.
 
-The game has three states - no fish, nibble, and bite. The no fish position is where the bobber is most visible. The nibble position, where the bobber is semi-submerged, represents a fish that has nipped at the bait or nudged it, but not swallowed up. The bite position, where the bobber is almost entirely submerged, represents a fish that has swallowed the bait and can be hooked.
+The game has three states - no fish, nibble, and bite. The no fish position is where the bobber is most visible. The nibble position, where the bobber is semi-submerged, represents a fish that has nipped at the bait or nudged it, but not swallowed it. The bite position, where the bobber is almost entirely submerged, represents a fish that has swallowed the bait and can be hooked.
 
-Fish are caught when the player presses the action button during the "bite" stage. A random number of points are given to the player for each fish caught. If the player presses the action button during the other phases there is a cooldown penalty to indicate that you've scared the fish away.
+Fish are caught when the player presses the action button during the bite stage. A random number of points are given to the player for each fish caught. If the player presses the action button during the other phases there is a cooldown penalty to indicate that you've scared the fish away.

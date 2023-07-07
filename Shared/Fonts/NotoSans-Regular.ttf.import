@@ -2,7 +2,7 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://qf703ekb1kv8"
+uid="uid://conqt2iceclon"
 path="res://.godot/imported/NotoSans-Regular.ttf-06ddc18cbed5b9d3a8469a9fcb8754fe.fontdata"
 
 [deps]
@@ -24,15 +24,14 @@ hinting=1
 subpixel_positioning=1
 oversampling=0.0
 Fallbacks=null
-fallbacks=[Resource("res://Shared/Fonts/NotoSansCanadianAboriginal-VariableFont_wght.ttf"), Resource("res://Shared/Fonts/NotoSansKannada-VariableFont_wdth,wght.ttf"), Resource("res://Shared/Fonts/NotoSansTelugu-VariableFont_wdth,wght.ttf")]
+fallbacks=[Resource("res://Shared/Fonts/NotoSansTelugu-VariableFont_wdth,wght.ttf")]
 Compress=null
-compress=true
+compress=false
 preload=[{
 "chars": [],
 "glyphs": [],
 "name": "New Configuration",
-"size": Vector2i(16, 0),
-"variation_embolden": 0.0
+"size": Vector2i(16, 0)
 }]
 language_support={}
 script_support={}

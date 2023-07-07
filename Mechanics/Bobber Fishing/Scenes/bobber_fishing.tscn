@@ -1,11 +1,11 @@
 [gd_scene load_steps=18 format=3 uid="uid://5q1x0obrn06c"]
 
 [ext_resource type="Texture2D" uid="uid://buaw5gnsrpuec" path="res://Mechanics/Bobber Fishing/Textures/backdrop.png" id="1_064c6"]
-[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingCfg.gd" id="1_a7j1g"]
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="2_0gvbo"]
 [ext_resource type="PackedScene" uid="uid://c8q272lc4ms25" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="2_exwg3"]
 [ext_resource type="Texture2D" uid="uid://31uin1jkqhaw" path="res://Mechanics/Bobber Fishing/Textures/water.png" id="2_q2qlh"]
 [ext_resource type="Texture2D" uid="uid://cbq11jmrf3hdm" path="res://Mechanics/Bobber Fishing/Textures/rod.png" id="3_1uvfa"]
+[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingConfig.gd" id="3_e05us"]
 [ext_resource type="Texture2D" uid="uid://s0k5e8sn5uqf" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="4_dom40"]
 [ext_resource type="PackedScene" uid="uid://ov5d7efltiud" path="res://Mechanics/Bobber Fishing/Scenes/bobber.tscn" id="6_h0d5b"]
 [ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Shared/Textures/mechanic_frame.png" id="7_6c4dv"]
@@ -32,8 +32,7 @@ script = ExtResource("2_0gvbo")
 cfg = NodePath("Config")
 
 [node name="Config" type="Node" parent="Bobber Fishing" node_paths=PackedStringArray("library_ui")]
-script = ExtResource("1_a7j1g")
-controls = ExtResource("2_exwg3")
+script = ExtResource("3_e05us")
 library_ui = NodePath("../../Library UI")
 
 [node name="Backdrop" type="Sprite2D" parent="Bobber Fishing"]
@@ -94,6 +93,8 @@ label_settings = SubResource("LabelSettings_ccpoh")
 horizontal_alignment = 1
 
 [node name="Library UI" parent="." instance=ExtResource("8_grm2o")]
+mechanic_description_file = "res://Mechanics/Bobber Fishing/description.txt"
+mechanic_controls_scene = ExtResource("2_exwg3")
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_6f3gp")
