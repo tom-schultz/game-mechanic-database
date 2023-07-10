@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cf6872w3y52f0"]
+
+[node name="TMML Manager" type="GridContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+
+[node name="Mechanic Name Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Mechanic Name"
+
+[node name="Mechanic Name" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Mechanic Category Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Mechanic Category"
+
+[node name="Mechanic Category" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Submit" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Submit Mechanic"

@@ -16,7 +16,7 @@ offset_top = 8.0
 offset_right = 432.0
 offset_bottom = 53.0
 theme = ExtResource("2_31g2g")
-text = "Bobber Fishing"
+text = "Mechanic Name"
 label_settings = ExtResource("3_qx4lr")
 horizontal_alignment = 1
 
@@ -25,7 +25,7 @@ offset_top = 48.0
 offset_right = 432.0
 offset_bottom = 75.0
 theme = ExtResource("2_31g2g")
-text = "Timed Button Press"
+text = "Mechanic Category"
 label_settings = ExtResource("4_skv0h")
 horizontal_alignment = 1
 
@@ -109,5 +109,5 @@ layout_mode = 2
 columns = 2
 
 [connection signal="pressed" from="TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]

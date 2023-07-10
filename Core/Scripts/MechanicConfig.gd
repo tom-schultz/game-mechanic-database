@@ -1,7 +1,7 @@
 extends Node
 class_name MechanicConfig
 
-@export var library_ui : CanvasLayer
+@export var library_ui : MechanicLibraryUI
 var config_container : Container
 var theme
 

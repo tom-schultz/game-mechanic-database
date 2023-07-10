@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://s0k5e8sn5uqf" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="4_dom40"]
 [ext_resource type="PackedScene" uid="uid://ov5d7efltiud" path="res://Mechanics/Bobber Fishing/Scenes/bobber.tscn" id="6_h0d5b"]
 [ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Shared/Textures/mechanic_frame.png" id="7_6c4dv"]
-[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/ui.tscn" id="8_grm2o"]
+[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="8_grm2o"]
 [ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/splash.ogg" id="9_rot67"]
 [ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/bloop.wav" id="10_i6cgl"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="10_vb4xo"]
@@ -22,31 +22,29 @@ font = ExtResource("14_iywq1")
 font_size = 29
 font_color = Color(0.941176, 0.964706, 0.941176, 1)
 
-[node name="Node" type="Node"]
-
-[node name="Bobber Fishing" type="Sprite2D" parent="." node_paths=PackedStringArray("cfg")]
+[node name="Bobber Fishing" type="Sprite2D" node_paths=PackedStringArray("cfg")]
 position = Vector2(848, 360)
 scale = Vector2(1.3, 1.43334)
 texture = ExtResource("7_6c4dv")
 script = ExtResource("2_0gvbo")
 cfg = NodePath("Config")
 
-[node name="Config" type="Node" parent="Bobber Fishing" node_paths=PackedStringArray("library_ui")]
+[node name="Config" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
 script = ExtResource("3_e05us")
-library_ui = NodePath("../../Library UI")
+library_ui = NodePath("../Library UI")
 
-[node name="Backdrop" type="Sprite2D" parent="Bobber Fishing"]
+[node name="Backdrop" type="Sprite2D" parent="."]
 position = Vector2(6.10352e-05, -0.000915527)
 scale = Vector2(0.769231, 0.697672)
 texture = ExtResource("1_064c6")
 
-[node name="Water" type="Sprite2D" parent="Bobber Fishing/Backdrop"]
+[node name="Water" type="Sprite2D" parent="Backdrop"]
 z_index = 3
 position = Vector2(-200.197, 210.438)
 scale = Vector2(1.60158, 0.886647)
 texture = ExtResource("2_q2qlh")
 
-[node name="Rod" type="Sprite2D" parent="Bobber Fishing"]
+[node name="Rod" type="Sprite2D" parent="."]
 z_index = 2
 position = Vector2(10.7692, -103.256)
 rotation = -0.783048
@@ -54,7 +52,7 @@ scale = Vector2(0.731004, 0.761232)
 skew = -0.0970706
 texture = ExtResource("3_1uvfa")
 
-[node name="Line" type="Sprite2D" parent="Bobber Fishing/Rod"]
+[node name="Line" type="Sprite2D" parent="Rod"]
 z_index = 1
 z_as_relative = false
 position = Vector2(-124.15, -14.9654)
@@ -63,17 +61,17 @@ scale = Vector2(0.32349, 1.29776)
 skew = 0.0315495
 texture = ExtResource("4_dom40")
 
-[node name="Bobber" parent="Bobber Fishing" node_paths=PackedStringArray("cfg", "sfx_player") instance=ExtResource("6_h0d5b")]
+[node name="Bobber" parent="." node_paths=PackedStringArray("cfg", "sfx_player") instance=ExtResource("6_h0d5b")]
 z_index = 1
 position = Vector2(-62.3845, 64.8832)
 scale = Vector2(0.307692, 0.279069)
 cfg = NodePath("../Config")
-sfx_player = NodePath("../../SFX Player")
+sfx_player = NodePath("../SFX Player")
 splash_sfx = ExtResource("9_rot67")
 bloop_sfx = ExtResource("10_i6cgl")
 bite_score_sfx = ExtResource("11_5oeu5")
 
-[node name="Score" type="Label" parent="Bobber Fishing"]
+[node name="Score" type="Label" parent="."]
 offset_left = -313.846
 offset_top = -228.836
 offset_right = 314.154
@@ -83,7 +81,7 @@ theme_override_fonts/font = ExtResource("14_iywq1")
 text = "Score: 0"
 horizontal_alignment = 1
 
-[node name="Fisherman" type="Label" parent="Bobber Fishing"]
+[node name="Fisherman" type="Label" parent="."]
 offset_left = 86.1539
 offset_top = -156.278
 offset_right = 209.154
@@ -94,6 +92,8 @@ label_settings = SubResource("LabelSettings_ccpoh")
 horizontal_alignment = 1
 
 [node name="Library UI" parent="." instance=ExtResource("8_grm2o")]
+mechanic_name = "Bobber Fishing"
+mechanic_category = "Timed Button Press"
 mechanic_description_file = "res://Mechanics/Bobber Fishing/description.txt"
 mechanic_controls_scene = ExtResource("2_exwg3")
 

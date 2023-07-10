@@ -28,6 +28,10 @@ project/assembly_name="minor-mechanic-library-testing"
 
 export/convert_text_resources_to_binary=false
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/tmml_manager/plugin.cfg")
+
 [gui]
 
 theme/custom="res://Shared/tmml_theme.tres"

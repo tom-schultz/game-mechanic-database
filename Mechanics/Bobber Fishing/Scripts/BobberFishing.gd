@@ -1,4 +1,5 @@
 extends Node
+class_name BobberFishing
 
 @export var cfg : BobberFishingConfig
 @onready var bobber : Bobber = get_node("Bobber")
