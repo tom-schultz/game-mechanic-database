@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://2gs4vniaoulv"
-path="res://.godot/imported/score.wav-c5338f9eec2efc3408eeef427237ec5b.sample"
+path="res://.godot/imported/score.wav-0a9529e60a4ac0baa9ea2a4d35ec21cd.sample"
 
 [deps]
 
-source_file="res://Mechanics/Bobber Fishing/Audio/score.wav"
-dest_files=["res://.godot/imported/score.wav-c5338f9eec2efc3408eeef427237ec5b.sample"]
+source_file="res://Shared/Audio/score.wav"
+dest_files=["res://.godot/imported/score.wav-0a9529e60a4ac0baa9ea2a4d35ec21cd.sample"]
 
 [params]
 

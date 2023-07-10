@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dau0o1i1jldji"
-path="res://.godot/imported/bloop.wav-838c50ef2eb1cdc49fe92854e343541d.sample"
+path="res://.godot/imported/bloop.wav-c54ecac5d55a330a5ee2b5c9a2647c85.sample"
 
 [deps]
 
-source_file="res://Mechanics/Bobber Fishing/Audio/bloop.wav"
-dest_files=["res://.godot/imported/bloop.wav-838c50ef2eb1cdc49fe92854e343541d.sample"]
+source_file="res://Shared/Audio/bloop.wav"
+dest_files=["res://.godot/imported/bloop.wav-c54ecac5d55a330a5ee2b5c9a2647c85.sample"]
 
 [params]
 

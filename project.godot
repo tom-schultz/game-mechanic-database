@@ -28,6 +28,10 @@ project/assembly_name="minor-mechanic-library-testing"
 
 export/convert_text_resources_to_binary=false
 
+[gui]
+
+theme/custom="res://Shared/tmml_theme.tres"
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.133333, 0.137255, 0.137255, 1)

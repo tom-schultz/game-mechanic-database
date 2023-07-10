@@ -7,7 +7,7 @@
 
 [node name="Library UI" type="CanvasLayer" node_paths=PackedStringArray("description_label", "controls_container", "config_container")]
 script = ExtResource("1_l1ius")
-description_label = NodePath("TabContainer/Description/Description Text")
+description_label = NodePath("TabContainer/Description/ScrollContainer/Description Text")
 controls_container = NodePath("TabContainer/Controls")
 config_container = NodePath("TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
 
@@ -66,14 +66,19 @@ visible = false
 layout_mode = 2
 theme = ExtResource("2_31g2g")
 
-[node name="Description Text" type="Label" parent="TabContainer/Description"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Description"]
 layout_mode = 2
-size_flags_vertical = 1
+theme = ExtResource("2_31g2g")
+horizontal_scroll_mode = 0
+
+[node name="Description Text" type="Label" parent="TabContainer/Description/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("2_31g2g")
 text = "Lorem Ipsum"
 horizontal_alignment = 1
 autowrap_mode = 2
-text_overrun_behavior = 4
 
 [node name="Controls" type="MarginContainer" parent="TabContainer"]
 visible = false
@@ -104,5 +109,5 @@ layout_mode = 2
 columns = 2
 
 [connection signal="pressed" from="TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]
 [connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]
