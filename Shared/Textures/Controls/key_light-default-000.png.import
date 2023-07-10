@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxyus6mr4fkk2"
-path="res://.godot/imported/key_light3-default-000.png-77670527bed8bd1fdac7b7584259373e.ctex"
+uid="uid://bhc8atini4gpj"
+path="res://.godot/imported/key_light-default-000.png-34400a15b496e69741a0c750f6bc5444.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/key_light3-default-000.png"
-dest_files=["res://.godot/imported/key_light3-default-000.png-77670527bed8bd1fdac7b7584259373e.ctex"]
+source_file="res://Shared/Textures/Controls/key_light-default-000.png"
+dest_files=["res://.godot/imported/key_light-default-000.png-34400a15b496e69741a0c750f6bc5444.ctex"]
 
 [params]
 

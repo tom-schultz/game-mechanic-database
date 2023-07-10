@@ -1,5 +1,5 @@
 extends SpinBox
-class_name ConfigField
+class_name ConfigFieldFloat
 
 var line_edit
 

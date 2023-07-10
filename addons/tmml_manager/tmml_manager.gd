@@ -14,6 +14,7 @@ var scene_path
 var scripts_path
 var textures_path
 var audio_path
+var editor_interface: EditorInterface
 var editor_file_system : EditorFileSystem
 var tmml
 
@@ -22,26 +23,23 @@ func _enter_tree():
 	mechanic_config_script = load("res://addons/tmml_manager/Template/Scripts/MECHANIC_CONFIG.gd")
 	mechanic_scene = load("res://addons/tmml_manager/Template/Scenes/MECHANIC.tscn")
 	mechanic_controls_scene = load("res://addons/tmml_manager/Template/Scenes/MECHANIC_CONTROLS.tscn")
-	editor_file_system = get_editor_interface().get_resource_filesystem()
+	editor_interface = get_editor_interface()
+	editor_file_system = editor_interface.get_resource_filesystem()
 	_build_plugin_ui()
 
 func _build_plugin_ui():
-#	button = Button.new()
-#	button.name = "TMML Manager"
-#	button.pressed.connect(build_new_mechanic)
-#	button.text = "Generate New Mechanic"
 	tmml = load("res://addons/tmml_manager/tmml_manager.tscn").instantiate()
 	tmml.get_node("Submit").pressed.connect(build_new_mechanic)
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, tmml)
 
 func build_new_mechanic():
-	mechanic_path = base_dir + mechanic_name + "/"
-	scene_path = mechanic_path + "/Scenes/"
-	scripts_path = mechanic_path + "/Scripts/"
-	textures_path = mechanic_path + "/Textures/"
-	audio_path = mechanic_path + "/Audio/"
 	mechanic_name = tmml.get_node("Mechanic Name").text
 	mechanic_category = tmml.get_node("Mechanic Category").text
+	mechanic_path = base_dir + mechanic_name + "/"
+	scene_path = mechanic_path + "Scenes/"
+	scripts_path = mechanic_path + "Scripts/"
+	textures_path = mechanic_path + "Textures/"
+	audio_path = mechanic_path + "Audio/"
 	
 	if (DirAccess.dir_exists_absolute(mechanic_path)):
 		print_debug("Mechanic path already exists: " + mechanic_path)
@@ -54,9 +52,8 @@ func build_new_mechanic():
 	DirAccess.make_dir_absolute(textures_path.trim_suffix("/"))
 	DirAccess.make_dir_absolute(audio_path.trim_suffix("/"))
 	
-	_build_mechanic_scene()
+	var scene_file_path = _build_mechanic_scene()
 	editor_file_system.scan_sources()
-
 
 func _build_mechanic_scene():
 	var pascal = mechanic_name.to_pascal_case()
@@ -89,9 +86,13 @@ func _build_mechanic_scene():
 	
 	var new_pack = PackedScene.new()
 	new_pack.resource_name = mechanic_name
+	var scene_file_path = scene_path + snake + ".tscn"
 	
 	if (new_pack.pack(mechanic) == OK):
-		ResourceSaver.save(new_pack, scene_path + snake + ".tscn")
+		ResourceSaver.save(new_pack, scene_file_path)
+	
+	editor_interface.set_main_screen_editor("2D")
+	editor_interface.open_scene_from_path(scene_file_path)
 
 func _render_script_templ(script : Script, script_name : String):
 	var new_path = scripts_path + script_name + ".gd"

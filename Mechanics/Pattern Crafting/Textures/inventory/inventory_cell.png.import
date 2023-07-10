@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1sj367qdhckw"
-path="res://.godot/imported/mechanic_frame.png-518c8a421468ec702f199c7bf2e55f44.ctex"
+uid="uid://cgjjg41k68xbe"
+path="res://.godot/imported/inventory_cell.png-1c5cffcf8c1ed7c0d6dabaa2d26dd64d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/mechanic_frame.png"
-dest_files=["res://.godot/imported/mechanic_frame.png-518c8a421468ec702f199c7bf2e55f44.ctex"]
+source_file="res://Mechanics/Pattern Crafting/Textures/inventory/inventory_cell.png"
+dest_files=["res://.godot/imported/inventory_cell.png-1c5cffcf8c1ed7c0d6dabaa2d26dd64d.ctex"]
 
 [params]
 

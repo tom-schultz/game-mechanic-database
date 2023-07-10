@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blhxf1ivp051"
-path="res://.godot/imported/space_key_light-default-000.png-7b61622a29544ff2b8899319e208769d.ctex"
+uid="uid://ccwrliifq4i65"
+path="res://.godot/imported/egg.svg-698d0ad03d3780f74f1e39d589a7e36e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/space_key_light-default-000.png"
-dest_files=["res://.godot/imported/space_key_light-default-000.png-7b61622a29544ff2b8899319e208769d.ctex"]
+source_file="res://Shared/Textures/Food/meat/egg.svg"
+dest_files=["res://.godot/imported/egg.svg-698d0ad03d3780f74f1e39d589a7e36e.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

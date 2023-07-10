@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhc8atini4gpj"
-path="res://.godot/imported/key_light-default-000.png-4763f9e009fa722021d3f2957fc66db0.ctex"
+uid="uid://1sj367qdhckw"
+path="res://.godot/imported/mechanic_frame.png-2a789caaa22e44155e4882547767df04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/key_light-default-000.png"
-dest_files=["res://.godot/imported/key_light-default-000.png-4763f9e009fa722021d3f2957fc66db0.ctex"]
+source_file="res://Core/Textures/mechanic_frame.png"
+dest_files=["res://.godot/imported/mechanic_frame.png-2a789caaa22e44155e4882547767df04.ctex"]
 
 [params]
 

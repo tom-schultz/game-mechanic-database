@@ -17,7 +17,6 @@ func _ready():
 
 	var file = FileAccess.open(mechanic_description_file, FileAccess.READ)
 	description_label.text = file.get_as_text()
-	
 	var title : Label = get_node("Title")
 	title.text = mechanic_name
 	var category : Label = get_node("Category")

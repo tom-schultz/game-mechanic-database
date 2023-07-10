@@ -5,18 +5,25 @@ class_name MechanicConfig
 var config_container : Container
 var theme
 
-
 func build_config_ui():
 	config_container = library_ui.get_config_container()
 	theme = load("res://Shared/tmml_theme.tres")
 	var config_list = _build_config_list()
 	
 	for config_item in config_list:
-		if (typeof(config_item.value) == TYPE_DICTIONARY):
-			_build_dict_grid(config_item.config_key, config_item.human_name, config_item.value)
-		else:
-			_build_label(config_container, config_item.human_name)
-			_build_spin_box(config_container, config_item.config_key, config_item.value)
+		match (typeof(config_item.value)):
+			TYPE_DICTIONARY:
+				_build_dict_grid(config_item.config_key, config_item.human_name, config_item.value)
+			TYPE_FLOAT,TYPE_INT:
+				_build_label(config_container, config_item.human_name)
+				_build_spin_box(config_container, config_item.config_key, config_item.value)
+			TYPE_STRING:
+				_build_label(config_container, config_item.human_name)
+				
+				if(config_item.is_multiline):
+					_build_text_area(config_container, config_item.config_key, config_item.value)
+				else:
+					_build_text_box(config_container, config_item.config_key, config_item.value)
 
 func _build_config_list():	
 	var script : Script = get_script()
@@ -39,7 +46,8 @@ func _build_config_list():
 		config_array.append({
 			config_key = prop_name,
 			human_name = _human_readable_name(prop_name),
-			value = get(property["name"])
+			value = get(property["name"]),
+			is_multiline = property["hint"] == PROPERTY_HINT_MULTILINE_TEXT
 		})
 	
 	return config_array
@@ -77,20 +85,35 @@ func _build_label(container, label_text):
 		container.add_child(label)
 
 func _build_spin_box(grid, config_key, value):
-		var spin_box = ConfigField.new()
-		spin_box.custom_arrow_step = 0.1
-		spin_box.min_value = -9999999999
-		spin_box.max_value = 9999999999
-		spin_box.rounded = false
-		spin_box.step = 0.01
-		spin_box.update_on_text_changed = true
-		spin_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		spin_box.focus_mode = Control.FOCUS_CLICK
-		spin_box.theme = theme
-		spin_box.value_changed.connect(_on_value_changed.bind(config_key))
-		spin_box.name = config_key
-		spin_box.value = value
-		grid.add_child(spin_box)
+		var field = ConfigFieldFloat.new()
+		field.custom_arrow_step = 0.1
+		field.min_value = -9999999999
+		field.max_value = 9999999999
+		field.rounded = typeof(value) == TYPE_INT
+		field.step = 0.01 if typeof(value) == TYPE_FLOAT else 1.0
+		field.update_on_text_changed = true
+		field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		field.focus_mode = Control.FOCUS_CLICK
+		field.theme = theme
+		field.value_changed.connect(_on_value_changed.bind(config_key))
+		field.name = config_key
+		field.value = value
+		grid.add_child(field)
+		
+func _build_text_area(grid, config_key, value):
+	var field = ConfigFieldLongString.new()
+	field.config_key = config_key
+	field.initial_value = value
+	field.focus_mode = Control.FOCUS_NONE
+	field.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE
+	grid.add_child(field)
+
+func _build_text_box(grid, config_key, value):
+	var field = ConfigFieldShortString.new()
+	field.text = value
+	field.focus_mode = Control.FOCUS_CLICK
+	field.text_changed.connect(_on_value_changed.bind(config_key))
+	grid.add_child(field)
 
 func _on_value_changed(value, config_key: String):
 	if (config_key.contains("/")):
