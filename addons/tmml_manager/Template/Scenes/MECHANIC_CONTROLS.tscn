@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c0c23ka0keg2o"]
 
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="1_vr7tb"]
-[ext_resource type="Texture2D" uid="uid://blhxf1ivp051" path="res://Shared/Textures/space_key_light-default-000.png" id="2_4ff0h"]
+[ext_resource type="Texture2D" uid="uid://dormxam1r7lks" path="res://Shared/Textures/Controls/Space_Key_Light.png" id="2_ubcys"]
 
 [node name="MechanicControls" type="GridContainer"]
 offset_right = 40.0
@@ -20,4 +20,4 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
 theme = ExtResource("1_vr7tb")
-texture = ExtResource("2_4ff0h")
+texture = ExtResource("2_ubcys")

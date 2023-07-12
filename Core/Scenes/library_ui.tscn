@@ -110,5 +110,5 @@ layout_mode = 2
 theme_override_constants/v_separation = 16
 
 [connection signal="pressed" from="TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
