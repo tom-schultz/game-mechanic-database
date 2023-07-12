@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://addons/tmml_manager/Template/Scripts/MECHANIC.gd" id="1_4iscb"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="1_fubq1"]
 [ext_resource type="Script" path="res://addons/tmml_manager/Template/Scripts/MECHANIC_CONFIG.gd" id="2_alonb"]
-[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Shared/Textures/mechanic_frame.png" id="2_ibta2"]
+[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="2_ibta2"]
 [ext_resource type="PackedScene" uid="uid://c0c23ka0keg2o" path="res://addons/tmml_manager/Template/Scenes/MECHANIC_CONTROLS.tscn" id="3_w3knq"]
 
 [node name="MECHANIC" type="Node"]
 script = ExtResource("1_4iscb")
-library_ui = null
+config = NodePath("")
 
 [node name="MechanicFrame" type="Sprite2D" parent="."]
 position = Vector2(848, 360)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccwrliifq4i65"
-path="res://.godot/imported/egg.svg-698d0ad03d3780f74f1e39d589a7e36e.ctex"
+uid="uid://uvm5t85nd76x"
+path="res://.godot/imported/tomato.svg-195cee5cc6ba8bfb67ef0b6eb102f05a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/Food/meat/egg.svg"
-dest_files=["res://.godot/imported/egg.svg-698d0ad03d3780f74f1e39d589a7e36e.ctex"]
+source_file="res://Shared/Textures/Items/tomato.svg"
+dest_files=["res://.godot/imported/tomato.svg-195cee5cc6ba8bfb67ef0b6eb102f05a.ctex"]
 
 [params]
 

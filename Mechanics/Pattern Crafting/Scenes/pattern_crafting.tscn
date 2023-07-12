@@ -1,260 +1,185 @@
-[gd_scene load_steps=11 format=3 uid="uid://2t7jma5we1kp"]
+[gd_scene load_steps=8 format=3 uid="uid://ble4safmkdqm0"]
 
 [ext_resource type="Script" path="res://Mechanics/Pattern Crafting/Scripts/PatternCrafting.gd" id="1_th824"]
 [ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="2_5e4i4"]
 [ext_resource type="Script" path="res://Mechanics/Pattern Crafting/Scripts/PatternCraftingConfig.gd" id="3_gfmcb"]
 [ext_resource type="Texture2D" uid="uid://c6w1uamsqmg5w" path="res://Mechanics/Pattern Crafting/Textures/inventory/background.png" id="3_uuka7"]
-[ext_resource type="Texture2D" uid="uid://cgjjg41k68xbe" path="res://Mechanics/Pattern Crafting/Textures/inventory/inventory_cell.png" id="4_21hl5"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_xou5d"]
-[ext_resource type="Texture2D" uid="uid://dt6jjg4lqtm8k" path="res://Shared/Textures/Food/meat/fried_eggs.svg" id="5_8i40j"]
 [ext_resource type="PackedScene" uid="uid://co6sgl5eqs41y" path="res://Mechanics/Pattern Crafting/Scenes/pattern_crafting_controls.tscn" id="5_8y7o3"]
-[ext_resource type="Texture2D" uid="uid://ccwrliifq4i65" path="res://Shared/Textures/Food/meat/egg.svg" id="6_2h1ds"]
-[ext_resource type="Texture2D" uid="uid://djax7rnry3mba" path="res://Shared/Textures/Food/dairy/butter.svg" id="7_0sodq"]
+[ext_resource type="PackedScene" uid="uid://d120c3tu4bm55" path="res://Mechanics/Pattern Crafting/Scenes/inventory_cell.tscn" id="6_uo4ji"]
 
 [node name="Pattern Crafting" type="Node" node_paths=PackedStringArray("config")]
 script = ExtResource("1_th824")
 config = NodePath("Config")
 
-[node name="MechanicFrame" type="Sprite2D" parent="."]
+[node name="Interface" type="Node2D" parent="."]
 position = Vector2(848, 360)
+
+[node name="MechanicFrame" type="Sprite2D" parent="Interface"]
 scale = Vector2(1.3, 1.43333)
 texture = ExtResource("2_5e4i4")
 
-[node name="Inventory" type="Sprite2D" parent="MechanicFrame"]
-position = Vector2(-1.24574e-05, 1.22786e-05)
-scale = Vector2(4.80769, 3.57559)
+[node name="Inventory Background" type="Sprite2D" parent="Interface"]
+position = Vector2(0, 3.05176e-05)
+scale = Vector2(6.25, 5.125)
 texture = ExtResource("3_uuka7")
 
-[node name="Output Inventory Cell" type="Sprite2D" parent="MechanicFrame/Inventory"]
-position = Vector2(15.36, -20.2927)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Output Inventory Cell" parent="Interface" instance=ExtResource("6_uo4ji")]
+offset_left = 64.0
+offset_top = -168.0
+offset_right = 128.0
+offset_bottom = -104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+cell_type = 1
 
-[node name="Fried Eggs" type="Sprite2D" parent="MechanicFrame/Inventory/Output Inventory Cell"]
-scale = Vector2(0.186988, 0.186988)
-texture = ExtResource("5_8i40j")
+[node name="Input Cells" type="GridContainer" parent="Interface"]
+offset_left = -256.0
+offset_top = -232.0
+offset_right = -64.0
+offset_bottom = -40.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 3
 
-[node name="Crafting Components" type="Node2D" parent="MechanicFrame/Inventory"]
-position = Vector2(-40.96, -39.0244)
+[node name="Input Inventory Cell" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Inventory Cell" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(5.12, 6.2439)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Input Inventory Cell2" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Egg" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components/Inventory Cell"]
-position = Vector2(-0.000183105, 3.05176e-05)
-scale = Vector2(0.187, 0.187)
-texture = ExtResource("6_2h1ds")
+[node name="Input Inventory Cell3" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Inventory Cell2" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(15.36, 6.2439)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Input Inventory Cell4" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Inventory Cell3" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(25.6, 6.2439)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Input Inventory Cell5" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Egg" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components/Inventory Cell3"]
-position = Vector2(0, 6.10352e-05)
-scale = Vector2(0.187, 0.187)
-texture = ExtResource("6_2h1ds")
+[node name="Input Inventory Cell6" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Inventory Cell4" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(5.12, 18.7317)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Input Inventory Cell7" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Inventory Cell5" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(15.36, 18.7317)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Input Inventory Cell8" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Butter" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components/Inventory Cell5"]
-position = Vector2(0, 0.00012207)
-scale = Vector2(0.187, 0.187)
-texture = ExtResource("7_0sodq")
+[node name="Input Inventory Cell9" parent="Interface/Input Cells" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
+cell_type = 0
 
-[node name="Inventory Cell6" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(25.6, 18.7317)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Grid" type="GridContainer" parent="Interface"]
+offset_left = -320.0
+offset_top = 48.0
+offset_right = 320.0
+offset_bottom = 240.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 10
 
-[node name="Inventory Cell7" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(5.12, 31.2195)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell8" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(15.36, 31.2195)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell2" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell9" type="Sprite2D" parent="MechanicFrame/Inventory/Crafting Components"]
-position = Vector2(25.6, 31.2195)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell3" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Row3" type="Node2D" parent="MechanicFrame/Inventory"]
-position = Vector2(0, 17.1707)
+[node name="Inventory Cell4" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(-46.0801, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell5" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell2" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(-35.8401, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell6" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell3" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(-25.6, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell7" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell4" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(-15.3601, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell8" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell5" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(-5.12006, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell9" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell6" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(5.12001, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell10" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell7" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(15.3599, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell11" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell8" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(25.6, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell12" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell9" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(35.84, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell13" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell10" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row3"]
-position = Vector2(46.08, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell14" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Row2" type="Node2D" parent="MechanicFrame/Inventory"]
-position = Vector2(0, 29.6585)
+[node name="Inventory Cell15" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(-46.0801, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell16" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell2" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(-35.8401, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell17" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell3" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(-25.6, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell18" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell4" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(-15.3601, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell19" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell5" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(-5.12006, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell20" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell6" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(5.12001, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell21" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell7" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(15.3599, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell22" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell8" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(25.6, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell23" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell9" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(35.84, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell24" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell10" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row2"]
-position = Vector2(46.08, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell25" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Row" type="Node2D" parent="MechanicFrame/Inventory"]
-position = Vector2(0, 42.1463)
+[node name="Inventory Cell26" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(-46.0801, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell27" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell2" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(-35.8401, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell28" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell3" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(-25.6, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell29" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
-[node name="Inventory Cell4" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(-15.3601, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
-
-[node name="Inventory Cell5" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(-5.12006, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
-
-[node name="Inventory Cell6" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(5.12001, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
-
-[node name="Inventory Cell7" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(15.3599, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
-
-[node name="Inventory Cell8" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(25.6, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
-
-[node name="Inventory Cell9" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(35.84, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
-
-[node name="Inventory Cell10" type="Sprite2D" parent="MechanicFrame/Inventory/Inventory Row"]
-position = Vector2(46.08, 6.24392)
-scale = Vector2(0.16, 0.195122)
-texture = ExtResource("4_21hl5")
+[node name="Inventory Cell30" parent="Interface/Inventory Grid" instance=ExtResource("6_uo4ji")]
+layout_mode = 2
 
 [node name="Config" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
 script = ExtResource("3_gfmcb")
@@ -269,3 +194,8 @@ mechanic_controls_scene = ExtResource("5_8y7o3")
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Cursor Item" type="TextureRect" parent="."]
+offset_right = 56.0
+offset_bottom = 56.0
+expand_mode = 1

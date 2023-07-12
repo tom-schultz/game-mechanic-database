@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ov5d7efltiud"]
-
-[ext_resource type="Texture2D" uid="uid://dwsenvitek7ux" path="res://Mechanics/Bobber Fishing/Textures/bobber.png" id="1_2gw80"]
-[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/Bobber.gd" id="2_26eyu"]
-
-[node name="Bobber" type="Sprite2D"]
-texture = ExtResource("1_2gw80")
-script = ExtResource("2_26eyu")

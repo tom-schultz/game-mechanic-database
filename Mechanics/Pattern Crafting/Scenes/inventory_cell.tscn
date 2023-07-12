@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://d120c3tu4bm55"]
+
+[ext_resource type="Texture2D" uid="uid://cgjjg41k68xbe" path="res://Mechanics/Pattern Crafting/Textures/inventory/inventory_cell.png" id="1_wqem3"]
+[ext_resource type="Script" path="res://Mechanics/Pattern Crafting/Scripts/InventoryCell.gd" id="2_pcgey"]
+
+[node name="Inventory Cell" type="TextureRect"]
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 0.0888889
+size_flags_horizontal = 2
+size_flags_vertical = 2
+texture = ExtResource("1_wqem3")
+script = ExtResource("2_pcgey")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Item Display" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+expand_mode = 3

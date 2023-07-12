@@ -13,7 +13,7 @@ func build_config_ui():
 	for config_item in config_list:
 		match (typeof(config_item.value)):
 			TYPE_DICTIONARY:
-				_build_dict_grid(config_item.config_key, config_item.human_name, config_item.value)
+				_build_dict(config_item.config_key, config_item.human_name, config_item.value)
 			TYPE_FLOAT,TYPE_INT:
 				_build_label(config_container, config_item.human_name)
 				_build_spin_box(config_container, config_item.config_key, config_item.value)
@@ -62,7 +62,7 @@ func _human_readable_name(property_name:String):
 	
 	return human_name.trim_suffix(" ")
 
-func _build_dict_grid(config_key, dict_label, dict):
+func _build_dict(config_key, dict_label, dict):
 	_build_label(config_container, "")
 	_build_label(config_container, "")
 	_build_label(config_container, dict_label)
@@ -72,7 +72,7 @@ func _build_dict_grid(config_key, dict_label, dict):
 		var new_config_key = config_key + "/" + key
 		
 		if (typeof(dict[key]) == TYPE_DICTIONARY):
-			_build_dict_grid(new_config_key, dict_label + "/" + key, dict[key])
+			_build_dict(new_config_key, dict_label + "/" + key, dict[key])
 		else:
 			_build_label(config_container, key)
 			_build_spin_box(config_container, new_config_key, dict[key])

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt6jjg4lqtm8k"
-path="res://.godot/imported/fried_eggs.svg-84843897bd7f51d78d6f6d322c7dbc00.ctex"
+uid="uid://b8bnl7u2y1as8"
+path="res://.godot/imported/mayo.svg-9e827ebafc8861495190801e20426519.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/Food/meat/fried_eggs.svg"
-dest_files=["res://.godot/imported/fried_eggs.svg-84843897bd7f51d78d6f6d322c7dbc00.ctex"]
+source_file="res://Shared/Textures/Items/mayo.svg"
+dest_files=["res://.godot/imported/mayo.svg-9e827ebafc8861495190801e20426519.ctex"]
 
 [params]
 
