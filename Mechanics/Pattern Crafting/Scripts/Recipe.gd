@@ -14,10 +14,10 @@ func _init(recipe_str: String):
 	for condition_string in condition_strings:
 		_conditions.append(RecipeCondition.new(condition_string))
 
-func check_recipe(items : PackedStringArray):
+func check_recipe(items : Array):
 	var consumed : Array
 	
-	return _conditions.all(func(cond):
+	var matched = _conditions.all(func(cond):
 		for i in range(cond.range_start, cond.range_end + 1):
 			if (!consumed.has(i) and items[i] == cond.item):
 				consumed.append(i)
@@ -25,6 +25,9 @@ func check_recipe(items : PackedStringArray):
 		
 		return false
 	)
+	
+	var item_count = items.size() - items.count("")
+	return matched && consumed.size() == item_count
 
 class RecipeCondition:
 	var item : String

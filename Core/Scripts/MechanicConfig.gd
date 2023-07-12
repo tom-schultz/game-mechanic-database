@@ -21,7 +21,9 @@ func build_config_ui():
 				_build_label(config_container, config_item.human_name)
 				
 				if(config_item.is_multiline):
+					_build_label(config_container, "")
 					_build_text_area(config_container, config_item.config_key, config_item.value)
+					_build_label(config_container, "")
 				else:
 					_build_text_box(config_container, config_item.config_key, config_item.value)
 
@@ -84,7 +86,7 @@ func _build_label(container, label_text):
 		label.theme = theme
 		container.add_child(label)
 
-func _build_spin_box(grid, config_key, value):
+func _build_spin_box(container, config_key, value):
 		var field = ConfigFieldFloat.new()
 		field.custom_arrow_step = 0.1
 		field.min_value = -9999999999
@@ -98,22 +100,21 @@ func _build_spin_box(grid, config_key, value):
 		field.value_changed.connect(_on_value_changed.bind(config_key))
 		field.name = config_key
 		field.value = value
-		grid.add_child(field)
+		container.add_child(field)
 		
-func _build_text_area(grid, config_key, value):
+func _build_text_area(container, config_key, value):
 	var field = ConfigFieldLongString.new()
-	field.config_key = config_key
-	field.initial_value = value
-	field.focus_mode = Control.FOCUS_NONE
-	field.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE
-	grid.add_child(field)
+	field.text = value
+	field.focus_mode = Control.FOCUS_CLICK
+	field.text_changed.connect(_on_value_changed.bind(config_key))
+	container.add_child(field)
 
-func _build_text_box(grid, config_key, value):
+func _build_text_box(container, config_key, value):
 	var field = ConfigFieldShortString.new()
 	field.text = value
 	field.focus_mode = Control.FOCUS_CLICK
 	field.text_changed.connect(_on_value_changed.bind(config_key))
-	grid.add_child(field)
+	container.add_child(field)
 
 func _on_value_changed(value, config_key: String):
 	if (config_key.contains("/")):
