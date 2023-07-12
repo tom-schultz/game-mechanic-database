@@ -1,11 +1,10 @@
 extends Node
 class_name PatternCrafting
 
-@export var config : MechanicConfig
+@export var config : PatternCraftingConfig
 var output_cell : InventoryCell
 var input_cells : Array
 var inventory_cells : Array
-var _recipes : Array
 var _recipe_met : bool
 
 var cursor_item : InventoryItem
@@ -25,10 +24,7 @@ func set_cursor_item(item : InventoryItem, original_owner : InventoryCell):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	I = self
-	var trimmed = config.recipes.trim_prefix("\n").trim_suffix("\n")
-	
-	for recipe in trimmed.split("\n"):
-		_recipes.append(Recipe.new(recipe))
+	config.recipes_changed.connect(_on_item_updated.bind(InventoryCell.CellType.INPUT))
 	
 	output_cell = find_child("Output Inventory Cell")
 	output_cell.item_updated.connect(_on_item_updated)
@@ -46,6 +42,7 @@ func _ready():
 	_on_item_updated(InventoryCell.CellType.INPUT)
 	
 	inventory_cells = find_children("Inventory Cell*")
+			
 	inventory_cells[0].item = InventoryItem.new("egg")
 	inventory_cells[1].item = InventoryItem.new("egg")
 	inventory_cells[2].item = InventoryItem.new("egg")
@@ -68,13 +65,24 @@ func _ready():
 	inventory_cells[18].item = InventoryItem.new("water")
 	inventory_cells[19].item = InventoryItem.new("water")
 	
-	inventory_cells[20].item = InventoryItem.new("wheat")
-	inventory_cells[21].item = InventoryItem.new("wheat")
+	inventory_cells[20].item = InventoryItem.new("ham")
+	inventory_cells[21].item = InventoryItem.new("mayo")
+	inventory_cells[21].item = InventoryItem.new("mayo")
 	inventory_cells[22].item = InventoryItem.new("wheat")
 	inventory_cells[23].item = InventoryItem.new("wheat")
 	inventory_cells[24].item = InventoryItem.new("wheat")
 	inventory_cells[25].item = InventoryItem.new("wheat")
 	inventory_cells[26].item = InventoryItem.new("wheat")
+	inventory_cells[27].item = InventoryItem.new("wheat")
+	inventory_cells[28].item = InventoryItem.new("wheat")
+	inventory_cells[29].item = InventoryItem.new("wheat")
+	
+	inventory_cells[30].item = InventoryItem.new("flour")
+	inventory_cells[31].item = InventoryItem.new("flour")
+	inventory_cells[31].item = InventoryItem.new("flour")
+	inventory_cells[32].item = InventoryItem.new("flour")
+	inventory_cells[33].item = InventoryItem.new("flour")
+	inventory_cells[34].item = InventoryItem.new("flour")
 	
 	cursor_item_display.hide()
 
@@ -85,8 +93,14 @@ func _on_item_updated(cell_type : InventoryCell.CellType):
 		
 	if (cell_type == InventoryCell.CellType.INPUT):
 		var inputs = _build_inputs()
+		var trimmed = config.recipes.trim_prefix("\n").trim_suffix("\n")
+		var recipes = Array()
 		
-		for recipe in _recipes:
+		for recipe in trimmed.split("\n"):
+			if (recipe):
+				recipes.append(Recipe.new(recipe))
+		
+		for recipe in recipes:
 			if (recipe.check_recipe(inputs)):
 				_recipe_met = true
 				output_cell.item = recipe.output

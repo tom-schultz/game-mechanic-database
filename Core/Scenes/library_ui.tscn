@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dldhpgic7l2ek"]
+[gd_scene load_steps=6 format=3 uid="uid://dldhpgic7l2ek"]
 
 [ext_resource type="Script" path="res://Core/Scripts/LibraryUI.gd" id="1_l1ius"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_31g2g"]
+[ext_resource type="PackedScene" uid="uid://co6sgl5eqs41y" path="res://Mechanics/Pattern Crafting/Scenes/pattern_crafting_controls.tscn" id="2_i0h2d"]
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_qx4lr"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_skv0h"]
 
@@ -9,6 +10,7 @@
 script = ExtResource("1_l1ius")
 description_label = NodePath("TabContainer/Description/ScrollContainer/Description Text")
 controls_container = NodePath("TabContainer/Controls")
+mechanic_controls_scene = ExtResource("2_i0h2d")
 config_container = NodePath("TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
 
 [node name="Title" type="Label" parent="."]
@@ -77,8 +79,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_31g2g")
 text = "Lorem Ipsum"
-horizontal_alignment = 1
-autowrap_mode = 2
+autowrap_mode = 3
 
 [node name="Controls" type="MarginContainer" parent="TabContainer"]
 visible = false
@@ -106,7 +107,7 @@ theme_override_constants/margin_bottom = 0
 
 [node name="GridContainer" type="GridContainer" parent="TabContainer/Configuration/Scroll Container/MarginContainer"]
 layout_mode = 2
-columns = 2
+theme_override_constants/v_separation = 16
 
 [connection signal="pressed" from="TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
 [connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]

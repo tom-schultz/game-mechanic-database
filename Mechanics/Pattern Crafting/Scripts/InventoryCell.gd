@@ -11,6 +11,7 @@ var item : InventoryItem :
 	get: return item
 	set(value):
 		item_display.texture = null if value == null else value.texture
+		item_display.tooltip_text = "" if value == null else value.id.capitalize()
 		item = value
 	
 var item_display : TextureRect

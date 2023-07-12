@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhc8atini4gpj"
-path="res://.godot/imported/key_light-default-000.png-34400a15b496e69741a0c750f6bc5444.ctex"
+uid="uid://wabxt4ffgvqc"
+path="res://.godot/imported/Shift_Alt_Key_Light.png-90fb73fa62e8333d8793ad2b1375e805.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/Controls/key_light-default-000.png"
-dest_files=["res://.godot/imported/key_light-default-000.png-34400a15b496e69741a0c750f6bc5444.ctex"]
+source_file="res://Shared/Textures/Controls/Shift_Alt_Key_Light.png"
+dest_files=["res://.godot/imported/Shift_Alt_Key_Light.png-90fb73fa62e8333d8793ad2b1375e805.ctex"]
 
 [params]
 

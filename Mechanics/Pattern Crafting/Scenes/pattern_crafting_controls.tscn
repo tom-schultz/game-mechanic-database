@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://co6sgl5eqs41y"]
+[gd_scene load_steps=4 format=3 uid="uid://co6sgl5eqs41y"]
 
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="1_kht3c"]
-[ext_resource type="Texture2D" uid="uid://blhxf1ivp051" path="res://Shared/Textures/Controls/space_key_light-default-000.png" id="2_c46ts"]
+[ext_resource type="Texture2D" uid="uid://b5amme0ulbktl" path="res://Shared/Textures/Controls/Mouse_Left_Key_Light.png" id="2_u81co"]
+[ext_resource type="Texture2D" uid="uid://c5vdutktdct4y" path="res://Shared/Textures/Controls/Mouse_Simple_Key_Light.png" id="3_63rhd"]
 
 [node name="Pattern Crafting Controls" type="GridContainer"]
 offset_right = 40.0
@@ -9,15 +10,28 @@ offset_bottom = 40.0
 theme = ExtResource("1_kht3c")
 columns = 2
 
-[node name="Action Button" type="Label" parent="."]
+[node name="Grab Item" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_kht3c")
-text = "Action Button"
+text = "Grab item"
 
-[node name="Action Button Image" type="TextureRect" parent="."]
+[node name="Grab Item Image" type="TextureRect" parent="."]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
 theme = ExtResource("1_kht3c")
-texture = ExtResource("2_c46ts")
+texture = ExtResource("2_u81co")
+
+[node name="Hover for Tooltip" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_kht3c")
+text = "Hover for item name"
+
+[node name="Hover Image" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme = ExtResource("1_kht3c")
+texture = ExtResource("3_63rhd")

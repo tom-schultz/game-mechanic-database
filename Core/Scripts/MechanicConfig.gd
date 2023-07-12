@@ -7,25 +7,31 @@ var theme
 
 func build_config_ui():
 	config_container = library_ui.get_config_container()
+	var grid : GridContainer = _new_grid()
 	theme = load("res://Shared/tmml_theme.tres")
 	var config_list = _build_config_list()
 	
-	for config_item in config_list:
+	for config_item in config_list:			
 		match (typeof(config_item.value)):
 			TYPE_DICTIONARY:
-				_build_dict(config_item.config_key, config_item.human_name, config_item.value)
+				_build_dict(grid, config_item.config_key, config_item.human_name, config_item.value)
 			TYPE_FLOAT,TYPE_INT:
-				_build_label(config_container, config_item.human_name)
-				_build_spin_box(config_container, config_item.config_key, config_item.value)
+				_build_label(grid, config_item.human_name)
+				_build_spin_box(grid, config_item.config_key, config_item.value)
 			TYPE_STRING:
-				_build_label(config_container, config_item.human_name)
-				
 				if(config_item.is_multiline):
-					_build_label(config_container, "")
+					_build_label(config_container, config_item.human_name)
 					_build_text_area(config_container, config_item.config_key, config_item.value)
-					_build_label(config_container, "")
 				else:
-					_build_text_box(config_container, config_item.config_key, config_item.value)
+					_build_label(grid, config_item.human_name)
+					_build_text_box(grid, config_item.config_key, config_item.value)
+
+func _new_grid():
+	var grid = GridContainer.new()
+	grid.columns = 2
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	config_container.add_child(grid)
+	return grid
 
 func _build_config_list():	
 	var script : Script = get_script()
@@ -64,20 +70,20 @@ func _human_readable_name(property_name:String):
 	
 	return human_name.trim_suffix(" ")
 
-func _build_dict(config_key, dict_label, dict):
-	_build_label(config_container, "")
-	_build_label(config_container, "")
-	_build_label(config_container, dict_label)
-	_build_label(config_container, "")
+func _build_dict(container, config_key, dict_label, dict):
+	_build_label(container, "")
+	_build_label(container, "")
+	_build_label(container, dict_label)
+	_build_label(container, "")
 	
 	for key in dict:
 		var new_config_key = config_key + "/" + key
 		
 		if (typeof(dict[key]) == TYPE_DICTIONARY):
-			_build_dict(new_config_key, dict_label + "/" + key, dict[key])
+			_build_dict(container, new_config_key, dict_label + "/" + key, dict[key])
 		else:
-			_build_label(config_container, key)
-			_build_spin_box(config_container, new_config_key, dict[key])
+			_build_label(container, key)
+			_build_spin_box(container, new_config_key, dict[key])
 
 func _build_label(container, label_text):
 		var label = Label.new()
@@ -104,9 +110,14 @@ func _build_spin_box(container, config_key, value):
 		
 func _build_text_area(container, config_key, value):
 	var field = ConfigFieldLongString.new()
+	field.initialize()
 	field.text = value
 	field.focus_mode = Control.FOCUS_CLICK
-	field.text_changed.connect(_on_value_changed.bind(config_key))
+	field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	field.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	field.scroll_fit_content_height = true
+	field.wrap_mode = TextEdit.LINE_WRAPPING_NONE
+	field.text_changed.connect(_on_value_changed_text_edit.bind(field, config_key))
 	container.add_child(field)
 
 func _build_text_box(container, config_key, value):
@@ -129,3 +140,17 @@ func _on_value_changed(value, config_key: String):
 		curr[keys[i]] = value
 	else:
 		set(config_key, value)
+
+func _on_value_changed_text_edit(text_edit, config_key: String):
+	if (config_key.contains("/")):
+		var keys = config_key.split("/")
+		var curr = get(keys[0])
+		var i = 1
+		
+		while i < keys.size() - 1:
+			curr = curr[keys[i]]
+			i += 1
+		
+		curr[keys[i]] = text_edit.text
+	else:
+		set(config_key, text_edit.text)

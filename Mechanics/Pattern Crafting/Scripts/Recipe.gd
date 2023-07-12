@@ -15,7 +15,7 @@ func _init(recipe_str: String):
 		_conditions.append(RecipeCondition.new(condition_string))
 
 func check_recipe(items : Array):
-	var consumed : Array
+	var consumed : Array = Array()
 	
 	var matched = _conditions.all(func(cond):
 		for i in range(cond.range_start, cond.range_end + 1):

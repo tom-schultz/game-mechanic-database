@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cbq11jmrf3hdm" path="res://Mechanics/Bobber Fishing/Textures/rod.png" id="3_1uvfa"]
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingConfig.gd" id="3_e05us"]
 [ext_resource type="Texture2D" uid="uid://s0k5e8sn5uqf" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="4_dom40"]
-[ext_resource type="PackedScene" uid="uid://ov5d7efltiud" path="res://Mechanics/Bobber Fishing/Scenes/bobber.tscn" id="6_h0d5b"]
+[ext_resource type="PackedScene" path="res://Mechanics/Bobber Fishing/Scenes/bobber.tscn" id="6_h0d5b"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="8_grm2o"]
 [ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/splash.ogg" id="9_rot67"]
 [ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/bloop.wav" id="10_i6cgl"]

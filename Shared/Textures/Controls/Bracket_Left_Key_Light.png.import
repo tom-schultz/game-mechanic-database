@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blhxf1ivp051"
-path="res://.godot/imported/space_key_light-default-000.png-156ccc790b7edc78b218147fdbc08430.ctex"
+uid="uid://ckqxbehnxwqfk"
+path="res://.godot/imported/Bracket_Left_Key_Light.png-3e566217369247a20475436cbd706e4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shared/Textures/Controls/space_key_light-default-000.png"
-dest_files=["res://.godot/imported/space_key_light-default-000.png-156ccc790b7edc78b218147fdbc08430.ctex"]
+source_file="res://Shared/Textures/Controls/Bracket_Left_Key_Light.png"
+dest_files=["res://.godot/imported/Bracket_Left_Key_Light.png-3e566217369247a20475436cbd706e4f.ctex"]
 
 [params]
 
