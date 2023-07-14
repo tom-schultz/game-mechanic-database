@@ -1,19 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://dldhpgic7l2ek"]
+[gd_scene load_steps=7 format=3 uid="uid://dldhpgic7l2ek"]
 
 [ext_resource type="Script" path="res://Core/Scripts/LibraryUI.gd" id="1_l1ius"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_31g2g"]
 [ext_resource type="PackedScene" uid="uid://co6sgl5eqs41y" path="res://Mechanics/Pattern Crafting/Scenes/pattern_crafting_controls.tscn" id="2_i0h2d"]
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_qx4lr"]
+[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="3_y2sgk"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_skv0h"]
 
-[node name="Library UI" type="CanvasLayer" node_paths=PackedStringArray("description_label", "controls_container", "config_container")]
+[node name="Library UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container")]
 script = ExtResource("1_l1ius")
-description_label = NodePath("TabContainer/Description/ScrollContainer/Description Text")
-controls_container = NodePath("TabContainer/Controls")
+description_label = NodePath("CanvasLayer/TabContainer/Description/ScrollContainer/Description Text")
+controls_container = NodePath("CanvasLayer/TabContainer/Controls")
 mechanic_controls_scene = ExtResource("2_i0h2d")
-config_container = NodePath("TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
+config_container = NodePath("CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
 
-[node name="Title" type="Label" parent="."]
+[node name="MechanicFrame" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(848, 360)
+scale = Vector2(1.3, 1.43333)
+texture = ExtResource("3_y2sgk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="CanvasLayer"]
 offset_top = 8.0
 offset_right = 432.0
 offset_bottom = 53.0
@@ -22,7 +31,7 @@ text = "Mechanic Name"
 label_settings = ExtResource("3_qx4lr")
 horizontal_alignment = 1
 
-[node name="Category" type="Label" parent="."]
+[node name="Category" type="Label" parent="CanvasLayer"]
 offset_top = 48.0
 offset_right = 432.0
 offset_bottom = 75.0
@@ -31,17 +40,17 @@ text = "Mechanic Category"
 label_settings = ExtResource("4_skv0h")
 horizontal_alignment = 1
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
 offset_left = 16.0
 offset_top = 88.0
 offset_right = 416.0
 offset_bottom = 704.0
 theme = ExtResource("2_31g2g")
 
-[node name="Menu" type="Control" parent="TabContainer"]
+[node name="Menu" type="Control" parent="CanvasLayer/TabContainer"]
 layout_mode = 2
 
-[node name="Reset Button" type="Button" parent="TabContainer/Menu"]
+[node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
 layout_mode = 2
 offset_left = 120.0
 offset_top = 17.0
@@ -52,7 +61,7 @@ size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
 text = "Reset Mechanic"
 
-[node name="Exit Button" type="Button" parent="TabContainer/Menu"]
+[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
 layout_mode = 2
 offset_left = 120.0
 offset_top = 65.0
@@ -63,17 +72,17 @@ size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
 text = "Exit Game"
 
-[node name="Description" type="MarginContainer" parent="TabContainer"]
+[node name="Description" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_31g2g")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Description"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TabContainer/Description"]
 layout_mode = 2
 theme = ExtResource("2_31g2g")
 horizontal_scroll_mode = 0
 
-[node name="Description Text" type="Label" parent="TabContainer/Description/ScrollContainer"]
+[node name="Description Text" type="Label" parent="CanvasLayer/TabContainer/Description/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -81,21 +90,21 @@ theme = ExtResource("2_31g2g")
 text = "Lorem Ipsum"
 autowrap_mode = 3
 
-[node name="Controls" type="MarginContainer" parent="TabContainer"]
+[node name="Controls" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_31g2g")
 
-[node name="Configuration" type="MarginContainer" parent="TabContainer"]
+[node name="Configuration" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_31g2g")
 
-[node name="Scroll Container" type="ScrollContainer" parent="TabContainer/Configuration"]
+[node name="Scroll Container" type="ScrollContainer" parent="CanvasLayer/TabContainer/Configuration"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Configuration/Scroll Container"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabContainer/Configuration/Scroll Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -105,10 +114,10 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Configuration/Scroll Container/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer"]
 layout_mode = 2
 theme_override_constants/v_separation = 16
 
-[connection signal="pressed" from="TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]

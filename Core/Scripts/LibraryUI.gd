@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 class_name MechanicLibraryUI
 
 @export var mechanic_name: String
@@ -8,7 +8,7 @@ class_name MechanicLibraryUI
 @export var controls_container: Container
 @export var mechanic_controls_scene: PackedScene
 @export var config_container: Container
-@onready var tab_container: TabContainer = get_node("TabContainer")
+@onready var tab_container: TabContainer = find_child("TabContainer")
 
 func _ready():
 	tab_container.current_tab = 1
@@ -17,9 +17,9 @@ func _ready():
 
 	var file = FileAccess.open(mechanic_description_file, FileAccess.READ)
 	description_label.text = file.get_as_text()
-	var title : Label = get_node("Title")
+	var title : Label = find_child("Title")
 	title.text = mechanic_name
-	var category : Label = get_node("Category")
+	var category : Label = find_child("Category")
 	category.text = mechanic_category
 
 func get_config_container():

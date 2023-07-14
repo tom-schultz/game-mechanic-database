@@ -1,19 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfd3h44p2cmlu"]
+[gd_scene load_steps=5 format=3 uid="uid://bfd3h44p2cmlu"]
 
 [ext_resource type="Script" path="res://addons/tmml_manager/Template/Scripts/MECHANIC.gd" id="1_4iscb"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="1_fubq1"]
 [ext_resource type="Script" path="res://addons/tmml_manager/Template/Scripts/MECHANIC_CONFIG.gd" id="2_alonb"]
-[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="2_ibta2"]
 [ext_resource type="PackedScene" uid="uid://c0c23ka0keg2o" path="res://addons/tmml_manager/Template/Scenes/MECHANIC_CONTROLS.tscn" id="3_w3knq"]
 
 [node name="MECHANIC" type="Node"]
 script = ExtResource("1_4iscb")
 config = NodePath("")
-
-[node name="MechanicFrame" type="Sprite2D" parent="."]
-position = Vector2(848, 360)
-scale = Vector2(1.3, 1.43333)
-texture = ExtResource("2_ibta2")
 
 [node name="Config" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
 script = ExtResource("2_alonb")

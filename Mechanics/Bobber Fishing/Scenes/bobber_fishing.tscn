@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bg01idnuck04h"]
+[gd_scene load_steps=15 format=3 uid="uid://bg01idnuck04h"]
 
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="1_12q3l"]
-[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="2_i0i6s"]
 [ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/splash.ogg" id="2_rcsng"]
 [ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/bloop.wav" id="3_0av07"]
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingConfig.gd" id="3_bb5ch"]
@@ -38,12 +37,6 @@ bite_score_sfx = ExtResource("4_767ul")
 [node name="Config" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
 script = ExtResource("3_bb5ch")
 library_ui = NodePath("../Library UI")
-
-[node name="MechanicFrame" type="Sprite2D" parent="."]
-position = Vector2(848, 360)
-scale = Vector2(1.3, 1.43333)
-texture = ExtResource("2_i0i6s")
-metadata/_edit_lock_ = true
 
 [node name="Backdrop" type="Sprite2D" parent="."]
 position = Vector2(848, 360)
