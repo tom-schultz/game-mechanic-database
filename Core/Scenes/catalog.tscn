@@ -1,0 +1,207 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1ax6iqc1qh5y"]
+
+[ext_resource type="Script" path="res://Core/Scripts/Catalog.gd" id="1_jrx72"]
+[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="1_lxj70"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_8iuxx"]
+[ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_ao3ls"]
+[ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_3vp4w"]
+
+[node name="Catalog" type="Node" node_paths=PackedStringArray("name_control", "categories_control", "tags_control", "related_games_control", "related_mechanics_control", "output_grid")]
+script = ExtResource("1_jrx72")
+name_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit")
+categories_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control")
+tags_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Tags Control")
+related_games_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Games Control")
+related_mechanics_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Mechanics Control")
+output_grid = NodePath("Database Frame/ScrollContainer/MarginContainer/GridContainer")
+
+[node name="Database Frame" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(848, 360)
+scale = Vector2(1.3, 1.43333)
+texture = ExtResource("1_lxj70")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Database Frame"]
+offset_left = -308.0
+offset_top = -229.0
+offset_right = 308.0
+offset_bottom = 229.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Database Frame/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="Database Frame/ScrollContainer/MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+offset_top = 8.0
+offset_right = 432.0
+offset_bottom = 53.0
+theme = ExtResource("2_8iuxx")
+text = "Library Catalog"
+label_settings = ExtResource("3_ao3ls")
+horizontal_alignment = 1
+
+[node name="Category" type="Label" parent="CanvasLayer"]
+offset_top = 48.0
+offset_right = 432.0
+offset_bottom = 75.0
+theme = ExtResource("2_8iuxx")
+text = "The Minor Mechanic Library"
+label_settings = ExtResource("4_3vp4w")
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 88.0
+offset_right = 416.0
+offset_bottom = 704.0
+theme = ExtResource("2_8iuxx")
+
+[node name="Menu" type="Control" parent="CanvasLayer/TabContainer"]
+layout_mode = 2
+
+[node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
+layout_mode = 2
+offset_left = 120.0
+offset_top = 17.0
+offset_right = 246.0
+offset_bottom = 48.0
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme = ExtResource("2_8iuxx")
+text = "Reset Catalog"
+
+[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
+layout_mode = 2
+offset_left = 120.0
+offset_top = 65.0
+offset_right = 247.0
+offset_bottom = 96.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2_8iuxx")
+text = "Exit Library"
+
+[node name="Usage" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_8iuxx")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TabContainer/Usage"]
+layout_mode = 2
+theme = ExtResource("2_8iuxx")
+horizontal_scroll_mode = 0
+
+[node name="Description Text" type="Label" parent="CanvasLayer/TabContainer/Usage/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_8iuxx")
+text = "Lorem Ipsum"
+autowrap_mode = 3
+
+[node name="Search" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_8iuxx")
+
+[node name="Scroll Container" type="ScrollContainer" parent="CanvasLayer/TabContainer/Search"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabContainer/Search/Scroll Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_8iuxx")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 16
+columns = 2
+
+[node name="Name Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Mechanic Name"
+
+[node name="Name LineEdit" type="LineEdit" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Mechanic Name"
+clear_button_enabled = true
+
+[node name="Category Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Category"
+
+[node name="Category Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+select_mode = 1
+auto_height = true
+
+[node name="Tags Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Tags"
+
+[node name="Tags Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+select_mode = 1
+auto_height = true
+
+[node name="Related Games Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Related Games"
+
+[node name="Related Games Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+select_mode = 1
+allow_reselect = true
+auto_height = true
+
+[node name="Related Mechanics Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Related Mechanics"
+
+[node name="Related Mechanics Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+select_mode = 1
+auto_height = true
+
+[node name="Music Player" type="AudioStreamPlayer" parent="."]
+
+[node name="SFX Player" type="AudioStreamPlayer" parent="."]
+
+[connection signal="text_changed" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit" to="." method="_on_filters_updated" unbinds=1]
+[connection signal="item_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control" to="." method="_on_filters_updated" unbinds=1]
+[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control" to="." method="_on_filters_updated" unbinds=2]
+[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Tags Control" to="." method="_on_filters_updated" unbinds=2]
+[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Games Control" to="." method="_on_filters_updated" unbinds=2]
+[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Mechanics Control" to="." method="_on_filters_updated" unbinds=2]

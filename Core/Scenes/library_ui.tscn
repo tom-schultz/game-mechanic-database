@@ -71,7 +71,7 @@ offset_bottom = 96.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
-text = "Exit Game"
+text = "Exit Library"
 
 [node name="Description" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
