@@ -3,7 +3,6 @@ class_name BobberFishingConfig
 
 var bob_speed = 2
 var bob_distance = 2
-var tiny_mass_hype = 1001
 var state_change_time = 0.1
 var score_range_min = 1
 var score_range_max = 5
@@ -18,16 +17,17 @@ var state_config = {
 	Nibble = {
 		change_cooldown = 0.2,
 		hit_cooldown = 2,
-		pos_y_offset = 7,
+		pos_y_offset = 10,
 		random_weight = 0.3,
 	},
 	Bite = {
 		change_cooldown = 0.6,
 		hit_cooldown = 1,
-		pos_y_offset = 12,
+		pos_y_offset = 14,
 		random_weight = 0.2,
 	},
 }
 
+# Called when the node enters the scene tree for the first time.
 func _ready():
 	build_config_ui()

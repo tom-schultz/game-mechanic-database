@@ -25,16 +25,20 @@ func _enter_tree():
 	mechanic_controls_scene = load("res://addons/tmml_manager/Template/Scenes/MECHANIC_CONTROLS.tscn")
 	editor_interface = get_editor_interface()
 	editor_file_system = editor_interface.get_resource_filesystem()
-	_build_plugin_ui()
-
-func _build_plugin_ui():
+	
 	tmml = load("res://addons/tmml_manager/tmml_manager.tscn").instantiate()
 	tmml.get_node("Submit").pressed.connect(build_new_mechanic)
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, tmml)
 
 func build_new_mechanic():
-	mechanic_name = tmml.get_node("Mechanic Name").text
-	mechanic_category = tmml.get_node("Mechanic Category").text
+	var name_control = tmml.get_node("Mechanic Name")
+	mechanic_name = name_control.text
+	name_control.text = ""
+	
+	var category_control = tmml.get_node("Mechanic Category")
+	mechanic_category = category_control.text
+	mechanic_category.text = ""
+	
 	mechanic_path = base_dir + mechanic_name + "/"
 	scene_path = mechanic_path + "Scenes/"
 	scripts_path = mechanic_path + "Scripts/"

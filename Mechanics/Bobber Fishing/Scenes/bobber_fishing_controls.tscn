@@ -1,47 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8q272lc4ms25"]
+[gd_scene load_steps=6 format=3 uid="uid://bkc4ui55h3e12"]
 
-[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="1_axrwr"]
-[ext_resource type="Texture2D" uid="uid://dormxam1r7lks" path="res://Shared/Textures/Controls/Space_Key_Light.png" id="2_npjun"]
-[ext_resource type="Texture2D" uid="uid://rp2chaxmwuha" path="res://Shared/Textures/Controls/1_Key_Light.png" id="3_c3xiv"]
-[ext_resource type="Texture2D" uid="uid://ccfy8wlwvqxie" path="res://Shared/Textures/Controls/2_Key_Light.png" id="4_jcbad"]
-[ext_resource type="Texture2D" uid="uid://1462kwmlma21" path="res://Shared/Textures/Controls/3_Key_Light.png" id="5_4e2px"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="1_24pnu"]
+[ext_resource type="Texture2D" uid="uid://dormxam1r7lks" path="res://Shared/Textures/Controls/Space_Key_Light.png" id="2_w6u5b"]
+[ext_resource type="Texture2D" uid="uid://rp2chaxmwuha" path="res://Shared/Textures/Controls/1_Key_Light.png" id="3_eylmq"]
+[ext_resource type="Texture2D" uid="uid://ccfy8wlwvqxie" path="res://Shared/Textures/Controls/2_Key_Light.png" id="4_er7mj"]
+[ext_resource type="Texture2D" uid="uid://1462kwmlma21" path="res://Shared/Textures/Controls/3_Key_Light.png" id="5_154rw"]
 
 [node name="BobberFishingControls" type="GridContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("1_axrwr")
+theme = ExtResource("1_24pnu")
 columns = 2
 
 [node name="Action Button" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("1_axrwr")
+theme = ExtResource("1_24pnu")
 text = "Action Button"
 
 [node name="Action Button Image" type="TextureRect" parent="."]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
-theme = ExtResource("1_axrwr")
-texture = ExtResource("2_npjun")
+theme = ExtResource("1_24pnu")
+texture = ExtResource("2_w6u5b")
 
 [node name="No Fish" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("1_axrwr")
+theme = ExtResource("1_24pnu")
 text = "Trigger No Fish"
 
 [node name="No Fish Image" type="TextureRect" parent="."]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
-theme = ExtResource("1_axrwr")
-texture = ExtResource("3_c3xiv")
+theme = ExtResource("1_24pnu")
+texture = ExtResource("3_eylmq")
 
 [node name="Nibble" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("1_axrwr")
+theme = ExtResource("1_24pnu")
 text = "Trigger Nibble
 "
 
@@ -49,18 +49,18 @@ text = "Trigger Nibble
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
-theme = ExtResource("1_axrwr")
-texture = ExtResource("4_jcbad")
+theme = ExtResource("1_24pnu")
+texture = ExtResource("4_er7mj")
 
 [node name="Bite" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("1_axrwr")
+theme = ExtResource("1_24pnu")
 text = "Trigger Bite"
 
 [node name="Bite Image" type="TextureRect" parent="."]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
-theme = ExtResource("1_axrwr")
-texture = ExtResource("5_4e2px")
+theme = ExtResource("1_24pnu")
+texture = ExtResource("5_154rw")

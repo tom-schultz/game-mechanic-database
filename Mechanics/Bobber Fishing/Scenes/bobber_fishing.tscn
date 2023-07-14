@@ -1,56 +1,68 @@
-[gd_scene load_steps=18 format=3 uid="uid://5q1x0obrn06c"]
+[gd_scene load_steps=16 format=3 uid="uid://bg01idnuck04h"]
 
-[ext_resource type="Texture2D" uid="uid://buaw5gnsrpuec" path="res://Mechanics/Bobber Fishing/Textures/backdrop.png" id="1_064c6"]
-[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="1_edhub"]
-[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="2_0gvbo"]
-[ext_resource type="PackedScene" uid="uid://c8q272lc4ms25" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="2_exwg3"]
-[ext_resource type="Texture2D" uid="uid://31uin1jkqhaw" path="res://Mechanics/Bobber Fishing/Textures/water.png" id="2_q2qlh"]
-[ext_resource type="Texture2D" uid="uid://cbq11jmrf3hdm" path="res://Mechanics/Bobber Fishing/Textures/rod.png" id="3_1uvfa"]
-[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingConfig.gd" id="3_e05us"]
-[ext_resource type="Texture2D" uid="uid://s0k5e8sn5uqf" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="4_dom40"]
-[ext_resource type="PackedScene" path="res://Mechanics/Bobber Fishing/Scenes/bobber.tscn" id="6_h0d5b"]
-[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="8_grm2o"]
-[ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/splash.ogg" id="9_rot67"]
-[ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/bloop.wav" id="10_i6cgl"]
-[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="10_vb4xo"]
-[ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Shared/Audio/score.wav" id="11_5oeu5"]
-[ext_resource type="FontFile" uid="uid://dsw31irh5aefs" path="res://Shared/Fonts/NotoSans-Bold.ttf" id="14_iywq1"]
-[ext_resource type="AudioStream" uid="uid://8jaidc1aninr" path="res://Shared/Audio/park_ambience_birds.wav" id="16_ffsoe"]
+[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="1_12q3l"]
+[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="2_i0i6s"]
+[ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/splash.ogg" id="2_rcsng"]
+[ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/bloop.wav" id="3_0av07"]
+[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingConfig.gd" id="3_bb5ch"]
+[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_2sb2k"]
+[ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Shared/Audio/score.wav" id="4_767ul"]
+[ext_resource type="PackedScene" uid="uid://bkc4ui55h3e12" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="5_3wdh5"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="9_4a7s5"]
+[ext_resource type="FontFile" uid="uid://dsw31irh5aefs" path="res://Shared/Fonts/NotoSans-Bold.ttf" id="10_vdfuk"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ccpoh"]
-font = ExtResource("14_iywq1")
-font_size = 29
-font_color = Color(0.941176, 0.964706, 0.941176, 1)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jkqt3"]
+load_path = "res://.godot/imported/backdrop.png-3f14e607d1516c29de8c64466a77a198.ctex"
 
-[node name="Bobber Fishing" type="Sprite2D" node_paths=PackedStringArray("cfg")]
-position = Vector2(848, 360)
-scale = Vector2(1.3, 1.43334)
-texture = ExtResource("1_edhub")
-script = ExtResource("2_0gvbo")
-cfg = NodePath("Config")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lbqgi"]
+load_path = "res://.godot/imported/water.png-96c5d91002029bbeae057e60330bfb6a.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_10ebd"]
+load_path = "res://.godot/imported/rod.png-fbcff7253bd9669a1ad58c26b6f2a4ab.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c3fil"]
+load_path = "res://.godot/imported/line.png-e1ee2a9d953af5cab65caf652a11c109.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d20fh"]
+load_path = "res://.godot/imported/bobber.png-7a06ee383ad62a833a2c8e89ee6f21a5.ctex"
+
+[node name="Bobber Fishing" type="Node" node_paths=PackedStringArray("config", "bobber", "sfx_player")]
+script = ExtResource("1_12q3l")
+config = NodePath("Config")
+bobber = NodePath("Bobber")
+sfx_player = NodePath("SFX Player")
+splash_sfx = ExtResource("2_rcsng")
+bloop_sfx = ExtResource("3_0av07")
+bite_score_sfx = ExtResource("4_767ul")
 
 [node name="Config" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
-script = ExtResource("3_e05us")
+script = ExtResource("3_bb5ch")
 library_ui = NodePath("../Library UI")
 
+[node name="MechanicFrame" type="Sprite2D" parent="."]
+position = Vector2(848, 360)
+scale = Vector2(1.3, 1.43333)
+texture = ExtResource("2_i0i6s")
+metadata/_edit_lock_ = true
+
 [node name="Backdrop" type="Sprite2D" parent="."]
-position = Vector2(6.10352e-05, -0.000915527)
-scale = Vector2(0.769231, 0.697672)
-texture = ExtResource("1_064c6")
+position = Vector2(848, 360)
+scale = Vector2(0.980392, 0.97619)
+texture = SubResource("CompressedTexture2D_jkqt3")
+metadata/_edit_lock_ = true
 
 [node name="Water" type="Sprite2D" parent="Backdrop"]
 z_index = 3
 position = Vector2(-200.197, 210.438)
 scale = Vector2(1.60158, 0.886647)
-texture = ExtResource("2_q2qlh")
+texture = SubResource("CompressedTexture2D_lbqgi")
 
 [node name="Rod" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(10.7692, -103.256)
-rotation = -0.783048
-scale = Vector2(0.731004, 0.761232)
+position = Vector2(872, 240)
+rotation = -0.802851
 skew = -0.0970706
-texture = ExtResource("3_1uvfa")
+texture = SubResource("CompressedTexture2D_10ebd")
 
 [node name="Line" type="Sprite2D" parent="Rod"]
 z_index = 1
@@ -59,47 +71,42 @@ position = Vector2(-124.15, -14.9654)
 rotation = 0.816004
 scale = Vector2(0.32349, 1.29776)
 skew = 0.0315495
-texture = ExtResource("4_dom40")
+texture = SubResource("CompressedTexture2D_c3fil")
 
-[node name="Bobber" parent="." node_paths=PackedStringArray("cfg", "sfx_player") instance=ExtResource("6_h0d5b")]
-z_index = 1
-position = Vector2(-62.3845, 64.8832)
-scale = Vector2(0.307692, 0.279069)
-cfg = NodePath("../Config")
-sfx_player = NodePath("../SFX Player")
-splash_sfx = ExtResource("9_rot67")
-bloop_sfx = ExtResource("10_i6cgl")
-bite_score_sfx = ExtResource("11_5oeu5")
+[node name="Bobber" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(774, 452)
+scale = Vector2(0.35, 0.35)
+texture = SubResource("CompressedTexture2D_d20fh")
 
 [node name="Score" type="Label" parent="."]
-offset_left = -313.846
-offset_top = -228.836
-offset_right = 314.154
-offset_bottom = -202.836
-theme = ExtResource("10_vb4xo")
-theme_override_fonts/font = ExtResource("14_iywq1")
+offset_left = 448.0
+offset_top = 48.0
+offset_right = 1248.0
+offset_bottom = 85.0
+theme = ExtResource("9_4a7s5")
+theme_override_fonts/font = ExtResource("10_vdfuk")
+theme_override_font_sizes/font_size = 24
 text = "Score: 0"
 horizontal_alignment = 1
 
 [node name="Fisherman" type="Label" parent="."]
-offset_left = 86.1539
-offset_top = -156.278
-offset_right = 209.154
-offset_bottom = -95.2784
-theme = ExtResource("10_vb4xo")
+offset_left = 900.0
+offset_top = 215.0
+offset_right = 1164.0
+offset_bottom = 285.0
+theme = ExtResource("9_4a7s5")
+theme_override_fonts/font = ExtResource("10_vdfuk")
+theme_override_font_sizes/font_size = 36
 text = ":)"
-label_settings = SubResource("LabelSettings_ccpoh")
 horizontal_alignment = 1
 
-[node name="Library UI" parent="." instance=ExtResource("8_grm2o")]
+[node name="Library UI" parent="." instance=ExtResource("4_2sb2k")]
 mechanic_name = "Bobber Fishing"
-mechanic_category = "Timed Button Press"
+mechanic_category = "Timed Action"
 mechanic_description_file = "res://Mechanics/Bobber Fishing/description.txt"
-mechanic_controls_scene = ExtResource("2_exwg3")
+mechanic_controls_scene = ExtResource("5_3wdh5")
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_rot67")
 
 [node name="Music Player" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_ffsoe")
-autoplay = true

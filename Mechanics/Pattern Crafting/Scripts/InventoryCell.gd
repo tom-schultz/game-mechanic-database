@@ -13,7 +13,7 @@ var item : InventoryItem :
 		item_display.texture = null if value == null else value.texture
 		item_display.tooltip_text = "" if value == null else value.id.capitalize()
 		item = value
-	
+
 var item_display : TextureRect
 
 func _ready():
@@ -21,10 +21,10 @@ func _ready():
 
 func _unhandled_input(event: InputEvent):
 	var is_press_inside = event is InputEventMouseButton and event.is_pressed() and get_global_rect().has_point(event.position)
-	
+
 	if (!is_press_inside || PatternCrafting.I.cursor_item == item):
 		return
-	
+
 	var temp = PatternCrafting.I.cursor_item
 	PatternCrafting.I.set_cursor_item(item, self)
 	item = temp
