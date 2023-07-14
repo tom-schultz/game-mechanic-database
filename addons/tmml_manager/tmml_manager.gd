@@ -13,8 +13,6 @@ var mechanic_category : String = "Minor Mechanic"
 var mechanic_path : String
 var scene_path : String
 var scripts_path : String
-var textures_path : String
-var audio_path : String
 var editor_interface: EditorInterface
 var editor_file_system : EditorFileSystem
 var tmml : Control
@@ -43,8 +41,6 @@ func build_new_mechanic():
 	mechanic_path = base_dir + mechanic_name + "/"
 	scene_path = mechanic_path + "Scenes/"
 	scripts_path = mechanic_path + "Scripts/"
-	textures_path = mechanic_path + "Textures/"
-	audio_path = mechanic_path + "Audio/"
 	
 	if (DirAccess.dir_exists_absolute(mechanic_path)):
 		print_debug("Mechanic path already exists: " + mechanic_path)
@@ -54,10 +50,9 @@ func build_new_mechanic():
 	DirAccess.make_dir_absolute(mechanic_path.trim_suffix("/"))
 	DirAccess.make_dir_absolute(scene_path.trim_suffix("/"))
 	DirAccess.make_dir_absolute(scripts_path.trim_suffix("/"))
-	DirAccess.make_dir_absolute(textures_path.trim_suffix("/"))
-	DirAccess.make_dir_absolute(audio_path.trim_suffix("/"))
 	
 	var scene_file_path = _build_mechanic_scene()
+	_copy_file(attributions_templ, mechanic_path, "attributions.txt")
 	editor_file_system.scan_sources()
 
 func _build_mechanic_scene():
@@ -82,16 +77,18 @@ func _build_mechanic_scene():
 	var mechanic : Node = mechanic_scene.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
 	mechanic.name = mechanic_name
 	mechanic.set_script(new_mechanic_script)
-	var config = mechanic.get_node("Config")
-	var library = config.library_ui
+	
+	var config_res = Resource.new()
+	config_res.set_script(new_config_script)
+	ResourceSaver.save(config_res, mechanic_path + mechanic_name + " Config.tres")
+	mechanic.config = config_res
+	var library = mechanic.get_node("Library UI")
+	library.mechanic_config = config_res
+	
 	library.mechanic_controls_scene = controls_scene
 	library.mechanic_description_file = _copy_file(description_templ, mechanic_path, "description.txt")
-	library.mechanic_description_file = _copy_file(attributions_templ, mechanic_path, "attributions.txt")
 	library.mechanic_name = mechanic_name
 	library.mechanic_category = mechanic_category
-	config.set_script(new_config_script)
-	config.library_ui = library
-	mechanic.config = config
 	
 	var new_pack = PackedScene.new()
 	new_pack.resource_name = mechanic_name

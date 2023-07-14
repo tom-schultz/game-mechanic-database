@@ -1,4 +1,4 @@
-extends MechanicConfig
+extends Resource
 class_name BobberFishingConfig
 
 var bob_speed = 2
@@ -27,7 +27,3 @@ var state_config = {
 		random_weight = 0.2,
 	},
 }
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	build_config_ui()

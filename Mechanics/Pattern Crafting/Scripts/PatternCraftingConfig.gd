@@ -1,4 +1,4 @@
-extends MechanicConfig
+extends Resource
 class_name PatternCraftingConfig
 
 signal recipes_changed
@@ -13,7 +13,3 @@ frittata:egg(0-2),egg(0-2),egg(0-2),spinach(3-8),tomato(3-8),onion(3-8),cheese(3
 	set(value):
 		recipes = value
 		recipes_changed.emit()
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	build_config_ui()

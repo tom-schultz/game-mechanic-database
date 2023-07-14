@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="BobberFishingConfig" load_steps=2 format=3 uid="uid://dpql7iup8llss"]
+
+[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingConfig.gd" id="1_kybfe"]
+
+[resource]
+script = ExtResource("1_kybfe")

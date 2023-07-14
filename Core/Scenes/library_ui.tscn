@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="3_y2sgk"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_skv0h"]
 
-[node name="Library UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container")]
+[node name="Library UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container", "tab_container")]
 script = ExtResource("1_l1ius")
 description_label = NodePath("CanvasLayer/TabContainer/Description/ScrollContainer/Description Text")
 controls_container = NodePath("CanvasLayer/TabContainer/Controls")
 mechanic_controls_scene = ExtResource("2_i0h2d")
 config_container = NodePath("CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
+tab_container = NodePath("CanvasLayer/TabContainer")
 
 [node name="MechanicFrame" type="Sprite2D" parent="."]
 z_index = -1
@@ -119,5 +120,5 @@ layout_mode = 2
 theme_override_constants/v_separation = 16
 
 [connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]

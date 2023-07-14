@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="1_12q3l"]
 [ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/splash.ogg" id="2_rcsng"]
 [ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/bloop.wav" id="3_0av07"]
-[ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishingConfig.gd" id="3_bb5ch"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_2sb2k"]
 [ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Shared/Audio/score.wav" id="4_767ul"]
 [ext_resource type="PackedScene" uid="uid://bkc4ui55h3e12" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="5_3wdh5"]
@@ -14,19 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://kjypt2ey357l" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="9_qe2bk"]
 [ext_resource type="Texture2D" uid="uid://cjvbkj660gc7j" path="res://Mechanics/Bobber Fishing/Textures/bobber.png" id="10_u7l3s"]
 [ext_resource type="FontFile" uid="uid://dsw31irh5aefs" path="res://Shared/Fonts/NotoSans-Bold.ttf" id="10_vdfuk"]
+[ext_resource type="Resource" uid="uid://dpql7iup8llss" path="res://Mechanics/Bobber Fishing/Bobber Fishing Config.tres" id="13_urk7n"]
 
-[node name="Bobber Fishing" type="Node" node_paths=PackedStringArray("config", "bobber", "sfx_player")]
+[node name="Bobber Fishing" type="Node" node_paths=PackedStringArray("bobber", "sfx_player")]
 script = ExtResource("1_12q3l")
-config = NodePath("Config")
+config = ExtResource("13_urk7n")
 bobber = NodePath("Bobber")
 sfx_player = NodePath("SFX Player")
 splash_sfx = ExtResource("2_rcsng")
 bloop_sfx = ExtResource("3_0av07")
 bite_score_sfx = ExtResource("4_767ul")
-
-[node name="Config" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
-script = ExtResource("3_bb5ch")
-library_ui = NodePath("../Library UI")
 
 [node name="Backdrop" type="Sprite2D" parent="."]
 position = Vector2(848, 360)
@@ -87,6 +83,7 @@ horizontal_alignment = 1
 [node name="Library UI" parent="." instance=ExtResource("4_2sb2k")]
 mechanic_name = "Bobber Fishing"
 mechanic_category = "Timed Action"
+mechanic_config = ExtResource("13_urk7n")
 mechanic_description_file = "res://Mechanics/Bobber Fishing/description.txt"
 mechanic_controls_scene = ExtResource("5_3wdh5")
 
