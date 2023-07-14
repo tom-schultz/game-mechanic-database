@@ -1,6 +1,7 @@
 extends Node
+class_name MECHANIC_CLASS
 
-@export var config : MechanicConfig
+@export var config : CONFIG_CLASS
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

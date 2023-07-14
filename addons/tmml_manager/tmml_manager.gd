@@ -7,16 +7,17 @@ var mechanic_script : Script
 var mechanic_config_script : Script
 const base_dir = "res://Mechanics/"
 const description_templ : String = "res://addons/tmml_manager/Template/description.txt"
-var mechanic_name = "Inventory Pattern Crafting"
-var mechanic_category = "Minor Mechanic"
-var mechanic_path
-var scene_path
-var scripts_path
-var textures_path
-var audio_path
+const attributions_templ : String = "res://addons/tmml_manager/Template/attributions.txt"
+var mechanic_name : String = "Inventory Pattern Crafting"
+var mechanic_category : String = "Minor Mechanic"
+var mechanic_path : String
+var scene_path : String
+var scripts_path : String
+var textures_path : String
+var audio_path : String
 var editor_interface: EditorInterface
 var editor_file_system : EditorFileSystem
-var tmml
+var tmml : Control
 
 func _enter_tree():
 	mechanic_script = load("res://addons/tmml_manager/Template/Scripts/MECHANIC.gd")
@@ -37,7 +38,7 @@ func build_new_mechanic():
 	
 	var category_control = tmml.get_node("Mechanic Category")
 	mechanic_category = category_control.text
-	mechanic_category.text = ""
+	category_control.text = ""
 	
 	mechanic_path = base_dir + mechanic_name + "/"
 	scene_path = mechanic_path + "Scenes/"
@@ -62,14 +63,17 @@ func build_new_mechanic():
 func _build_mechanic_scene():
 	var pascal = mechanic_name.to_pascal_case()
 	var snake = mechanic_name.to_snake_case()
-	
-	var new_mechanic_script = _render_script_templ(
-		mechanic_script,
-		pascal)
+	var config_class = pascal + "Config"
 	
 	var new_config_script = _render_script_templ(
 		mechanic_config_script,
-		pascal + "Config")
+		pascal + "Config",
+		{ "CONFIG_CLASS": config_class })
+	
+	var new_mechanic_script = _render_script_templ(
+		mechanic_script,
+		pascal,
+		{ "MECHANIC_CLASS": pascal, "CONFIG_CLASS": config_class })
 	
 	var controls_scene = _copy_scene(mechanic_controls_scene,
 		mechanic_name + " Controls",
@@ -81,7 +85,8 @@ func _build_mechanic_scene():
 	var config = mechanic.get_node("Config")
 	var library = config.library_ui
 	library.mechanic_controls_scene = controls_scene
-	library.mechanic_description_file = _copy_description_file(mechanic_path)
+	library.mechanic_description_file = _copy_file(description_templ, mechanic_path, "description.txt")
+	library.mechanic_description_file = _copy_file(attributions_templ, mechanic_path, "attributions.txt")
 	library.mechanic_name = mechanic_name
 	library.mechanic_category = mechanic_category
 	config.set_script(new_config_script)
@@ -98,19 +103,25 @@ func _build_mechanic_scene():
 	editor_interface.set_main_screen_editor("2D")
 	editor_interface.open_scene_from_path(scene_file_path)
 
-func _render_script_templ(script : Script, script_name : String):
+func _render_script_templ(script : Script, script_name : String, replace_symbols : Dictionary):
 	var new_path = scripts_path + script_name + ".gd"
 	var new_script_file = FileAccess.open(new_path, FileAccess.WRITE)
-	var new_source = script.source_code.replace("CLASS_NAME", script_name)
+	var new_source = script.source_code
+	
+	for symbol in replace_symbols:
+		new_source = new_source.replace(symbol, replace_symbols[symbol])
+		
 	new_script_file.store_string(new_source)
 	new_script_file.close()
+	editor_file_system.update_file(new_path)
 	var new_script : Script = load(new_path)
+	
 	return new_script
 	
-func _copy_description_file(mechanic_path):
-	var desc_path = mechanic_path + "description.txt"
-	DirAccess.copy_absolute(description_templ, mechanic_path + "description.txt")
-	return desc_path
+func _copy_file(template_path, mechanic_path : String, filename : String):
+	var file_path = mechanic_path + filename
+	DirAccess.copy_absolute(template_path, mechanic_path + filename)
+	return file_path
 
 func _copy_scene(packed_scene, new_name, path):
 	var scene = packed_scene.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)

@@ -7,7 +7,6 @@
 
 [node name="MECHANIC" type="Node"]
 script = ExtResource("1_4iscb")
-config = NodePath("")
 
 [node name="Config" type="Node" parent="." node_paths=PackedStringArray("library_ui")]
 script = ExtResource("2_alonb")

@@ -7,23 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_2sb2k"]
 [ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Shared/Audio/score.wav" id="4_767ul"]
 [ext_resource type="PackedScene" uid="uid://bkc4ui55h3e12" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="5_3wdh5"]
+[ext_resource type="Texture2D" uid="uid://d02ls3y8ax7qm" path="res://Mechanics/Bobber Fishing/Textures/backdrop.png" id="6_6cloi"]
+[ext_resource type="Texture2D" uid="uid://db5jib74xvb0f" path="res://Mechanics/Bobber Fishing/Textures/water.png" id="7_atjsr"]
+[ext_resource type="Texture2D" uid="uid://bnewxa2isf0ro" path="res://Mechanics/Bobber Fishing/Textures/rod.png" id="8_l34yq"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="9_4a7s5"]
+[ext_resource type="Texture2D" uid="uid://kjypt2ey357l" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="9_qe2bk"]
+[ext_resource type="Texture2D" uid="uid://cjvbkj660gc7j" path="res://Mechanics/Bobber Fishing/Textures/bobber.png" id="10_u7l3s"]
 [ext_resource type="FontFile" uid="uid://dsw31irh5aefs" path="res://Shared/Fonts/NotoSans-Bold.ttf" id="10_vdfuk"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jkqt3"]
-load_path = "res://.godot/imported/backdrop.png-3f14e607d1516c29de8c64466a77a198.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lbqgi"]
-load_path = "res://.godot/imported/water.png-96c5d91002029bbeae057e60330bfb6a.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_10ebd"]
-load_path = "res://.godot/imported/rod.png-fbcff7253bd9669a1ad58c26b6f2a4ab.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c3fil"]
-load_path = "res://.godot/imported/line.png-e1ee2a9d953af5cab65caf652a11c109.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d20fh"]
-load_path = "res://.godot/imported/bobber.png-7a06ee383ad62a833a2c8e89ee6f21a5.ctex"
 
 [node name="Bobber Fishing" type="Node" node_paths=PackedStringArray("config", "bobber", "sfx_player")]
 script = ExtResource("1_12q3l")
@@ -41,21 +31,21 @@ library_ui = NodePath("../Library UI")
 [node name="Backdrop" type="Sprite2D" parent="."]
 position = Vector2(848, 360)
 scale = Vector2(0.980392, 0.97619)
-texture = SubResource("CompressedTexture2D_jkqt3")
+texture = ExtResource("6_6cloi")
 metadata/_edit_lock_ = true
 
 [node name="Water" type="Sprite2D" parent="Backdrop"]
 z_index = 3
 position = Vector2(-200.197, 210.438)
 scale = Vector2(1.60158, 0.886647)
-texture = SubResource("CompressedTexture2D_lbqgi")
+texture = ExtResource("7_atjsr")
 
 [node name="Rod" type="Sprite2D" parent="."]
 z_index = 2
 position = Vector2(872, 240)
 rotation = -0.802851
 skew = -0.0970706
-texture = SubResource("CompressedTexture2D_10ebd")
+texture = ExtResource("8_l34yq")
 
 [node name="Line" type="Sprite2D" parent="Rod"]
 z_index = 1
@@ -64,13 +54,13 @@ position = Vector2(-124.15, -14.9654)
 rotation = 0.816004
 scale = Vector2(0.32349, 1.29776)
 skew = 0.0315495
-texture = SubResource("CompressedTexture2D_c3fil")
+texture = ExtResource("9_qe2bk")
 
 [node name="Bobber" type="Sprite2D" parent="."]
 z_index = 2
 position = Vector2(774, 452)
 scale = Vector2(0.35, 0.35)
-texture = SubResource("CompressedTexture2D_d20fh")
+texture = ExtResource("10_u7l3s")
 
 [node name="Score" type="Label" parent="."]
 offset_left = 448.0
