@@ -1,39 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1ax6iqc1qh5y"]
+[gd_scene load_steps=7 format=3 uid="uid://b1ax6iqc1qh5y"]
 
 [ext_resource type="Script" path="res://Core/Scripts/Catalog.gd" id="1_jrx72"]
-[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="1_lxj70"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_8iuxx"]
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_ao3ls"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_3vp4w"]
 
-[node name="Catalog" type="Node" node_paths=PackedStringArray("name_control", "categories_control", "tags_control", "related_games_control", "related_mechanics_control", "output_grid")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oj1gi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_811lx"]
+
+[node name="Catalog" type="Node" node_paths=PackedStringArray("name_control", "categories_control", "tags_control", "implementations_control", "related_mechanics_control", "output_grid")]
 script = ExtResource("1_jrx72")
 name_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit")
 categories_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control")
 tags_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Tags Control")
-related_games_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Games Control")
+implementations_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Implementations Control")
 related_mechanics_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Mechanics Control")
-output_grid = NodePath("Database Frame/ScrollContainer/MarginContainer/GridContainer")
+output_grid = NodePath("ScrollContainer/MarginContainer/GridContainer")
 
-[node name="Database Frame" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(848, 360)
-scale = Vector2(1.3, 1.43333)
-texture = ExtResource("1_lxj70")
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 448.0
+offset_top = 32.0
+offset_right = 1248.0
+offset_bottom = 688.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Database Frame"]
-offset_left = -308.0
-offset_top = -229.0
-offset_right = 308.0
-offset_bottom = 229.0
-
-[node name="MarginContainer" type="MarginContainer" parent="Database Frame/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="Database Frame/ScrollContainer/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 columns = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -64,6 +62,7 @@ offset_bottom = 704.0
 theme = ExtResource("2_8iuxx")
 
 [node name="Menu" type="Control" parent="CanvasLayer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
@@ -89,7 +88,6 @@ theme = ExtResource("2_8iuxx")
 text = "Exit Library"
 
 [node name="Usage" type="MarginContainer" parent="CanvasLayer/TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("2_8iuxx")
 
@@ -98,13 +96,17 @@ layout_mode = 2
 theme = ExtResource("2_8iuxx")
 horizontal_scroll_mode = 0
 
-[node name="Description Text" type="Label" parent="CanvasLayer/TabContainer/Usage/ScrollContainer"]
+[node name="Usage Text" type="RichTextLabel" parent="CanvasLayer/TabContainer/Usage/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_8iuxx")
-text = "Lorem Ipsum"
-autowrap_mode = 3
+bbcode_enabled = true
+text = "[font_size=40][center]Welcome! [/center][/font_size]
+
+This is the Minor Mechanic Library, an open-source collection of small game mechanics intended to educate and inspire folks who want to make games or learn about them. Each mechanic comes with a description, controls, and a set of parameters that you can use to tweak and tune the mechanic's behavior.
+
+You are currently at the Library's catalog. On the search tab you can filter games based on name, category, and other attributes. Click to select or deselect individual attributes, or shift-click to select multiple."
 
 [node name="Search" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
@@ -152,8 +154,11 @@ text = "Category"
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_oj1gi")
 select_mode = 1
 auto_height = true
+item_count = 1
+item_0/text = ""
 
 [node name="Tags Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
@@ -165,19 +170,21 @@ text = "Tags"
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_811lx")
 select_mode = 1
 auto_height = true
 
-[node name="Related Games Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Implementations Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "Related Games"
+text = "Implementations"
 
-[node name="Related Games Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Implementations Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_811lx")
 select_mode = 1
 allow_reselect = true
 auto_height = true
@@ -192,6 +199,7 @@ text = "Related Mechanics"
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_811lx")
 select_mode = 1
 auto_height = true
 
@@ -199,9 +207,6 @@ auto_height = true
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
 
-[connection signal="text_changed" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit" to="." method="_on_filters_updated" unbinds=1]
-[connection signal="item_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control" to="." method="_on_filters_updated" unbinds=1]
-[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control" to="." method="_on_filters_updated" unbinds=2]
-[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Tags Control" to="." method="_on_filters_updated" unbinds=2]
-[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Games Control" to="." method="_on_filters_updated" unbinds=2]
-[connection signal="multi_selected" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Mechanics Control" to="." method="_on_filters_updated" unbinds=2]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Reset Button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="text_changed" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit" to="." method="_build_results" unbinds=1]

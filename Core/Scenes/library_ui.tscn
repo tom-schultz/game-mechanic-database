@@ -48,26 +48,29 @@ offset_right = 416.0
 offset_bottom = 704.0
 theme = ExtResource("2_31g2g")
 
-[node name="Menu" type="Control" parent="CanvasLayer/TabContainer"]
+[node name="Menu" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 layout_mode = 2
 
-[node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Menu"]
 layout_mode = 2
-offset_left = 120.0
-offset_top = 17.0
-offset_right = 246.0
-offset_bottom = 48.0
-size_flags_horizontal = 6
+theme_override_constants/separation = 16
+
+[node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
 text = "Reset Mechanic"
 
-[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
+[node name="Return to Catalog" type="Button" parent="CanvasLayer/TabContainer/Menu/VBoxContainer"]
 layout_mode = 2
-offset_left = 120.0
-offset_top = 65.0
-offset_right = 247.0
-offset_bottom = 96.0
+size_flags_horizontal = 6
+size_flags_vertical = 0
+theme = ExtResource("2_31g2g")
+text = "Return to Catalog"
+
+[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
@@ -119,6 +122,7 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 theme_override_constants/v_separation = 16
 
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Reset Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Reset Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Return to Catalog" to="." method="_on_return_to_catalog_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Exit Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Exit Button" to="." method="_on_exit_button_pressed"]

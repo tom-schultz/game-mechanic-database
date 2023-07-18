@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ble4safmkdqm0"]
+[gd_scene load_steps=7 format=3 uid="uid://ble4safmkdqm0"]
 
 [ext_resource type="Script" path="res://Mechanics/Pattern Crafting/Scripts/PatternCrafting.gd" id="1_th824"]
 [ext_resource type="Resource" uid="uid://ct5tct30sgg04" path="res://Mechanics/Pattern Crafting/Pattern Crafting Config.tres" id="2_rqwcb"]
 [ext_resource type="Texture2D" uid="uid://c6w1uamsqmg5w" path="res://Mechanics/Pattern Crafting/Textures/inventory/background.png" id="3_uuka7"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_xou5d"]
+[ext_resource type="PackedScene" uid="uid://b1ax6iqc1qh5y" path="res://Core/Scenes/catalog.tscn" id="6_0gcys"]
 [ext_resource type="PackedScene" uid="uid://d120c3tu4bm55" path="res://Mechanics/Pattern Crafting/Scenes/inventory_cell.tscn" id="6_uo4ji"]
 
 [node name="Pattern Crafting" type="Node"]
@@ -216,6 +217,7 @@ mechanic_name = "Pattern Crafting"
 mechanic_category = "Crafting Systems"
 mechanic_config = ExtResource("2_rqwcb")
 mechanic_description_file = "res://Mechanics/Pattern Crafting/description.txt"
+catalog_scene = ExtResource("6_0gcys")
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
 

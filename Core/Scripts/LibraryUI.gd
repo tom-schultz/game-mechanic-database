@@ -10,6 +10,7 @@ class_name MechanicLibraryUI
 @export var mechanic_controls_scene: PackedScene
 @export var config_container: Container
 @export var tab_container: TabContainer = find_child("TabContainer")
+@export var catalog_scene: PackedScene
 @onready var theme : Theme = load("res://Shared/tmml_theme.tres")
 
 func _ready():
@@ -191,3 +192,7 @@ func _on_value_changed_text_edit(text_edit, config_key: String):
 		mechanic_config.set(config_key, text_edit.text)
 
 
+
+
+func _on_return_to_catalog_pressed():
+	get_tree().change_scene_to_packed(catalog_scene)

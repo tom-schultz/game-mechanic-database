@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://drnl2un6br6rw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6870"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ttjdp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgcrj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_som81"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jmv6c"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_ree5f"]
+
+[node name="catalog_item" type="Button"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.941176, 0.964706, 0.941176, 1)
+theme_override_colors/font_pressed_color = Color(0.752941, 0.768627, 0.752941, 1)
+theme_override_colors/font_hover_color = Color(0.85098, 0.870588, 0.85098, 1)
+theme_override_constants/icon_max_width = 196
+theme_override_styles/normal = SubResource("StyleBoxEmpty_r6870")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ttjdp")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bgcrj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_som81")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jmv6c")
+icon = SubResource("ImageTexture_ree5f")
+icon_alignment = 1
+vertical_icon_alignment = 2
