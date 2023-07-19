@@ -12,7 +12,6 @@ extends Node
 @onready var tab_container: TabContainer = find_child("TabContainer")
 
 var _selected : Dictionary
-var _was_multi = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,15 +54,15 @@ func _ready():
 
 	_build_results()
 
-func _on_filters_updated(index : int, selected : bool, control : ItemList):
+func _on_filters_updated(index : int, _unused : bool, control : ItemList):
 	var multi = Input.is_key_pressed(KEY_SHIFT) or Input.is_key_pressed(KEY_CTRL)
-	
+
 	if not multi and _selected[control.name].has(index) and _selected[control.name].size() == 1:
 		control.deselect(index)
-	
+
 	_selected[control.name] = control.get_selected_items()
 	_build_results()
-		
+
 func _build_results():
 	var cat_filters = _get_selected_items(categories_control)
 	var tag_filters = _get_selected_items(tags_control)

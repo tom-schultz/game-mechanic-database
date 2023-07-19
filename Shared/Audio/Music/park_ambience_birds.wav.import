@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://8jaidc1aninr"
-path="res://.godot/imported/park_ambience_birds.wav-f548770b8b4c2849b0afe6bc6a6ae715.sample"
+path="res://.godot/imported/park_ambience_birds.wav-09352ac844c6a092e283d74d0047a456.sample"
 
 [deps]
 
-source_file="res://Shared/Audio/park_ambience_birds.wav"
-dest_files=["res://.godot/imported/park_ambience_birds.wav-f548770b8b4c2849b0afe6bc6a6ae715.sample"]
+source_file="res://Shared/Audio/Music/park_ambience_birds.wav"
+dest_files=["res://.godot/imported/park_ambience_birds.wav-09352ac844c6a092e283d74d0047a456.sample"]
 
 [params]
 

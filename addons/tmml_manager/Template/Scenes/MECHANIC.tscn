@@ -11,5 +11,3 @@ script = ExtResource("1_4iscb")
 mechanic_controls_scene = ExtResource("3_w3knq")
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
-
-[node name="Music Player" type="AudioStreamPlayer" parent="."]

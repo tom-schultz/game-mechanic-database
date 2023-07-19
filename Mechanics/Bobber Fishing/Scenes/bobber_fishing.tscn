@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://bg01idnuck04h"]
 
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="1_12q3l"]
-[ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/splash.ogg" id="2_rcsng"]
-[ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/bloop.wav" id="3_0av07"]
+[ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/SFX/splash.ogg" id="3_8a3u3"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_2sb2k"]
-[ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Shared/Audio/score.wav" id="4_767ul"]
+[ext_resource type="AudioStream" uid="uid://dau0o1i1jldji" path="res://Shared/Audio/SFX/bloop.wav" id="4_u2ttc"]
 [ext_resource type="PackedScene" uid="uid://bkc4ui55h3e12" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="5_3wdh5"]
+[ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Shared/Audio/SFX/score.wav" id="5_36byl"]
 [ext_resource type="Texture2D" uid="uid://d02ls3y8ax7qm" path="res://Mechanics/Bobber Fishing/Textures/backdrop.png" id="6_6cloi"]
 [ext_resource type="Texture2D" uid="uid://db5jib74xvb0f" path="res://Mechanics/Bobber Fishing/Textures/water.png" id="7_atjsr"]
 [ext_resource type="Texture2D" uid="uid://bnewxa2isf0ro" path="res://Mechanics/Bobber Fishing/Textures/rod.png" id="8_l34yq"]
@@ -21,9 +21,9 @@ script = ExtResource("1_12q3l")
 config = ExtResource("13_urk7n")
 bobber = NodePath("Bobber")
 sfx_player = NodePath("SFX Player")
-splash_sfx = ExtResource("2_rcsng")
-bloop_sfx = ExtResource("3_0av07")
-bite_score_sfx = ExtResource("4_767ul")
+splash_sfx = ExtResource("3_8a3u3")
+bloop_sfx = ExtResource("4_u2ttc")
+bite_score_sfx = ExtResource("5_36byl")
 
 [node name="Backdrop" type="Sprite2D" parent="."]
 position = Vector2(848, 360)
@@ -90,5 +90,3 @@ mechanic_controls_scene = ExtResource("5_3wdh5")
 catalog_scene = ExtResource("15_0scqd")
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
-
-[node name="Music Player" type="AudioStreamPlayer" parent="."]

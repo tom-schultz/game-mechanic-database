@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce6lqqyb5xc0f"]
+
+[ext_resource type="Script" path="res://Core/Scripts/AudioControls.gd" id="1_b82n1"]
+
+[node name="Audio Controls" type="GridContainer"]
+script = ExtResource("1_b82n1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Volume Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Volume"
+
+[node name="Volume Slider" type="HSlider" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
+value = 100.0
+
+[node name="HBox Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Playlist Label" type="Label" parent="HBox Container"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Playlist"
+
+[node name="GridContainer" type="GridContainer" parent="HBox Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+columns = 3
+
+[node name="Previous Button" type="Button" parent="HBox Container/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Prev"
+
+[node name="Label" type="Label" parent="HBox Container/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Birbs"
+horizontal_alignment = 1
+
+[node name="Next Button" type="Button" parent="HBox Container/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Next"
+
+[connection signal="value_changed" from="HBoxContainer/Volume Slider" to="." method="_on_volume_slider_value_changed"]

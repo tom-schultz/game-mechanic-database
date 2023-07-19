@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dldhpgic7l2ek"]
+[gd_scene load_steps=8 format=3 uid="uid://dldhpgic7l2ek"]
 
 [ext_resource type="Script" path="res://Core/Scripts/LibraryUI.gd" id="1_l1ius"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_31g2g"]
@@ -6,6 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_qx4lr"]
 [ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="3_y2sgk"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_skv0h"]
+[ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="7_l8aea"]
 
 [node name="Library UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container", "tab_container")]
 script = ExtResource("1_l1ius")
@@ -51,30 +52,38 @@ theme = ExtResource("2_31g2g")
 [node name="Menu" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Menu"]
+[node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/TabContainer/Menu"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TabContainer/Menu/VSplitContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu/VBoxContainer"]
+[node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
 text = "Reset Mechanic"
 
-[node name="Return to Catalog" type="Button" parent="CanvasLayer/TabContainer/Menu/VBoxContainer"]
+[node name="Return to Catalog" type="Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
 text = "Return to Catalog"
 
-[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu/VBoxContainer"]
+[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
 text = "Exit Library"
+
+[node name="Audio Controls" parent="CanvasLayer/TabContainer/Menu/VSplitContainer" instance=ExtResource("7_l8aea")]
+layout_mode = 2
+size_flags_vertical = 8
 
 [node name="Description" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
@@ -122,7 +131,7 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 theme_override_constants/v_separation = 16
 
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Reset Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Return to Catalog" to="." method="_on_return_to_catalog_pressed"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Exit Button" to="." method="reset_mechanic"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VBoxContainer/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Reset Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Return to Catalog" to="." method="_on_return_to_catalog_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="reset_mechanic"]

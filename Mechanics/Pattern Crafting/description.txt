@@ -1,6 +1,6 @@
 Pattern crafting uses item position in a crafting window to match recipes. To craft item, players put materials in the crafting input window. When a recipe pattern is matched, the item appears in the crafting output window. If the player takes the output item, the input items are consumed. If the player instead modifies the input window, the output item disappears.
 
-This crafting style gives players an intuitive mechanism to discover new recipes through experimentation. Players might experiment and guess pattern of new items if the patterns are developed with some tie to the shape and structure of the real item. For example, an egg and cheese sandwich has bread on top and bottom with eggs, cheese, and spread in between. Players might also see the shape of one item and decide to try swapping out items. Our delightful egg and cheese sandwich might become an old but reliable friend, the ham and cheese.
+This crafting style gives players an intuitive mechanism to discover new recipes through experimentation. Players might experiment and guess pattern of new items if the patterns are developed with some tie to the shape and structure of the real item. For example, an egg and cheese sandwich has bread on top and bottom with eggs, cheese, and spread in between. Players might also see the shape of one item and decide to try swapping out items. Our delightful egg and cheese sandwich might become the classic ham and cheese.
 
 In this implementation, recipe patterns use ranges to determine where an item can be placed. The ranges correspond to the input area cells where top left is 0 and bottom right is 8. A pattern is the output item, a colon, and a comma delineated list of input items.
 	
@@ -10,7 +10,7 @@ There can be up to nine input items. Input items are defined by an item name and
 
 <item name>(<start>-<end>)
 
-The initial recipe, bread, requires three flour, one salt, and one water. The items can be placed in any position:
+The initial recipe, bread, requires three flour, one salt, and one water. The items can be placed in any order:
 	
 bread:flour(0-8),flour(0-8),flour(0-8),water(0-8),
 salt(0-8)

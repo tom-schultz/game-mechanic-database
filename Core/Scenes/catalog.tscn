@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1ax6iqc1qh5y"]
+[gd_scene load_steps=8 format=3 uid="uid://b1ax6iqc1qh5y"]
 
 [ext_resource type="Script" path="res://Core/Scripts/Catalog.gd" id="1_jrx72"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_8iuxx"]
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_ao3ls"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_3vp4w"]
+[ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="5_yq0s2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oj1gi"]
 
@@ -11,11 +12,11 @@
 
 [node name="Catalog" type="Node" node_paths=PackedStringArray("name_control", "categories_control", "tags_control", "implementations_control", "related_mechanics_control", "output_grid")]
 script = ExtResource("1_jrx72")
-name_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit")
-categories_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control")
-tags_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Tags Control")
-implementations_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Implementations Control")
-related_mechanics_control = NodePath("CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Mechanics Control")
+name_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit")
+categories_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Category Control")
+tags_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Tags Control")
+implementations_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Implementations Control")
+related_mechanics_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Mechanics Control")
 output_grid = NodePath("ScrollContainer/MarginContainer/GridContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -34,9 +35,9 @@ layout_mode = 2
 size_flags_vertical = 0
 columns = 3
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Catalog UI" type="CanvasLayer" parent="."]
 
-[node name="Title" type="Label" parent="CanvasLayer"]
+[node name="Title" type="Label" parent="Catalog UI"]
 offset_top = 8.0
 offset_right = 432.0
 offset_bottom = 53.0
@@ -45,7 +46,7 @@ text = "Library Catalog"
 label_settings = ExtResource("3_ao3ls")
 horizontal_alignment = 1
 
-[node name="Category" type="Label" parent="CanvasLayer"]
+[node name="Category" type="Label" parent="Catalog UI"]
 offset_top = 48.0
 offset_right = 432.0
 offset_bottom = 75.0
@@ -54,49 +55,51 @@ text = "The Minor Mechanic Library"
 label_settings = ExtResource("4_3vp4w")
 horizontal_alignment = 1
 
-[node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
+[node name="TabContainer" type="TabContainer" parent="Catalog UI"]
 offset_left = 16.0
 offset_top = 88.0
 offset_right = 416.0
 offset_bottom = 704.0
 theme = ExtResource("2_8iuxx")
 
-[node name="Menu" type="Control" parent="CanvasLayer/TabContainer"]
-visible = false
+[node name="Menu" type="MarginContainer" parent="Catalog UI/TabContainer"]
 layout_mode = 2
 
-[node name="Reset Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
+[node name="VSplitContainer" type="VSplitContainer" parent="Catalog UI/TabContainer/Menu"]
 layout_mode = 2
-offset_left = 120.0
-offset_top = 17.0
-offset_right = 246.0
-offset_bottom = 48.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Catalog UI/TabContainer/Menu/VSplitContainer"]
+layout_mode = 2
+
+[node name="Reset Button" type="Button" parent="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 theme = ExtResource("2_8iuxx")
 text = "Reset Catalog"
 
-[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu"]
+[node name="Exit Button" type="Button" parent="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer"]
 layout_mode = 2
-offset_left = 120.0
-offset_top = 65.0
-offset_right = 247.0
-offset_bottom = 96.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_8iuxx")
 text = "Exit Library"
 
-[node name="Usage" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+[node name="Audio Controls" parent="Catalog UI/TabContainer/Menu/VSplitContainer" instance=ExtResource("5_yq0s2")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Usage" type="MarginContainer" parent="Catalog UI/TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_8iuxx")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TabContainer/Usage"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Catalog UI/TabContainer/Usage"]
 layout_mode = 2
 theme = ExtResource("2_8iuxx")
 horizontal_scroll_mode = 0
 
-[node name="Usage Text" type="RichTextLabel" parent="CanvasLayer/TabContainer/Usage/ScrollContainer"]
+[node name="Usage Text" type="RichTextLabel" parent="Catalog UI/TabContainer/Usage/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -108,16 +111,16 @@ This is the Minor Mechanic Library, an open-source collection of small game mech
 
 You are currently at the Library's catalog. On the search tab you can filter games based on name, category, and other attributes. Click to select or deselect individual attributes, or shift-click to select multiple."
 
-[node name="Search" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+[node name="Search" type="MarginContainer" parent="Catalog UI/TabContainer"]
 visible = false
 layout_mode = 2
 theme = ExtResource("2_8iuxx")
 
-[node name="Scroll Container" type="ScrollContainer" parent="CanvasLayer/TabContainer/Search"]
+[node name="Scroll Container" type="ScrollContainer" parent="Catalog UI/TabContainer/Search"]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabContainer/Search/Scroll Container"]
+[node name="MarginContainer" type="MarginContainer" parent="Catalog UI/TabContainer/Search/Scroll Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -127,30 +130,30 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 0
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer"]
 layout_mode = 2
 theme_override_constants/v_separation = 16
 columns = 2
 
-[node name="Name Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Name Label" type="Label" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Mechanic Name"
 
-[node name="Name LineEdit" type="LineEdit" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Name LineEdit" type="LineEdit" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Mechanic Name"
 clear_button_enabled = true
 
-[node name="Category Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Category Label" type="Label" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Category"
 
-[node name="Category Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Category Control" type="ItemList" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -160,13 +163,13 @@ auto_height = true
 item_count = 1
 item_0/text = ""
 
-[node name="Tags Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Tags Label" type="Label" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Tags"
 
-[node name="Tags Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Tags Control" type="ItemList" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -174,13 +177,13 @@ theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_811lx")
 select_mode = 1
 auto_height = true
 
-[node name="Implementations Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Implementations Label" type="Label" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Implementations"
 
-[node name="Implementations Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Implementations Control" type="ItemList" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -189,13 +192,13 @@ select_mode = 1
 allow_reselect = true
 auto_height = true
 
-[node name="Related Mechanics Label" type="Label" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Related Mechanics Label" type="Label" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Related Mechanics"
 
-[node name="Related Mechanics Control" type="ItemList" parent="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
+[node name="Related Mechanics Control" type="ItemList" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -207,6 +210,6 @@ auto_height = true
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
 
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Reset Button" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/Exit Button" to="." method="_on_exit_button_pressed"]
-[connection signal="text_changed" from="CanvasLayer/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit" to="." method="_build_results" unbinds=1]
+[connection signal="pressed" from="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer/Reset Button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="_on_exit_button_pressed"]
+[connection signal="text_changed" from="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit" to="." method="_build_results" unbinds=1]
