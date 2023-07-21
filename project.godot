@@ -16,7 +16,8 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
 
-MusicPlayer="*res://Core/Scenes/AL_music_player.tscn"
+AudioPlayer="*res://Core/Scenes/AL_audio_player.tscn"
+LocalDb="*res://Core/Scripts/LocalDB.gd"
 
 [display]
 

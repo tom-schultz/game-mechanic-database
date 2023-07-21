@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1ax6iqc1qh5y"]
+[gd_scene load_steps=10 format=3 uid="uid://b1ax6iqc1qh5y"]
 
 [ext_resource type="Script" path="res://Core/Scripts/Catalog.gd" id="1_jrx72"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_8iuxx"]
+[ext_resource type="AudioStream" uid="uid://bdfu0qag8qfvq" path="res://Shared/Audio/SFX/interface/Switch sounds 6.wav" id="2_sor0t"]
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_ao3ls"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_3vp4w"]
+[ext_resource type="PackedScene" uid="uid://cniyflpfkj1oh" path="res://Core/Scenes/exit_button.tscn" id="5_drj6u"]
 [ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="5_yq0s2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oj1gi"]
@@ -18,6 +20,8 @@ tags_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginC
 implementations_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Implementations Control")
 related_mechanics_control = NodePath("Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Related Mechanics Control")
 output_grid = NodePath("ScrollContainer/MarginContainer/GridContainer")
+_mechanic_click_sfx = ExtResource("2_sor0t")
+_mechanic_click_volume = 1.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 448.0
@@ -67,9 +71,11 @@ layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="Catalog UI/TabContainer/Menu"]
 layout_mode = 2
+dragger_visibility = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Catalog UI/TabContainer/Menu/VSplitContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 
 [node name="Reset Button" type="Button" parent="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer"]
 layout_mode = 2
@@ -78,12 +84,8 @@ size_flags_vertical = 0
 theme = ExtResource("2_8iuxx")
 text = "Reset Catalog"
 
-[node name="Exit Button" type="Button" parent="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer"]
+[node name="Exit Button" parent="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer" instance=ExtResource("5_drj6u")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme = ExtResource("2_8iuxx")
-text = "Exit Library"
 
 [node name="Audio Controls" parent="Catalog UI/TabContainer/Menu/VSplitContainer" instance=ExtResource("5_yq0s2")]
 layout_mode = 2
@@ -159,6 +161,7 @@ size_flags_horizontal = 3
 focus_mode = 0
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_oj1gi")
 select_mode = 1
+allow_reselect = true
 auto_height = true
 item_count = 1
 item_0/text = ""
@@ -175,6 +178,7 @@ size_flags_horizontal = 3
 focus_mode = 0
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_811lx")
 select_mode = 1
+allow_reselect = true
 auto_height = true
 
 [node name="Implementations Label" type="Label" parent="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer"]
@@ -204,12 +208,9 @@ size_flags_horizontal = 3
 focus_mode = 0
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_811lx")
 select_mode = 1
+allow_reselect = true
 auto_height = true
 
-[node name="Music Player" type="AudioStreamPlayer" parent="."]
-
-[node name="SFX Player" type="AudioStreamPlayer" parent="."]
-
+[connection signal="tab_clicked" from="Catalog UI/TabContainer" to="." method="_on_tab_container_tab_clicked"]
 [connection signal="pressed" from="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer/Reset Button" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="_on_exit_button_pressed"]
 [connection signal="text_changed" from="Catalog UI/TabContainer/Search/Scroll Container/MarginContainer/GridContainer/Name LineEdit" to="." method="_build_results" unbinds=1]

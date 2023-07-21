@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cniyflpfkj1oh"]
+
+[ext_resource type="Script" path="res://Core/Scripts/ExitButton.gd" id="1_vujb6"]
+
+[node name="Exit Button" type="MenuButton"]
+size_flags_horizontal = 4
+text = "Exit Library"
+flat = false
+item_count = 2
+popup/item_0/text = "Confirm"
+popup/item_0/id = 0
+popup/item_1/text = "Cancel"
+popup/item_1/id = 1
+script = ExtResource("1_vujb6")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -4,12 +4,14 @@
 [ext_resource type="Resource" uid="uid://ct5tct30sgg04" path="res://Mechanics/Pattern Crafting/Pattern Crafting Config.tres" id="2_rqwcb"]
 [ext_resource type="Texture2D" uid="uid://c6w1uamsqmg5w" path="res://Mechanics/Pattern Crafting/Textures/inventory/background.png" id="3_uuka7"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_xou5d"]
-[ext_resource type="PackedScene" uid="uid://b1ax6iqc1qh5y" path="res://Core/Scenes/catalog.tscn" id="6_0gcys"]
+[ext_resource type="PackedScene" uid="uid://co6sgl5eqs41y" path="res://Mechanics/Pattern Crafting/Scenes/pattern_crafting_controls.tscn" id="6_jjdqw"]
 [ext_resource type="PackedScene" uid="uid://d120c3tu4bm55" path="res://Mechanics/Pattern Crafting/Scenes/inventory_cell.tscn" id="6_uo4ji"]
 
 [node name="Pattern Crafting" type="Node"]
 script = ExtResource("1_th824")
 config = ExtResource("2_rqwcb")
+_item_pickup_sfx_volume = null
+_item_drop_sfx_volume = null
 
 [node name="Inventory" type="Node2D" parent="."]
 position = Vector2(848, 360)
@@ -217,7 +219,7 @@ mechanic_name = "Pattern Crafting"
 mechanic_category = "Crafting Systems"
 mechanic_config = ExtResource("2_rqwcb")
 mechanic_description_file = "res://Mechanics/Pattern Crafting/description.txt"
-catalog_scene = ExtResource("6_0gcys")
+mechanic_controls_scene = ExtResource("6_jjdqw")
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
 

@@ -2,10 +2,14 @@ extends Node
 
 @export var config : BobberFishingConfig
 @export var bobber : Sprite2D
-@export var sfx_player: AudioStreamPlayer
-@export var splash_sfx: AudioStream
-@export var bloop_sfx: AudioStream
+@export var hit_sfx: AudioStream
+@export var _hit_sfx_volume : float = 1
 @export var bite_score_sfx: AudioStream
+@export var _bite_score_sfx_volume : float = 1
+@export var _nibble_sfx : AudioStream
+@export var _nibble_sfx_volume : float = 1
+@export var _bite_sfx : AudioStream
+@export var _bite_sfx_volume : float = 1
 
 @onready var score_control : Label = get_node("Score")
 @onready var fisherman : Label = get_node("Fisherman")
@@ -54,23 +58,22 @@ func _unhandled_key_input(event):
 			KEY_3:
 				set_state(FishState.BITE, false)
 	
-func _do_hit():
-	sfx_player.stream = splash_sfx
-	
+func _do_hit():	
 	match (fish_state):
 		FishState.NOFISH:
 			fisherman.text = "(ఠ_ఠ)"
+			AudioPlayer.play_sfx(hit_sfx, _hit_sfx_volume)
 		FishState.NIBBLE:
 			fisherman.text = "(ఠ౧ఠ)"
+			AudioPlayer.play_sfx(hit_sfx, _hit_sfx_volume)
 		FishState.BITE:
-			sfx_player.stream = bite_score_sfx
+			AudioPlayer.play_sfx(bite_score_sfx, _bite_score_sfx_volume)
 			fisherman.text = "\\ (ఠ‿ఠ) /"
 			print("You GO Fish Coco!")
 			score += randi_range(config.score_range_min, config.score_range_max)
 			score_control.text = "Score: " + String.num(score)
 	
 	set_state(FishState.NOFISH, true)
-	sfx_player.play()
 	_reset_fisherman()
 
 func _reset_fisherman():
@@ -125,6 +128,11 @@ func move_bobber(delta):
 			is_bobbing = fish_state == FishState.NOFISH
 	
 func set_state(new_state, is_hit):
+	if new_state == FishState.NIBBLE:
+		AudioPlayer.play_sfx(_nibble_sfx, _nibble_sfx_volume)
+	elif new_state == FishState.BITE:
+		AudioPlayer.play_sfx(_bite_sfx, _bite_sfx_volume)
+	
 	if is_hit:
 		fish_cooldown = config.state_config[fish_state].hit_cooldown
 	else:

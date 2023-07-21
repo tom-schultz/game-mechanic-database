@@ -4,13 +4,14 @@ class_name MechanicLibraryUI
 @export var mechanic_name: String
 @export var mechanic_category: String
 @export var mechanic_config : Resource
-@export var description_label: Label
+@export var description_label: RichTextLabel
 @export var mechanic_description_file: String
 @export var controls_container: Container
 @export var mechanic_controls_scene: PackedScene
 @export var config_container: Container
 @export var tab_container: TabContainer = find_child("TabContainer")
 @export var catalog_scene: PackedScene
+
 @onready var theme : Theme = load("res://Shared/tmml_theme.tres")
 
 func _ready():
@@ -29,24 +30,6 @@ func _ready():
 
 func get_config_container():
 	return config_container
-
-func reset_mechanic():
-	get_tree().reload_current_scene()
-
-func _unhandled_key_input(event):
-	if event.keycode == KEY_ESCAPE:
-		_do_exit()
-
-func _on_exit_button_pressed():
-	_do_exit()
-
-func _do_exit():
-	if OS.has_feature('web'):
-		JavaScriptBridge.eval("""
-			window.history.back()
-		""")
-	else:
-		get_tree().quit()
 
 func _build_config_ui():
 	var grid : GridContainer = _new_grid()
@@ -122,27 +105,27 @@ func _build_dict(container, config_key, dict_label, dict):
 			_build_spin_box(container, new_config_key, dict[key])
 
 func _build_label(container, label_text):
-		var label = Label.new()
-		label.text = label_text
-		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		label.theme = theme
-		container.add_child(label)
+	var label = Label.new()
+	label.text = label_text
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.theme = theme
+	container.add_child(label)
 
 func _build_spin_box(container, config_key, value):
-		var field = ConfigFieldFloat.new()
-		field.custom_arrow_step = 0.1
-		field.min_value = -9999999999
-		field.max_value = 9999999999
-		field.rounded = typeof(value) == TYPE_INT
-		field.step = 0.01 if typeof(value) == TYPE_FLOAT else 1.0
-		field.update_on_text_changed = true
-		field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		field.focus_mode = Control.FOCUS_CLICK
-		field.theme = theme
-		field.value_changed.connect(_on_value_changed.bind(config_key))
-		field.name = config_key
-		field.value = value
-		container.add_child(field)
+	var field = ConfigFieldFloat.new()
+	field.custom_arrow_step = 0.1
+	field.min_value = -9999999999
+	field.max_value = 9999999999
+	field.rounded = typeof(value) == TYPE_INT
+	field.step = 0.01 if typeof(value) == TYPE_FLOAT else 1.0
+	field.update_on_text_changed = true
+	field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	field.focus_mode = Control.FOCUS_CLICK
+	field.theme = theme
+	field.value_changed.connect(_on_value_changed.bind(config_key))
+	field.name = config_key
+	field.value = value
+	container.add_child(field)
 		
 func _build_text_area(container, config_key, value):
 	var field = ConfigFieldLongString.new()
@@ -191,8 +174,16 @@ func _on_value_changed_text_edit(text_edit, config_key: String):
 	else:
 		mechanic_config.set(config_key, text_edit.text)
 
-
-
-
 func _on_return_to_catalog_pressed():
+	AudioPlayer.play_button_press_sfx()
 	get_tree().change_scene_to_packed(catalog_scene)
+
+func reset_mechanic():
+	AudioPlayer.play_button_press_sfx()
+	get_tree().reload_current_scene()
+
+func _on_description_text_meta_clicked(meta):
+	OS.shell_open(str(meta))
+
+func _on_tab_clicked(_tab):
+	AudioPlayer.play_tab_click_sfx()

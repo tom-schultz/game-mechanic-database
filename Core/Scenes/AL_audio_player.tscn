@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg2ncjft13r41"]
+
+[ext_resource type="Script" path="res://Core/Scripts/AudioPlayer.gd" id="1_71kbk"]
+[ext_resource type="AudioStream" uid="uid://cm0nokknkmdx0" path="res://Shared/Audio/SFX/interface/Simple Click Sound 1.wav" id="2_ap08p"]
+[ext_resource type="AudioStream" uid="uid://8jaidc1aninr" path="res://Shared/Audio/Music/park_ambience_birds.wav" id="2_bjdd2"]
+[ext_resource type="AudioStream" uid="uid://ma0anllmwf0a" path="res://Shared/Audio/SFX/interface/Simple Click Sound 2.wav" id="3_fomgg"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_71kbk")
+_button_press_sfx = ExtResource("2_ap08p")
+_button_press_volume = 0.8
+_tab_click_sfx = ExtResource("3_fomgg")
+_tab_click_volume = 0.8
+
+[node name="Music Player Blue" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bjdd2")
+volume_db = -10.0
+autoplay = true
+
+[node name="SFX Player" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0

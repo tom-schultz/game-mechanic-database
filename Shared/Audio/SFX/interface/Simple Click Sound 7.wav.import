@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7hmarj4q44un"
+path="res://.godot/imported/Simple Click Sound 7.wav-22280449053eb74d70058a93a2cf891f.sample"
+
+[deps]
+
+source_file="res://Shared/Audio/SFX/interface/Simple Click Sound 7.wav"
+dest_files=["res://.godot/imported/Simple Click Sound 7.wav-22280449053eb74d70058a93a2cf891f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -6,6 +6,8 @@ extends Node
 @export var implementations_control : ItemList
 @export var related_mechanics_control : ItemList
 @export var output_grid : GridContainer
+@export var _mechanic_click_sfx : AudioStream
+@export var _mechanic_click_volume : float = 0.7
 
 @onready var db : LibraryDatabase = load("res://Core/Resources/LibraryDatabase.tres")
 @onready var catalog_item_scene : PackedScene = load("res://Core/Scenes/catalog_item.tscn")
@@ -18,10 +20,14 @@ func _ready():
 	tab_container.current_tab = 1
 	db.build_indices()
 	
-	categories_control.multi_selected.connect(_on_filters_updated.bind(categories_control))
-	tags_control.multi_selected.connect(_on_filters_updated.bind(tags_control))
-	implementations_control.multi_selected.connect(_on_filters_updated.bind(implementations_control))
-	related_mechanics_control.multi_selected.connect(_on_filters_updated.bind(related_mechanics_control))
+	categories_control.multi_selected \
+			.connect(_on_filters_updated.bind(categories_control))
+	tags_control.multi_selected \
+			.connect(_on_filters_updated.bind(tags_control))
+	implementations_control.multi_selected \
+			.connect(_on_filters_updated.bind(implementations_control))
+	related_mechanics_control.multi_selected \
+			.connect(_on_filters_updated.bind(related_mechanics_control))
 	
 	_selected[categories_control.name] = []
 	_selected[tags_control.name] = []
@@ -55,6 +61,7 @@ func _ready():
 	_build_results()
 
 func _on_filters_updated(index : int, _unused : bool, control : ItemList):
+	AudioPlayer.play_button_press_sfx()
 	var multi = Input.is_key_pressed(KEY_SHIFT) or Input.is_key_pressed(KEY_CTRL)
 
 	if not multi and _selected[control.name].has(index) and _selected[control.name].size() == 1:
@@ -98,8 +105,6 @@ func _build_results():
 			&& name_match)
 	)
 	
-	print_debug(matched)
-	
 	for label in output_grid.get_children():
 		output_grid.remove_child(label)
 		label.queue_free()
@@ -123,24 +128,13 @@ func _get_selected_items(list : ItemList):
 	return selected
 
 func _on_mechanic_pressed(scene : String):
+	AudioPlayer.play_sfx(_mechanic_click_sfx, _mechanic_click_volume)
 	if get_tree().change_scene_to_file(scene) != OK:
 		print_debug("Could not load scene %" % scene)
 
-func _unhandled_key_input(event):
-	if event.keycode == KEY_ESCAPE:
-		_do_exit()
-
-func _on_exit_button_pressed():
-	_do_exit()
-
-func _do_exit():
-	if OS.has_feature('web'):
-		JavaScriptBridge.eval("""
-			window.history.back()
-		""")
-	else:
-		get_tree().quit()
-
-
 func _on_reset_button_pressed():
+	AudioPlayer.play_button_press_sfx()
 	get_tree().reload_current_scene()
+
+func _on_tab_container_tab_clicked(_tab):
+	AudioPlayer.play_tab_click_sfx()

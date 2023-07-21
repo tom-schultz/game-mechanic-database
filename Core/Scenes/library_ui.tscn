@@ -1,20 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://dldhpgic7l2ek"]
+[gd_scene load_steps=9 format=3 uid="uid://dldhpgic7l2ek"]
 
 [ext_resource type="Script" path="res://Core/Scripts/LibraryUI.gd" id="1_l1ius"]
+[ext_resource type="PackedScene" uid="uid://b1ax6iqc1qh5y" path="res://Core/Scenes/catalog.tscn" id="2_8je0q"]
 [ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_31g2g"]
-[ext_resource type="PackedScene" uid="uid://co6sgl5eqs41y" path="res://Mechanics/Pattern Crafting/Scenes/pattern_crafting_controls.tscn" id="2_i0h2d"]
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_qx4lr"]
 [ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="3_y2sgk"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_skv0h"]
+[ext_resource type="PackedScene" uid="uid://cniyflpfkj1oh" path="res://Core/Scenes/exit_button.tscn" id="7_c8jfa"]
 [ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="7_l8aea"]
 
 [node name="Library UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container", "tab_container")]
 script = ExtResource("1_l1ius")
-description_label = NodePath("CanvasLayer/TabContainer/Description/ScrollContainer/Description Text")
+description_label = NodePath("CanvasLayer/TabContainer/Description/ScrollContainer/MarginContainer/Description Text")
 controls_container = NodePath("CanvasLayer/TabContainer/Controls")
-mechanic_controls_scene = ExtResource("2_i0h2d")
 config_container = NodePath("CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
 tab_container = NodePath("CanvasLayer/TabContainer")
+catalog_scene = ExtResource("2_8je0q")
 
 [node name="MechanicFrame" type="Sprite2D" parent="."]
 z_index = -1
@@ -50,6 +51,7 @@ offset_bottom = 704.0
 theme = ExtResource("2_31g2g")
 
 [node name="Menu" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/TabContainer/Menu"]
@@ -74,19 +76,14 @@ size_flags_vertical = 0
 theme = ExtResource("2_31g2g")
 text = "Return to Catalog"
 
-[node name="Exit Button" type="Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer"]
+[node name="Exit Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer" instance=ExtResource("7_c8jfa")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme = ExtResource("2_31g2g")
-text = "Exit Library"
 
 [node name="Audio Controls" parent="CanvasLayer/TabContainer/Menu/VSplitContainer" instance=ExtResource("7_l8aea")]
 layout_mode = 2
 size_flags_vertical = 8
 
 [node name="Description" type="MarginContainer" parent="CanvasLayer/TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("2_31g2g")
 
@@ -95,13 +92,19 @@ layout_mode = 2
 theme = ExtResource("2_31g2g")
 horizontal_scroll_mode = 0
 
-[node name="Description Text" type="Label" parent="CanvasLayer/TabContainer/Description/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabContainer/Description/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Description Text" type="RichTextLabel" parent="CanvasLayer/TabContainer/Description/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_31g2g")
+bbcode_enabled = true
 text = "Lorem Ipsum"
-autowrap_mode = 3
+fit_content = true
 
 [node name="Controls" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
@@ -131,7 +134,8 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 theme_override_constants/v_separation = 16
 
+[connection signal="tab_clicked" from="CanvasLayer/TabContainer" to="." method="_on_tab_clicked"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Reset Button" to="." method="reset_mechanic"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Return to Catalog" to="." method="_on_return_to_catalog_pressed"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="reset_mechanic"]
+[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="_on_button_pressed_sfx"]
+[connection signal="meta_clicked" from="CanvasLayer/TabContainer/Description/ScrollContainer/MarginContainer/Description Text" to="." method="_on_description_text_meta_clicked"]
