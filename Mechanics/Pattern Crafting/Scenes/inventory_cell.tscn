@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cgjjg41k68xbe" path="res://Mechanics/Pattern Crafting/Textures/inventory/inventory_cell.png" id="1_wqem3"]
 [ext_resource type="Script" path="res://Mechanics/Pattern Crafting/Scripts/InventoryCell.gd" id="2_pcgey"]
-[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="3_5cn1o"]
 [ext_resource type="AudioStream" uid="uid://7hmarj4q44un" path="res://Shared/Audio/SFX/interface/Simple Click Sound 7.wav" id="3_evjsd"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/main_theme.tres" id="4_dkccd"]
 
 [node name="Inventory Cell" type="TextureRect"]
 anchors_preset = -1
@@ -29,5 +29,5 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Item Display" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
-theme = ExtResource("3_5cn1o")
+theme = ExtResource("4_dkccd")
 expand_mode = 3

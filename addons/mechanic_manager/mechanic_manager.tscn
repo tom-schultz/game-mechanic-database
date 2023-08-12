@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cf6872w3y52f0"]
 
-[node name="TMML Manager" type="GridContainer"]
+[node name="Mechanic Manager" type="GridContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 columns = 2

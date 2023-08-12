@@ -12,7 +12,7 @@ class_name MechanicLibraryUI
 @export var tab_container: TabContainer = find_child("TabContainer")
 @export var catalog_scene: PackedScene
 
-@onready var theme : Theme = load("res://Shared/tmml_theme.tres")
+@onready var theme : Theme = load("res://Shared/main_theme.tres")
 
 func _ready():
 	tab_container.current_tab = 1

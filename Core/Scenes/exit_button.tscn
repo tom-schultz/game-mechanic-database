@@ -4,7 +4,7 @@
 
 [node name="Exit Button" type="MenuButton"]
 size_flags_horizontal = 4
-text = "Exit Library"
+text = "Exit Game"
 flat = false
 item_count = 2
 popup/item_0/text = "Confirm"

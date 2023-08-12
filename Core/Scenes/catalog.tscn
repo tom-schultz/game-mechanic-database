@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1ax6iqc1qh5y"]
 
 [ext_resource type="Script" path="res://Core/Scripts/Catalog.gd" id="1_jrx72"]
-[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_8iuxx"]
 [ext_resource type="AudioStream" uid="uid://bdfu0qag8qfvq" path="res://Shared/Audio/SFX/interface/Switch sounds 6.wav" id="2_sor0t"]
 [ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_ao3ls"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/main_theme.tres" id="3_iaoj2"]
 [ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_3vp4w"]
 [ext_resource type="PackedScene" uid="uid://cniyflpfkj1oh" path="res://Core/Scenes/exit_button.tscn" id="5_drj6u"]
 [ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="5_yq0s2"]
@@ -45,8 +45,8 @@ columns = 3
 offset_top = 8.0
 offset_right = 432.0
 offset_bottom = 53.0
-theme = ExtResource("2_8iuxx")
-text = "Library Catalog"
+theme = ExtResource("3_iaoj2")
+text = "Encyclopedia Mechanica"
 label_settings = ExtResource("3_ao3ls")
 horizontal_alignment = 1
 
@@ -54,8 +54,8 @@ horizontal_alignment = 1
 offset_top = 48.0
 offset_right = 432.0
 offset_bottom = 75.0
-theme = ExtResource("2_8iuxx")
-text = "The Minor Mechanic Library"
+theme = ExtResource("3_iaoj2")
+text = "Catalog"
 label_settings = ExtResource("4_3vp4w")
 horizontal_alignment = 1
 
@@ -64,7 +64,7 @@ offset_left = 16.0
 offset_top = 88.0
 offset_right = 416.0
 offset_bottom = 704.0
-theme = ExtResource("2_8iuxx")
+theme = ExtResource("3_iaoj2")
 
 [node name="Menu" type="MarginContainer" parent="Catalog UI/TabContainer"]
 layout_mode = 2
@@ -81,7 +81,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
-theme = ExtResource("2_8iuxx")
+theme = ExtResource("3_iaoj2")
 text = "Reset Catalog"
 
 [node name="Exit Button" parent="Catalog UI/TabContainer/Menu/VSplitContainer/VBoxContainer" instance=ExtResource("5_drj6u")]
@@ -94,29 +94,29 @@ size_flags_vertical = 8
 [node name="Usage" type="MarginContainer" parent="Catalog UI/TabContainer"]
 visible = false
 layout_mode = 2
-theme = ExtResource("2_8iuxx")
+theme = ExtResource("3_iaoj2")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Catalog UI/TabContainer/Usage"]
 layout_mode = 2
-theme = ExtResource("2_8iuxx")
+theme = ExtResource("3_iaoj2")
 horizontal_scroll_mode = 0
 
 [node name="Usage Text" type="RichTextLabel" parent="Catalog UI/TabContainer/Usage/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_8iuxx")
+theme = ExtResource("3_iaoj2")
 bbcode_enabled = true
 text = "[font_size=40][center]Welcome! [/center][/font_size]
 
-This is the Minor Mechanic Library, an open-source collection of small game mechanics intended to educate and inspire folks who want to make games or learn about them. Each mechanic comes with a description, controls, and a set of parameters that you can use to tweak and tune the mechanic's behavior.
+This is the Encyclopedia Mechanica, an open-source collection of game mechanics intended to educate and inspire folks who want to make games or learn about them. Each mechanic comes with a description, controls, and a set of parameters that you can use to tweak and tune the mechanic's behavior.
 
-You are currently at the Library's catalog. On the search tab you can filter games based on name, category, and other attributes. Click to select or deselect individual attributes, or shift-click to select multiple."
+You are currently at the catalog. On the search tab you can filter games based on name, category, and other attributes. Click to select or deselect individual attributes, or shift-click to select multiple."
 
 [node name="Search" type="MarginContainer" parent="Catalog UI/TabContainer"]
 visible = false
 layout_mode = 2
-theme = ExtResource("2_8iuxx")
+theme = ExtResource("3_iaoj2")
 
 [node name="Scroll Container" type="ScrollContainer" parent="Catalog UI/TabContainer/Search"]
 layout_mode = 2
@@ -126,7 +126,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_8iuxx")
+theme = ExtResource("3_iaoj2")
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8

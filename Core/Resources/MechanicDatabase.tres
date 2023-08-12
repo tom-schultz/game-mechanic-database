@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LibraryDatabase" load_steps=2 format=3 uid="uid://54j53ev57vvc"]
 
-[ext_resource type="Script" path="res://Core/Scripts/LibraryDatabase.gd" id="1_1miy6"]
+[ext_resource type="Script" path="res://Core/Scripts/MechanicDatabase.gd" id="1_1miy6"]
 
 [resource]
 script = ExtResource("1_1miy6")

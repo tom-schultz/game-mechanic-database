@@ -1,27 +1,27 @@
 [gd_scene load_steps=9 format=3 uid="uid://dldhpgic7l2ek"]
 
-[ext_resource type="Script" path="res://Core/Scripts/LibraryUI.gd" id="1_l1ius"]
-[ext_resource type="PackedScene" uid="uid://b1ax6iqc1qh5y" path="res://Core/Scenes/catalog.tscn" id="2_8je0q"]
-[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="2_31g2g"]
-[ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="3_qx4lr"]
-[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="3_y2sgk"]
-[ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="4_skv0h"]
-[ext_resource type="PackedScene" uid="uid://cniyflpfkj1oh" path="res://Core/Scenes/exit_button.tscn" id="7_c8jfa"]
-[ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="7_l8aea"]
+[ext_resource type="Script" path="res://Core/Scripts/CoreUI.gd" id="1_jegjp"]
+[ext_resource type="PackedScene" uid="uid://b1ax6iqc1qh5y" path="res://Core/Scenes/catalog.tscn" id="2_vl2rp"]
+[ext_resource type="Texture2D" uid="uid://1sj367qdhckw" path="res://Core/Textures/mechanic_frame.png" id="3_blwai"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/main_theme.tres" id="4_tstj4"]
+[ext_resource type="LabelSettings" uid="uid://b21w5hkbull3a" path="res://Core/Settings/title_label_settings.tres" id="5_ktgdt"]
+[ext_resource type="LabelSettings" uid="uid://dkm6gskrwl3rb" path="res://Core/Settings/category_label_settings.tres" id="6_g0gk8"]
+[ext_resource type="PackedScene" uid="uid://cniyflpfkj1oh" path="res://Core/Scenes/exit_button.tscn" id="7_18fcv"]
+[ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="8_12uu1"]
 
-[node name="Library UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container", "tab_container")]
-script = ExtResource("1_l1ius")
+[node name="Core UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container", "tab_container")]
+script = ExtResource("1_jegjp")
 description_label = NodePath("CanvasLayer/TabContainer/Description/ScrollContainer/MarginContainer/Description Text")
 controls_container = NodePath("CanvasLayer/TabContainer/Controls")
 config_container = NodePath("CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
 tab_container = NodePath("CanvasLayer/TabContainer")
-catalog_scene = ExtResource("2_8je0q")
+catalog_scene = ExtResource("2_vl2rp")
 
 [node name="MechanicFrame" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(848, 360)
 scale = Vector2(1.3, 1.43333)
-texture = ExtResource("3_y2sgk")
+texture = ExtResource("3_blwai")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -29,18 +29,18 @@ texture = ExtResource("3_y2sgk")
 offset_top = 8.0
 offset_right = 432.0
 offset_bottom = 53.0
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 text = "Mechanic Name"
-label_settings = ExtResource("3_qx4lr")
+label_settings = ExtResource("5_ktgdt")
 horizontal_alignment = 1
 
 [node name="Category" type="Label" parent="CanvasLayer"]
 offset_top = 48.0
 offset_right = 432.0
 offset_bottom = 75.0
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 text = "Mechanic Category"
-label_settings = ExtResource("4_skv0h")
+label_settings = ExtResource("6_g0gk8")
 horizontal_alignment = 1
 
 [node name="TabContainer" type="TabContainer" parent="CanvasLayer"]
@@ -48,7 +48,7 @@ offset_left = 16.0
 offset_top = 88.0
 offset_right = 416.0
 offset_bottom = 704.0
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 
 [node name="Menu" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 layout_mode = 2
@@ -65,31 +65,31 @@ theme_override_constants/separation = 16
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 text = "Reset Mechanic"
 
 [node name="Return to Catalog" type="Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 text = "Return to Catalog"
 
-[node name="Exit Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer" instance=ExtResource("7_c8jfa")]
+[node name="Exit Button" parent="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer" instance=ExtResource("7_18fcv")]
 layout_mode = 2
 
-[node name="Audio Controls" parent="CanvasLayer/TabContainer/Menu/VSplitContainer" instance=ExtResource("7_l8aea")]
+[node name="Audio Controls" parent="CanvasLayer/TabContainer/Menu/VSplitContainer" instance=ExtResource("8_12uu1")]
 layout_mode = 2
 size_flags_vertical = 8
 
 [node name="Description" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
 layout_mode = 2
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TabContainer/Description"]
 layout_mode = 2
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/TabContainer/Description/ScrollContainer"]
@@ -101,7 +101,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 bbcode_enabled = true
 text = "Lorem Ipsum"
 fit_content = true
@@ -109,12 +109,12 @@ fit_content = true
 [node name="Controls" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
 layout_mode = 2
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 
 [node name="Configuration" type="MarginContainer" parent="CanvasLayer/TabContainer"]
 visible = false
 layout_mode = 2
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 
 [node name="Scroll Container" type="ScrollContainer" parent="CanvasLayer/TabContainer/Configuration"]
 layout_mode = 2
@@ -124,7 +124,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_31g2g")
+theme = ExtResource("4_tstj4")
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 8

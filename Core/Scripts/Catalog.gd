@@ -9,7 +9,7 @@ extends Node
 @export var _mechanic_click_sfx : AudioStream
 @export var _mechanic_click_volume : float = 0.7
 
-@onready var db : LibraryDatabase = load("res://Core/Resources/LibraryDatabase.tres")
+@onready var db : LibraryDatabase = load("res://Core/Resources/MechanicDatabase.tres")
 @onready var catalog_item_scene : PackedScene = load("res://Core/Scenes/catalog_item.tscn")
 @onready var tab_container: TabContainer = find_child("TabContainer")
 

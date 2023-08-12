@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Mechanics/Pattern Crafting/Scripts/PatternCrafting.gd" id="1_th824"]
 [ext_resource type="Resource" uid="uid://ct5tct30sgg04" path="res://Mechanics/Pattern Crafting/Pattern Crafting Config.tres" id="2_rqwcb"]
 [ext_resource type="Texture2D" uid="uid://c6w1uamsqmg5w" path="res://Mechanics/Pattern Crafting/Textures/inventory/background.png" id="3_uuka7"]
-[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_xou5d"]
+[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/core_ui.tscn" id="4_xou5d"]
 [ext_resource type="PackedScene" uid="uid://co6sgl5eqs41y" path="res://Mechanics/Pattern Crafting/Scenes/pattern_crafting_controls.tscn" id="6_jjdqw"]
 [ext_resource type="PackedScene" uid="uid://d120c3tu4bm55" path="res://Mechanics/Pattern Crafting/Scenes/inventory_cell.tscn" id="6_uo4ji"]
 
@@ -212,7 +212,7 @@ layout_mode = 2
 [node name="Inventory Cell40" parent="Inventory/Inventory Grid" instance=ExtResource("6_uo4ji")]
 layout_mode = 2
 
-[node name="Library UI" parent="." instance=ExtResource("4_xou5d")]
+[node name="Core UI" parent="." instance=ExtResource("4_xou5d")]
 mechanic_name = "Pattern Crafting"
 mechanic_category = "Crafting Systems"
 mechanic_config = ExtResource("2_rqwcb")

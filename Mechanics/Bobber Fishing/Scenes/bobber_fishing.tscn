@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Mechanics/Bobber Fishing/Scripts/BobberFishing.gd" id="1_12q3l"]
 [ext_resource type="AudioStream" uid="uid://dt60ud23y6hqq" path="res://Shared/Audio/SFX/splash.ogg" id="3_8a3u3"]
-[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/library_ui.tscn" id="4_2sb2k"]
+[ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/core_ui.tscn" id="4_2sb2k"]
 [ext_resource type="PackedScene" uid="uid://bkc4ui55h3e12" path="res://Mechanics/Bobber Fishing/Scenes/bobber_fishing_controls.tscn" id="5_3wdh5"]
 [ext_resource type="AudioStream" uid="uid://2gs4vniaoulv" path="res://Shared/Audio/SFX/score.wav" id="5_36byl"]
 [ext_resource type="AudioStream" uid="uid://ddcr8c7npy2ww" path="res://Shared/Audio/SFX/bloop 2.wav" id="5_ub5lk"]
@@ -10,10 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://cnj7tq3yr568l" path="res://Shared/Audio/SFX/bloop 1.wav" id="6_xmtnm"]
 [ext_resource type="Texture2D" uid="uid://db5jib74xvb0f" path="res://Mechanics/Bobber Fishing/Textures/water.png" id="7_atjsr"]
 [ext_resource type="Texture2D" uid="uid://bnewxa2isf0ro" path="res://Mechanics/Bobber Fishing/Textures/rod.png" id="8_l34yq"]
-[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/tmml_theme.tres" id="9_4a7s5"]
 [ext_resource type="Texture2D" uid="uid://kjypt2ey357l" path="res://Mechanics/Bobber Fishing/Textures/line.png" id="9_qe2bk"]
 [ext_resource type="Texture2D" uid="uid://cjvbkj660gc7j" path="res://Mechanics/Bobber Fishing/Textures/bobber.png" id="10_u7l3s"]
 [ext_resource type="FontFile" uid="uid://dsw31irh5aefs" path="res://Shared/Fonts/NotoSans-Bold.ttf" id="10_vdfuk"]
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/main_theme.tres" id="12_7adaj"]
 [ext_resource type="Resource" uid="uid://dpql7iup8llss" path="res://Mechanics/Bobber Fishing/Bobber Fishing Config.tres" id="13_urk7n"]
 
 [node name="Bobber Fishing" type="Node" node_paths=PackedStringArray("bobber")]
@@ -67,7 +67,7 @@ offset_left = 448.0
 offset_top = 48.0
 offset_right = 1248.0
 offset_bottom = 85.0
-theme = ExtResource("9_4a7s5")
+theme = ExtResource("12_7adaj")
 theme_override_fonts/font = ExtResource("10_vdfuk")
 theme_override_font_sizes/font_size = 24
 text = "Score: 0"
@@ -78,13 +78,13 @@ offset_left = 900.0
 offset_top = 215.0
 offset_right = 1164.0
 offset_bottom = 285.0
-theme = ExtResource("9_4a7s5")
+theme = ExtResource("12_7adaj")
 theme_override_fonts/font = ExtResource("10_vdfuk")
 theme_override_font_sizes/font_size = 36
 text = ":)"
 horizontal_alignment = 1
 
-[node name="Library UI" parent="." instance=ExtResource("4_2sb2k")]
+[node name="Core UI" parent="." instance=ExtResource("4_2sb2k")]
 mechanic_name = "Bobber Fishing"
 mechanic_category = "Timed Action"
 mechanic_config = ExtResource("13_urk7n")

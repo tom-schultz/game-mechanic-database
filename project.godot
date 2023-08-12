@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="minor-mechanic-library"
+config/name="encyclopedia-mechanica"
 run/main_scene="res://Core/Scenes/catalog.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
@@ -35,11 +35,11 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/tmml_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/mechanic_manager/plugin.cfg")
 
 [gui]
 
-theme/custom="res://Shared/tmml_theme.tres"
+theme/custom="res://Shared/main_theme.tres"
 
 [rendering]
 

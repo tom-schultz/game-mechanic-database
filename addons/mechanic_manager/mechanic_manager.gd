@@ -6,8 +6,8 @@ var mechanic_controls_scene : PackedScene
 var mechanic_script : Script
 var mechanic_config_script : Script
 const base_dir = "res://Mechanics/"
-const description_templ : String = "res://addons/tmml_manager/Template/description.txt"
-const attributions_templ : String = "res://addons/tmml_manager/Template/attributions.txt"
+const description_templ : String = "res://addons/mechanic_manager/Template/description.txt"
+const attributions_templ : String = "res://addons/mechanic_manager/Template/attributions.txt"
 var mechanic_name : String = "Inventory Pattern Crafting"
 var mechanic_category : String = "Minor Mechanic"
 var mechanic_path : String
@@ -15,26 +15,26 @@ var scene_path : String
 var scripts_path : String
 var editor_interface: EditorInterface
 var editor_file_system : EditorFileSystem
-var tmml : Control
+var mechanic_manager : Control
 
 func _enter_tree():
-	mechanic_script = load("res://addons/tmml_manager/Template/Scripts/MECHANIC.gd")
-	mechanic_config_script = load("res://addons/tmml_manager/Template/Scripts/MECHANIC_CONFIG.gd")
-	mechanic_scene = load("res://addons/tmml_manager/Template/Scenes/MECHANIC.tscn")
-	mechanic_controls_scene = load("res://addons/tmml_manager/Template/Scenes/MECHANIC_CONTROLS.tscn")
+	mechanic_script = load("res://addons/mechanic_manager/Template/Scripts/MECHANIC.gd")
+	mechanic_config_script = load("res://addons/mechanic_manager/Template/Scripts/MECHANIC_CONFIG.gd")
+	mechanic_scene = load("res://addons/mechanic_manager/Template/Scenes/MECHANIC.tscn")
+	mechanic_controls_scene = load("res://addons/mechanic_manager/Template/Scenes/MECHANIC_CONTROLS.tscn")
 	editor_interface = get_editor_interface()
 	editor_file_system = editor_interface.get_resource_filesystem()
 	
-	tmml = load("res://addons/tmml_manager/tmml_manager.tscn").instantiate()
-	tmml.get_node("Submit").pressed.connect(build_new_mechanic)
-	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, tmml)
+	mechanic_manager = load("res://addons/mechanic_manager/mechanic_manager.tscn").instantiate()
+	mechanic_manager.get_node("Submit").pressed.connect(build_new_mechanic)
+	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, mechanic_manager)
 
 func build_new_mechanic():
-	var name_control = tmml.get_node("Mechanic Name")
+	var name_control = mechanic_manager.get_node("Mechanic Name")
 	mechanic_name = name_control.text
 	name_control.text = ""
 	
-	var category_control = tmml.get_node("Mechanic Category")
+	var category_control = mechanic_manager.get_node("Mechanic Category")
 	mechanic_category = category_control.text
 	category_control.text = ""
 	
@@ -132,5 +132,5 @@ func _copy_scene(packed_scene, new_name, path):
 	return load(path)
 	
 func _exit_tree():
-	remove_control_from_docks(tmml)
-	tmml.free()
+	remove_control_from_docks(mechanic_manager)
+	mechanic_manager.free()
