@@ -51,7 +51,6 @@ offset_bottom = 704.0
 theme = ExtResource("2_31g2g")
 
 [node name="Menu" type="MarginContainer" parent="CanvasLayer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/TabContainer/Menu"]
@@ -84,6 +83,7 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="Description" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("2_31g2g")
 

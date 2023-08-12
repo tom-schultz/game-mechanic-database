@@ -10,8 +10,6 @@
 [node name="Pattern Crafting" type="Node"]
 script = ExtResource("1_th824")
 config = ExtResource("2_rqwcb")
-_item_pickup_sfx_volume = null
-_item_drop_sfx_volume = null
 
 [node name="Inventory" type="Node2D" parent="."]
 position = Vector2(848, 360)
