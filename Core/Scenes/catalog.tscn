@@ -46,7 +46,7 @@ offset_top = 8.0
 offset_right = 432.0
 offset_bottom = 53.0
 theme = ExtResource("3_iaoj2")
-text = "Encyclopedia Mechanica"
+text = "Game Mechanic Database"
 label_settings = ExtResource("3_ao3ls")
 horizontal_alignment = 1
 
@@ -109,7 +109,7 @@ theme = ExtResource("3_iaoj2")
 bbcode_enabled = true
 text = "[font_size=40][center]Welcome! [/center][/font_size]
 
-This is the Encyclopedia Mechanica, an open-source collection of game mechanics intended to educate and inspire folks who want to make games or learn about them. Each mechanic comes with a description, controls, and a set of parameters that you can use to tweak and tune the mechanic's behavior.
+This is the Game Mechanic Database, an open-source collection of game mechanics intended to educate and inspire folks who want to make games or learn about them. Each mechanic comes with a description, controls, and a set of parameters that you can use to tweak and tune the mechanic's behavior.
 
 You are currently at the catalog. On the search tab you can filter games based on name, category, and other attributes. Click to select or deselect individual attributes, or shift-click to select multiple."
 

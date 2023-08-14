@@ -10,9 +10,10 @@ config_version=5
 
 [application]
 
-config/name="encyclopedia-mechanica"
+config/name="game-mechanic-database"
 run/main_scene="res://Core/Scenes/catalog.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+boot_splash/bg_color=Color(0.133333, 0.137255, 0.137255, 1)
 
 [autoload]
 
