@@ -1,6 +1,6 @@
-# Encyclopedia Mechanica
+# Game Mechanic Database
 
-This is the Encyclopedia Mechanica, an open-source collection of game mechanics intended to educate and inspire folks who want to make games or learn about them. Each mechanic comes with a description, controls, and a set of parameters that you can use to tweak and tune the mechanic's behavior.
+This is the Game Mechanic Database, an open-source collection of game mechanics intended to educate and inspire folks who want to make games or learn about them. Each mechanic comes with a description, controls, and a set of parameters that you can use to tweak and tune the mechanic's behavior.
 
 Come find us on [Discord](https://discord.gg/6HYYNwq4FS)!
 
@@ -34,4 +34,4 @@ A finished mechanic will have:
 ### Assets
 You are welcome to pull in third-party assets but you need to make sure that their license is compatible with the license on this project. Creating your own assets or using [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) is the easiest way to do so.
 
-The main way we deploy the Encyclopedia is through web export, so please try and re-use assets in the Shared folder where possible to keep the size of the library low.
+The main way we deploy the GMDB is through web export, so please try and re-use assets in the Shared folder where possible to keep the download size of the DB low.
