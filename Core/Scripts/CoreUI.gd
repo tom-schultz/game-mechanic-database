@@ -113,7 +113,7 @@ func _build_label(container, label_text):
 
 func _build_spin_box(container, config_key, value):
 	var field = ConfigFieldFloat.new()
-	field.custom_arrow_step = 0.1
+	field.custom_arrow_step = 0.1 if typeof(value) == TYPE_FLOAT else 1.0
 	field.min_value = -9999999999
 	field.max_value = 9999999999
 	field.rounded = typeof(value) == TYPE_INT

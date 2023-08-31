@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3u78l4jdm158"]
+
+[ext_resource type="Theme" uid="uid://bcip2px0p5c35" path="res://Shared/main_theme.tres" id="1_wqg00"]
+[ext_resource type="Texture2D" uid="uid://dormxam1r7lks" path="res://Shared/Textures/Controls/Space_Key_Light.png" id="2_mro3w"]
+
+[node name="Crafting with Money Controls" type="GridContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_wqg00")
+columns = 2
+
+[node name="Action Button" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_wqg00")
+text = "Action Button"
+
+[node name="Action Button Image" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme = ExtResource("1_wqg00")
+texture = ExtResource("2_mro3w")

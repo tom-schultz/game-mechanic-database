@@ -112,8 +112,6 @@ func _build_results():
 	for mechanic in matched:
 		var btn : Button = catalog_item_scene.instantiate()
 		btn.text = mechanic["Id"]
-		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		btn.pressed.connect(_on_mechanic_pressed.bind(mechanic["Scene"]))
 		btn.icon = mechanic["Thumbnail"]
 		output_grid.add_child(btn)

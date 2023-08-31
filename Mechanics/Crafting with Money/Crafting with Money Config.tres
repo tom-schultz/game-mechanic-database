@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="CraftingWithMoneyConfig" load_steps=2 format=3 uid="uid://bre578jwgl880"]
+
+[ext_resource type="Script" path="res://Mechanics/Crafting with Money/Scripts/CraftingWithMoneyConfig.gd" id="1_vogir"]
+
+[resource]
+script = ExtResource("1_vogir")

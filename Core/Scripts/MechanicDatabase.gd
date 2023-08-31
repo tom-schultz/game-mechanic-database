@@ -16,9 +16,18 @@ var mechanics : Array = [
 		"Category": "Crafting Systems",
 		"Tags": [ "crafting" ],
 		"Implementations": [ "Minecraft" ],
-		"Related Mechanics": [  ],
+		"Related Mechanics": [ "Crafting with Money" ],
 		"Scene" : "res://Mechanics/Pattern Crafting/Scenes/pattern_crafting.tscn",
 		"Thumbnail" : "res://Mechanics/Pattern Crafting/thumbnail.png",
+	},
+	{
+		"Id": "Crafting with Money",
+		"Category": "Crafting Systems",
+		"Tags": [ "crafting" ],
+		"Implementations": [ "Fire Emblem Games" ],
+		"Related Mechanics": [ "Pattern Crafting" ],
+		"Scene" : "res://Mechanics/Crafting with Money/Scenes/crafting_with_money.tscn",
+		"Thumbnail" : "res://Core/Textures/mechanic_frame.png",
 	},
 ]
 
