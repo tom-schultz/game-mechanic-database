@@ -1,32 +1,105 @@
 extends Resource
 class_name CraftingWithMoneyConfig
 
-var money : int = 100
+signal types_changed
 
-var types : Dictionary
+@export_multiline var types : String = """{
+	"flaming": {
+		"strong": ["living wood"],
+		"color": "crimson"
+	},
+	"living wood": {
+		"strong": ["earthen"],
+		"color": "peru"
+	},
+	"aqueous": {
+		"strong": ["flaming"],
+		"color": "deep sky blue"
+	},
+	"earthen": {
+		"strong": ["skyborn"],
+		"color": "saddle brown"
+	},
+	"skyborn": {
+		"strong": ["aqueous"],
+		"color": "light steel blue"
+	}
+}""":
+	set(value):
+		types = value
+		types_changed.emit()
 
-var enemies : Array[String] = [
-	"Lizardfolk",
-	"Eagle",
-	"Beagle",
-	"Goblin",
-	"Teenager",
-	"Programmer",
-	"Artist",
-	"Producer",
-	"Tester",
-	"Audio Engineer",
-	"MBA",
-	"Writer",
-	"Gamer",
-	"Monkey",
-	"Bear",
-	"Bug",
-	"Bugbear",
-	"Bearbug",
+@export var items_per_store : int = 5
+@export var upgrade_cost_multiplier = 3
+@export var purchase_cost_multiplier = 4
+@export var strong_modifier = 2
+
+@export var weapons : Array[String] = [
+	"axe",
+	"sword",
+	"bow",
+	"table leg",
+	"crossbow",
+	"wand",
+	"wizard Staff",
+	"quarterstaff",
+	"sling",
+	"dagger",
+	"scimitar",
+	"keyboard",
+	"flail",
+	"mace",
+	"morningstar",
+	"palm strike",
+	"pinky hold",
+	"baleful glare",
+	"stink eye",
 ]
 
-var enemy_levels : Array[String] = [
+@export var armors : Array[String] = [
+	"apathy",
+	"platemail",
+	"leather jerkin",
+	"round shield",
+	"tower shield",
+	"kite shield",
+	"trash can lid",
+	"great helm",
+	"trucker hat",
+	"cuirass",
+	"mage armor",
+	"greaves",
+	"codpiece",
+	"pauldrons",
+	"sneakers",
+	"short shorts",
+	"chainmail",
+	"scalemail",
+	"origami breastplate",
+]
+
+@export var enemies : Array[String] = [
+	"lizardfolk",
+	"eagle",
+	"beagle",
+	"goblin",
+	"teenager",
+	"programmer",
+	"artist",
+	"producer",
+	"tester",
+	"audio Engineer",
+	"MBA",
+	"writer",
+	"gamer",
+	"monkey",
+	"bear",
+	"bug",
+	"bugbear",
+	"bearbug",
+]
+
+@export var enemy_levels : Array[String] = [
 	"sickly",
 	"weak",
 	"young",
@@ -44,26 +117,3 @@ var enemy_levels : Array[String] = [
 	"apocalyptic",
 	"godlike",
 ]
-
-func init():
-	# This is here because I don't support rendering this kind of thing right now :D
-	var types_data = {
-		"Fire" = {
-			Adjective = "Fire",
-			Strong = ["Wooden"],
-			Weak = ["Water"]
-		},
-		"Wood" = {
-			Adjective = "Wooden",
-			Strong = ["Water"],
-			Weak = ["Fire"]
-		},
-		"Water" = {
-			Adjective = "Water",
-			Strong = ["Fire"],
-			Weak = ["Wooden"]
-		}
-	}
-	
-	for type in types_data:
-		types[type] = CWM_EntityType.new(type, types_data[type])

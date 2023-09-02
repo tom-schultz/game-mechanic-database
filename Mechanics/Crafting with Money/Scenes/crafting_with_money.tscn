@@ -1,12 +1,43 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4litptltxpwt"]
+[gd_scene load_steps=10 format=3 uid="uid://bnje7cclg1pxh"]
 
 [ext_resource type="Script" path="res://Mechanics/Crafting with Money/Scripts/CraftingWithMoney.gd" id="1_yg4mu"]
 [ext_resource type="Script" path="res://Mechanics/Crafting with Money/Scripts/CraftingWithMoneyConfig.gd" id="2_fptl3"]
+[ext_resource type="PackedScene" uid="uid://fvp4m5iloy6b" path="res://Mechanics/Crafting with Money/Scenes/button.tscn" id="3_2vw0d"]
 [ext_resource type="PackedScene" uid="uid://dldhpgic7l2ek" path="res://Core/Scenes/core_ui.tscn" id="3_4nint"]
-[ext_resource type="PackedScene" uid="uid://c3u78l4jdm158" path="res://Mechanics/Crafting with Money/Scenes/crafting_with_money_controls.tscn" id="4_uf3ud"]
+[ext_resource type="PackedScene" uid="uid://devbbec3ygmqb" path="res://Mechanics/Crafting with Money/Scenes/crafting_with_money_controls.tscn" id="4_uf3ud"]
 
 [sub_resource type="Resource" id="Resource_aodhi"]
 script = ExtResource("2_fptl3")
+types = "{
+	\"flaming\": {
+		\"strong\": [\"living wood\"],
+		\"color\": \"crimson\"
+	},
+	\"living wood\": {
+		\"strong\": [\"earthen\"],
+		\"color\": \"peru\"
+	},
+	\"aqueous\": {
+		\"strong\": [\"flaming\"],
+		\"color\": \"deep sky blue\"
+	},
+	\"earthen\": {
+		\"strong\": [\"skyborn\"],
+		\"color\": \"saddle brown\"
+	},
+	\"skyborn\": {
+		\"strong\": [\"aqueous\"],
+		\"color\": \"light steel blue\"
+	}
+}"
+items_per_store = 5
+upgrade_cost_multiplier = 3
+purchase_cost_multiplier = 4
+strong_modifier = 2
+weapons = Array[String](["axe", "sword", "bow", "table leg", "crossbow", "wand", "wizard Staff", "quarterstaff", "sling", "dagger", "scimitar", "keyboard", "flail", "mace", "morningstar", "palm strike", "pinky hold", "baleful glare", "stink eye"])
+armors = Array[String](["apathy", "platemail", "leather jerkin", "round shield", "tower shield", "kite shield", "trash can lid", "great helm", "trucker hat", "cuirass", "mage armor", "greaves", "codpiece", "pauldrons", "sneakers", "short shorts", "chainmail", "scalemail", "origami breastplate"])
+enemies = Array[String](["lizardfolk", "eagle", "beagle", "goblin", "teenager", "programmer", "artist", "producer", "tester", "audio Engineer", "MBA", "writer", "gamer", "monkey", "bear", "bug", "bugbear", "bearbug"])
+enemy_levels = Array[String](["sickly", "weak", "young", "juvenile", "adult", "strong", "greater", "intelligent", "powerful", "ancient", "giant", "massive", "gargantuan", "titanic", "apocalyptic", "godlike"])
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_557wj"]
 bg_color = Color(0.133333, 0.137255, 0.137255, 1)
@@ -14,34 +45,37 @@ bg_color = Color(0.133333, 0.137255, 0.137255, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8f5p"]
 bg_color = Color(0.133333, 0.137255, 0.137255, 1)
 
-[node name="Crafting with Money" type="Node" node_paths=PackedStringArray("adv_text")]
+[sub_resource type="LabelSettings" id="LabelSettings_avm26"]
+font_size = 26
+font_color = Color(0.133333, 0.137255, 0.137255, 1)
+
+[node name="Crafting with Money" type="Node" node_paths=PackedStringArray("adv_text", "coins_label", "inventory_grid", "weapon_store_grid", "armor_store_grid")]
 script = ExtResource("1_yg4mu")
 config = SubResource("Resource_aodhi")
 adv_text = NodePath("Adventure Text")
+coins_label = NodePath("Coins Label")
+inventory_grid = NodePath("ScrollContainer/Inventory Grid")
+weapon_store_grid = NodePath("Weapon Store Grid")
+armor_store_grid = NodePath("Armor Store Grid")
+btn_scene = ExtResource("3_2vw0d")
 
 [node name="Adventure Button" type="Button" parent="."]
-offset_left = 452.0
-offset_top = 30.0
-offset_right = 539.0
-offset_bottom = 61.0
+offset_left = 804.0
+offset_top = 568.0
+offset_right = 891.0
+offset_bottom = 599.0
 text = "Adventure"
 
-[node name="Upgrade" type="Button" parent="."]
-offset_left = 571.0
-offset_top = 28.0
-offset_right = 645.0
-offset_bottom = 59.0
-text = "Upgrade"
-
 [node name="Adventure Text" type="RichTextLabel" parent="."]
-offset_left = 451.0
-offset_top = 68.0
-offset_right = 957.0
+offset_left = 448.0
+offset_top = 616.0
+offset_right = 1248.0
 offset_bottom = 688.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/focus = SubResource("StyleBoxFlat_557wj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8f5p")
+bbcode_enabled = true
 
 [node name="Library UI" parent="." instance=ExtResource("3_4nint")]
 mechanic_name = "Crafting with Money"
@@ -52,5 +86,70 @@ mechanic_controls_scene = ExtResource("4_uf3ud")
 metadata/_edit_lock_ = true
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
+
+[node name="Coins Label" type="Label" parent="."]
+offset_left = 448.0
+offset_top = 72.0
+offset_right = 808.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(0.133333, 0.137255, 0.137255, 1)
+text = "Coins: 55"
+horizontal_alignment = 1
+
+[node name="Inventory Label" type="Label" parent="."]
+offset_left = 448.0
+offset_top = 32.0
+offset_right = 808.0
+offset_bottom = 71.0
+theme_override_colors/font_color = Color(0.133333, 0.137255, 0.137255, 1)
+text = "Inventory"
+label_settings = SubResource("LabelSettings_avm26")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 448.0
+offset_top = 104.0
+offset_right = 808.0
+offset_bottom = 552.0
+
+[node name="Inventory Grid" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Weapon Store Label" type="Label" parent="."]
+offset_left = 880.0
+offset_top = 56.0
+offset_right = 1240.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(0.133333, 0.137255, 0.137255, 1)
+text = "Weapon Store"
+label_settings = SubResource("LabelSettings_avm26")
+horizontal_alignment = 1
+
+[node name="Weapon Store Grid" type="GridContainer" parent="."]
+offset_left = 880.0
+offset_top = 104.0
+offset_right = 1240.0
+offset_bottom = 296.0
+columns = 2
+
+[node name="Armor Store Label" type="Label" parent="."]
+offset_left = 880.0
+offset_top = 312.0
+offset_right = 1240.0
+offset_bottom = 351.0
+theme_override_colors/font_color = Color(0.133333, 0.137255, 0.137255, 1)
+text = "Armor Store"
+label_settings = SubResource("LabelSettings_avm26")
+horizontal_alignment = 1
+
+[node name="Armor Store Grid" type="GridContainer" parent="."]
+offset_left = 880.0
+offset_top = 360.0
+offset_right = 1240.0
+offset_bottom = 552.0
+columns = 2
 
 [connection signal="pressed" from="Adventure Button" to="." method="_on_adventure_pressed"]

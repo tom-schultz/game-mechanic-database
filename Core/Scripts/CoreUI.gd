@@ -8,10 +8,10 @@ class_name MechanicLibraryUI
 @export var mechanic_description_file: String
 @export var controls_container: Container
 @export var mechanic_controls_scene: PackedScene
-@export var config_container: Container
 @export var tab_container: TabContainer = find_child("TabContainer")
 @export var catalog_scene: PackedScene
-
+@export var grid : GridContainer
+@export var config_editor : Panel
 @onready var theme : Theme = load("res://Shared/main_theme.tres")
 
 func _ready():
@@ -26,36 +26,30 @@ func _ready():
 	var category : Label = find_child("Category")
 	category.text = mechanic_category
 	
+	var cancel_btn = config_editor.find_child("Cancel Button")
+	cancel_btn.pressed.connect(_close_config_editor)
+	
 	_build_config_ui()
 
-func get_config_container():
-	return config_container
-
 func _build_config_ui():
-	var grid : GridContainer = _new_grid()
 	var config_list = _build_config_list()
 	
 	for config_item in config_list:
 		match (typeof(config_item.value)):
 			TYPE_DICTIONARY:
-				_build_dict(grid, config_item.config_key, config_item.human_name, config_item.value)
+				_build_dict(config_item.config_key, config_item.human_name, config_item.value)
+			TYPE_ARRAY:
+				_build_array(config_item.config_key, config_item.human_name, config_item.value)
 			TYPE_FLOAT,TYPE_INT:
-				_build_label(grid, config_item.human_name)
-				_build_spin_box(grid, config_item.config_key, config_item.value)
+				_build_label(config_item.human_name)
+				_build_spin_box(config_item.config_key, config_item.value)
 			TYPE_STRING:
 				if(config_item.is_multiline):
-					_build_label(config_container, config_item.human_name)
-					_build_text_area(config_container, config_item.config_key, config_item.value)
+					_build_label(config_item.human_name)
+					_build_config_editor_button(config_item.config_key)
 				else:
-					_build_label(grid, config_item.human_name)
-					_build_text_box(grid, config_item.config_key, config_item.value)
-
-func _new_grid():
-	var grid = GridContainer.new()
-	grid.columns = 2
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	config_container.add_child(grid)
-	return grid
+					_build_label(config_item.human_name)
+					_build_text_box(config_item.config_key, config_item.value)
 
 func _build_config_list():	
 	var config_script = mechanic_config.get_script()
@@ -65,7 +59,8 @@ func _build_config_list():
 	var config_array = []
 	
 	for property in script_props:
-		if (property["name"] == script_filename):
+		if (property["usage"] & PROPERTY_USAGE_EDITOR != PROPERTY_USAGE_EDITOR
+				or property["name"] == script_filename):
 			continue
 			
 		var prop_name = property["name"]
@@ -89,29 +84,52 @@ func _human_readable_name(property_name:String):
 	
 	return human_name.trim_suffix(" ")
 
-func _build_dict(container, config_key, dict_label, dict):
-	_build_label(container, "")
-	_build_label(container, "")
-	_build_label(container, dict_label)
-	_build_label(container, "")
+func _build_array(config_key, array_label, array):
+	_build_label("")
+	_build_label("")
+	_build_label(array_label)
+	_build_label("")
+	
+	for i in range(0, array.size()):
+		_build_label("%s[%d]" % [array_label, i])
+		var key = "%s/%d" % [config_key, i]
+		
+		match(typeof(array[i])):
+			TYPE_FLOAT,TYPE_INT:
+				_build_spin_box(key, array[i])
+			TYPE_STRING:
+				_build_text_box(key, array[i])
+
+func _build_dict(config_key, dict_label, dict):
+	_build_label("")
+	_build_label("")
+	_build_label(dict_label)
+	_build_label("")
 	
 	for key in dict:
 		var new_config_key = config_key + "/" + key
+		var label = "%s/%s" % [dict_label, key]
 		
-		if (typeof(dict[key]) == TYPE_DICTIONARY):
-			_build_dict(container, new_config_key, dict_label + "/" + key, dict[key])
-		else:
-			_build_label(container, key)
-			_build_spin_box(container, new_config_key, dict[key])
+		match(typeof(dict[key])):
+			TYPE_ARRAY:
+				_build_array(new_config_key, label,  dict[key])
+			TYPE_DICTIONARY:
+				_build_dict(new_config_key, label, dict[key])
+			TYPE_FLOAT,TYPE_INT:
+				_build_label(key)
+				_build_spin_box(new_config_key, dict[key])
+			TYPE_STRING:
+				_build_label(key)
+				_build_text_box(new_config_key, dict[key])
 
-func _build_label(container, label_text):
+func _build_label(label_text):
 	var label = Label.new()
 	label.text = label_text
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.theme = theme
-	container.add_child(label)
+	grid.add_child(label)
 
-func _build_spin_box(container, config_key, value):
+func _build_spin_box(config_key, value):
 	var field = ConfigFieldFloat.new()
 	field.custom_arrow_step = 0.1 if typeof(value) == TYPE_FLOAT else 1.0
 	field.min_value = -9999999999
@@ -125,26 +143,35 @@ func _build_spin_box(container, config_key, value):
 	field.value_changed.connect(_on_value_changed.bind(config_key))
 	field.name = config_key
 	field.value = value
-	container.add_child(field)
-		
-func _build_text_area(container, config_key, value):
-	var field = ConfigFieldLongString.new()
-	field.initialize()
-	field.text = value
-	field.focus_mode = Control.FOCUS_CLICK
-	field.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	field.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	field.scroll_fit_content_height = true
-	field.wrap_mode = TextEdit.LINE_WRAPPING_NONE
-	field.text_changed.connect(_on_value_changed_text_edit.bind(field, config_key))
-	container.add_child(field)
+	grid.add_child(field)
 
-func _build_text_box(container, config_key, value):
+func _build_config_editor_button(config_key : String):
+	var btn = Button.new()
+	btn.text = "Edit"
+	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	btn.pressed.connect(_open_config_editor.bind(config_key))
+	grid.add_child(btn)
+
+func _open_config_editor(config_key : String):
+	var text_area = config_editor.find_child("Text Editor")
+	text_area.text = mechanic_config.get(config_key)
+	var save_btn = config_editor.find_child("Save Button")
+	
+	if save_btn.pressed.is_connected(_on_value_changed_text_edit):
+		save_btn.pressed.disconnect(_on_value_changed_text_edit)
+		
+	save_btn.pressed.connect(_on_value_changed_text_edit.bind(text_area, config_key))
+	config_editor.visible = true
+	
+func _close_config_editor():
+	config_editor.visible = false
+
+func _build_text_box(config_key, value):
 	var field = ConfigFieldShortString.new()
 	field.text = value
 	field.focus_mode = Control.FOCUS_CLICK
 	field.text_changed.connect(_on_value_changed.bind(config_key))
-	container.add_child(field)
+	grid.add_child(field)
 
 func _on_value_changed(value, config_key: String):
 	if (config_key.contains("/")):
@@ -153,10 +180,16 @@ func _on_value_changed(value, config_key: String):
 		var i = 1
 		
 		while i < keys.size() - 1:
-			curr = curr[keys[i]]
+			if (typeof(curr) == TYPE_DICTIONARY):
+				curr = curr[keys[i]]
+			else:
+				curr = curr[keys[i].to_int()]
 			i += 1
 		
-		curr[keys[i]] = value
+		if (typeof(curr) == TYPE_DICTIONARY):
+			curr[keys[i]] = value
+		else:
+			curr[keys[i].to_int()] = value
 	else:
 		mechanic_config.set(config_key, value)
 
@@ -187,3 +220,9 @@ func _on_description_text_meta_clicked(meta):
 
 func _on_tab_clicked(_tab):
 	AudioPlayer.play_tab_click_sfx()
+
+func _on_save_button_pressed():
+	config_editor.visible = false
+
+func _on_cancel_button_pressed():
+	config_editor.visible = false

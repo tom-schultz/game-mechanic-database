@@ -1,13 +1,13 @@
 extends Resource
 class_name BobberFishingConfig
 
-var bob_speed : float = 2.0
-var bob_distance : float = 2.0
-var state_change_time : float = 0.1
-var score_range_min : int = 1
-var score_range_max : int = 5
+@export var bob_speed : float = 2.0
+@export var bob_distance : float = 2.0
+@export var state_change_time : float = 0.1
+@export var score_range_min : int = 1
+@export var score_range_max : int = 5
 
-var state_config = {
+@export var state_config = {
 	NoFish = {
 		change_cooldown = 1.5,
 		hit_cooldown = 1.0,

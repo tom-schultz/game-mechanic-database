@@ -3,119 +3,231 @@ class_name CraftingWithMoney
 
 @export var config : CraftingWithMoneyConfig
 @export var adv_text : RichTextLabel
+@export var coins_label : Label
+@export var inventory_grid : GridContainer
+@export var weapon_store_grid : GridContainer
+@export var armor_store_grid : GridContainer
+@export var btn_scene : PackedScene
 
-var weapons : Array[CWM_Item]
-var armors : Array[CWM_Item]
-
-enum result {
-	FIRST,
-	SECOND,
-	STALEMATE
-}
+var weapons : Array[CWM_Entity]
+var armors : Array[CWM_Entity]
+var weapon_store : Array[CWM_Entity]
+var armor_store : Array[CWM_Entity]
+var coins = 3
+var types : Dictionary
 
 func _ready():
-	config.init()
+	config.types_changed.connect(_update_types)
+	_update_types()
 	
 	weapons = [
-		CWM_Item.new("Axe", config.types["Fire"], 10),
+		CWM_Entity.new(config, config.weapons.pick_random(), rand_type(), 1),
 	]
 	
 	armors = [
-		CWM_Item.new("Paper Armor", config.types["Wood"], 4),
+		CWM_Entity.new(config, config.armors.pick_random(), rand_type(), 1),
 	]
+	
+	_update_inventory()
+	_update_store()
 
-func _get_weapon():
-	var weapon = weapons[randi() % weapons.size()]
-	var weapon_str = "Weapon: " + weapon.str()
-	print(weapon_str)
-	adv_text.append_text(weapon_str + "\n")
-	return weapon
+func _update_types():
+	var types_data = JSON.parse_string(config.types)
+	
+	for key in types_data:
+		types[key] = CWM_EntityType.new(key, types_data[key])
 
-func _get_armor():
-	var armor = armors[randi() % armors.size()]
-	var armor_str = "Armor: " + armor.str()
-	print(armor_str)
-	adv_text.append_text(armor_str + "\n")
-	return armor
+func _update_inventory():
+	coins_label.text = "Coins: " + String.num(coins)
+	
+	for child in inventory_grid.get_children():
+		child.queue_free()
+		
+	_add_items_to_inv_grid(weapons, true)
+	_add_items_to_inv_grid(armors, false)
+	
+func _update_store():
+	weapon_store.clear()
+	armor_store.clear()
+	
+	for i in range(0, config.items_per_store):
+		var item_name = config.weapons.pick_random()
+		var item_type = rand_type()
+		var item_level = randi_range(0, _player_level())
+		var item = CWM_Entity.new(config, item_name, item_type, item_level)
+		weapon_store.append(item)
+		
+	for i in range(0, config.items_per_store):
+		var item_name = config.armors.pick_random()
+		var item_type = rand_type()
+		var item_level = randi_range(0, _player_level())
+		var item = CWM_Entity.new(config, item_name, item_type, item_level)
+		armor_store.append(item)
+	
+	_redraw_store(true)
+	_redraw_store(false)
 
-func _on_adventure_pressed():
-	print("\nNew adventure!")
-	adv_text.append_text("### New Adventure ###\n")
-	var weapon = _get_weapon()
-	var armor = _get_armor()
+func _redraw_store(is_weapon : bool):
+	var item_store = weapon_store if is_weapon else armor_store
+	var store_grid = weapon_store_grid if is_weapon else armor_store_grid
+	
+	for dying in store_grid.get_children():
+		dying.queue_free()
+	
+	for i in range(0, item_store.size()):
+		var label = RichTextLabel.new()
+		label.text = item_store[i].to_str()
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		label.add_theme_color_override("default_color", Color.html("222323"))
+		label.fit_content = true
+		label.bbcode_enabled = true
+		store_grid.add_child(label)
+		
+		var btn : Button = btn_scene.instantiate()
+		btn.text = "Buy: " + String.num(item_store[i].purchase_cost())
+		btn.pressed.connect(_on_buy_btn_pressed.bind(is_weapon, i))
+		btn.disabled = coins < item_store[i].purchase_cost()
+		store_grid.add_child(btn)
 
-	var player_level = (weapon.level + armor.level) / 2
+func _on_buy_btn_pressed(is_weapon : bool, store_index : int):
+	var items = weapons if is_weapon else armors
+	var item_store = weapon_store if is_weapon else armor_store
+		
+	if coins >= item_store[store_index].purchase_cost():
+		coins -= item_store[store_index].purchase_cost()
+		items.append(item_store[store_index])
+		item_store.remove_at(store_index)
+		_update_inventory()
+		_redraw_store(true)
+		_redraw_store(false)
+
+func _add_items_to_inv_grid(collection, is_weapon):
+	for i in range(0, collection.size()):
+		var label = RichTextLabel.new()
+		label.text = collection[i].to_str()
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		label.add_theme_color_override("default_color", Color.html("222323"))
+		label.fit_content = true
+		label.bbcode_enabled = true
+		inventory_grid.add_child(label)
+		
+		var btn : Button = btn_scene.instantiate()
+		btn.text = "Upgrade: " + String.num(collection[i].upgrade_cost())
+		btn.pressed.connect(_on_upgrade_btn_pressed.bind(is_weapon, i))
+		btn.disabled = coins < collection[i].upgrade_cost()
+		inventory_grid.add_child(btn)
+
+func _on_upgrade_btn_pressed(is_weapon : bool, index : int):
+	var items : Array[CWM_Entity] = weapons if is_weapon else armors
+	
+	if coins >= items[index].upgrade_cost():
+		coins -= items[index].upgrade_cost()
+		items[index].level += 1
+		_update_inventory()
+		_redraw_store(true)
+		_redraw_store(false)
+
+func _get_best_item(collection : Array[CWM_Entity], enemy : CWM_Entity):
+	var best_level = collection[0].get_adjusted_level(enemy.type)
+	var best_item = collection[0]
+	
+	for item in collection:
+		var adjusted_level = item.get_adjusted_level(enemy.type)
+		
+		if adjusted_level > best_level:
+			best_level = adjusted_level
+			best_item = item
+	
+	print_rich("%s : %s" % [enemy.to_str(), best_item.to_str()])
+	return best_item
+
+func _player_level():
+	var highest_weapon : float = 0
+	var highest_armor : float = 0
+	
+	for item in weapons:
+		if item.level > highest_weapon:
+			highest_armor = item.level
+			
+	for item in armors:
+		if item.level > highest_armor:
+			highest_armor = item.level
+	
+	return roundi((highest_weapon + highest_armor) / 2)
+
+func _generate_enemy():
 	var max_level = config.enemy_levels.size() - 1
-	var rand = randfn(player_level, 1 + player_level / 2)
-	var enemy_level =  clampf(rand, 0, max_level)
-	var enemy_level_string = config.enemy_levels[enemy_level]
-	var enemy_type = config.types.keys()[randi() % config.types.size()]
-	var enemy_name = config.enemies[randi() % config.enemies.size()]
-	var enemy = CWM_Item.new(enemy_name, config.types[enemy_type], enemy_level)
-	
-	var enemy_string = "%s (%d) %s %s" % [
-		enemy_level_string,
-		enemy_level,
-		config.types[enemy_type].adjective,
-		enemy_name
-	]
-	
-	var enemy_str = "Enemy: " + enemy_string
-	print(enemy_str)
-	adv_text.append_text(enemy_str + "\n")
-	
-	var player_initiative = (randi() % 2) == 1
+	var rand = randfn(_player_level() * 0.9, 1.0 + _player_level() / 2.0)
+	var enemy_level =  roundi(clampf(rand, 0, max_level))
+	var enemy_type = rand_type()
+	var enemy_name = config.enemies.pick_random()
+	var enemy = CWM_Entity.new(config, enemy_name, enemy_type, enemy_level)
+	return enemy
+
+func _get_result(enemy, weapon, armor, initiative):
 	var result = "Stalemate"
-	var reversal = false
+	var wep_success = _test_item(weapon, enemy)
+	var armor_success = _test_item(armor, enemy)
 	
-	if player_initiative:
-		if _test_items(weapon, enemy):
+	if initiative:
+		if wep_success:
 			result = "Victory"
-		elif _test_items(enemy, armor):
+		elif not armor_success:
 			result = "Defeat"
-			reversal = true
 	else:
-		if _test_items(enemy, armor):
+		if not armor_success:
 			result = "Defeat"
-		elif _test_items(weapon, enemy):
+		elif wep_success:
 			result = "Victory"
-			reversal = true
 	
+	return result
+	
+func _build_outcome(result, enemy, weapon, armor, initiative):
 	var outcome = ""
+	var enemy_string = enemy.to_str(true)
 	
 	if result == "Stalemate":
-		outcome = "You disengage from " + enemy_string
+		outcome = "[center]Stalemate!\n\nToo evenly matched, you decide to disengage from the " \
+			+ enemy_string + ".[/center]"
 	else:
 		var victory = result == "Victory"
-		var initiative_phrase = "You snuck up on" if player_initiative else "You were ambushed by"
-		var item_string = weapon.str() if victory else armor.str()
-		var result_phrase = "was overcome by" if victory else "was too much for"
-		var reversal_string = ""
+		var initiative_phrase = "You snuck up on" if initiative else "You were ambushed by"
+		var item_string = weapon.to_str() if victory else armor.to_str()
+		var result_phrase = "was overcome by" if victory else "overcame"
+		var aeiou = "n" if "aeiou".contains(enemy.level_str()[0].to_lower()) else ""
 		
-		if reversal:
-			var reversal_phrase = "couldn't get past" if victory else "too tough for"
-			var reversal_item = armor.str() if victory else weapon.str()
-			reversal_string = "%s your %s and " % [reversal_phrase, reversal_item]
-		
-		outcome = "%s! %s a %s who %s%s your %s" % [
+		outcome = "[center]%s!\n\n%s a%s %s who %s your %s.[/center]" % [
 			result,
 			initiative_phrase,
+			aeiou,
 			enemy_string,
-			reversal_string,
 			result_phrase,
 			item_string
 		]
 	
-	print(outcome)
-	adv_text.append_text(outcome + "\n\n")
-	adv_text.scroll_following = true
+	if result == "Victory":
+		coins += clampi(randi_range(enemy.level - 3, enemy.level + 3), 1, 999)
+		coins_label.text = "Coins: " + String.num(coins)
+		_update_inventory()
+	
+	return outcome
 
-func _test_items(item_attack : CWM_Item, item_defend : CWM_Item):
-	var multiplier = 1
+func _on_adventure_pressed():
+	var enemy = _generate_enemy()	
+	var weapon = _get_best_item(weapons, enemy)
+	var armor = _get_best_item(armors, enemy)
 	
-	if item_attack.type.strong.has(item_defend.type.id):
-		multiplier = 2
-	elif item_attack.type.weak.has(item_defend.type.id):
-		multiplier = 0.5
-	
-	return item_attack.level * multiplier > item_defend.level
+	var initiative = (randi() % 2) == 1
+	var result = _get_result(enemy, weapon, armor, initiative)
+	var outcome = _build_outcome(result, enemy, weapon, armor, initiative)
+	print(outcome)
+	adv_text.text = outcome
+	_update_store()
+
+func _test_item(item : CWM_Entity, enemy : CWM_Entity):	
+	return item.get_adjusted_level(enemy.type) > enemy.level
+
+func rand_type():
+	return types[types.keys().pick_random()]

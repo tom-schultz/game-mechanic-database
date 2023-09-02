@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dldhpgic7l2ek"]
+[gd_scene load_steps=10 format=3 uid="uid://dldhpgic7l2ek"]
 
 [ext_resource type="Script" path="res://Core/Scripts/CoreUI.gd" id="1_jegjp"]
 [ext_resource type="PackedScene" uid="uid://b1ax6iqc1qh5y" path="res://Core/Scenes/catalog.tscn" id="2_vl2rp"]
@@ -9,13 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://cniyflpfkj1oh" path="res://Core/Scenes/exit_button.tscn" id="7_18fcv"]
 [ext_resource type="PackedScene" uid="uid://ce6lqqyb5xc0f" path="res://Core/Scenes/audio_controls.tscn" id="8_12uu1"]
 
-[node name="Core UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "config_container", "tab_container")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxae5"]
+bg_color = Color(0.133333, 0.137255, 0.137255, 1)
+
+[node name="Core UI" type="Node2D" node_paths=PackedStringArray("description_label", "controls_container", "tab_container", "grid", "config_editor")]
 script = ExtResource("1_jegjp")
 description_label = NodePath("CanvasLayer/TabContainer/Description/ScrollContainer/MarginContainer/Description Text")
 controls_container = NodePath("CanvasLayer/TabContainer/Controls")
-config_container = NodePath("CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
 tab_container = NodePath("CanvasLayer/TabContainer")
 catalog_scene = ExtResource("2_vl2rp")
+grid = NodePath("CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer/GridContainer")
+config_editor = NodePath("CanvasLayer/Config Editor")
 
 [node name="MechanicFrame" type="Sprite2D" parent="."]
 z_index = -1
@@ -24,6 +28,59 @@ scale = Vector2(1.3, 1.43333)
 texture = ExtResource("3_blwai")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Config Editor" type="Panel" parent="CanvasLayer"]
+visible = false
+offset_left = 432.0
+offset_top = 16.0
+offset_right = 1264.0
+offset_bottom = 704.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gxae5")
+
+[node name="Text Editor" type="CodeEdit" parent="CanvasLayer/Config Editor"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 816.0
+offset_bottom = 595.0
+text = "sdfsdfsdf"
+placeholder_text = "sdfsdf"
+highlight_all_occurrences = true
+line_folding = true
+gutters_draw_line_numbers = true
+gutters_draw_fold_gutter = true
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
+
+[node name="Cancel Button" type="Button" parent="CanvasLayer/Config Editor"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -48.0
+offset_right = -32.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Cancel"
+
+[node name="Save Button" type="Button" parent="CanvasLayer/Config Editor"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -48.0
+offset_right = 104.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Save"
 
 [node name="Title" type="Label" parent="CanvasLayer"]
 offset_top = 8.0
@@ -51,6 +108,7 @@ offset_bottom = 704.0
 theme = ExtResource("4_tstj4")
 
 [node name="Menu" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/TabContainer/Menu"]
@@ -112,7 +170,6 @@ layout_mode = 2
 theme = ExtResource("4_tstj4")
 
 [node name="Configuration" type="MarginContainer" parent="CanvasLayer/TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("4_tstj4")
 
@@ -133,9 +190,11 @@ theme_override_constants/margin_bottom = 0
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/TabContainer/Configuration/Scroll Container/MarginContainer"]
 layout_mode = 2
 theme_override_constants/v_separation = 16
+columns = 2
 
+[connection signal="pressed" from="CanvasLayer/Config Editor/Cancel Button" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Config Editor/Save Button" to="." method="_on_save_button_pressed"]
 [connection signal="tab_clicked" from="CanvasLayer/TabContainer" to="." method="_on_tab_clicked"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Reset Button" to="." method="reset_mechanic"]
 [connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Return to Catalog" to="." method="_on_return_to_catalog_pressed"]
-[connection signal="pressed" from="CanvasLayer/TabContainer/Menu/VSplitContainer/VBoxContainer/Exit Button" to="." method="_on_button_pressed_sfx"]
 [connection signal="meta_clicked" from="CanvasLayer/TabContainer/Description/ScrollContainer/MarginContainer/Description Text" to="." method="_on_description_text_meta_clicked"]
