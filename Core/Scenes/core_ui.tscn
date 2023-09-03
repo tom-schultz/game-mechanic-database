@@ -108,7 +108,6 @@ offset_bottom = 704.0
 theme = ExtResource("4_tstj4")
 
 [node name="Menu" type="MarginContainer" parent="CanvasLayer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer/TabContainer/Menu"]
@@ -160,6 +159,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_tstj4")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Lorem Ipsum"
 fit_content = true
@@ -170,6 +170,7 @@ layout_mode = 2
 theme = ExtResource("4_tstj4")
 
 [node name="Configuration" type="MarginContainer" parent="CanvasLayer/TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_tstj4")
 

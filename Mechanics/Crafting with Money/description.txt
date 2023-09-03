@@ -1,11 +1,51 @@
-This is a minor mechanic! The author needs to update the description.
+[font size="20"]Overview[/font]
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas sed tempus urna et pharetra pharetra massa massa ultricies. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Pharetra magna ac placerat vestibulum lectus mauris ultrices eros in. Diam quam nulla porttitor massa id neque aliquam vestibulum. Et ultrices neque ornare aenean euismod. Nunc vel risus commodo viverra maecenas accumsan lacus. Natoque penatibus et magnis dis. Sed sed risus pretium quam vulputate dignissim suspendisse. Egestas quis ipsum suspendisse ultrices gravida. Bibendum neque egestas congue quisque egestas diam. Nunc sed augue lacus viverra vitae congue eu consequat ac. Tellus molestie nunc non blandit massa enim nec dui. Urna condimentum mattis pellentesque id nibh tortor id. Elit ut aliquam purus sit. Arcu cursus vitae congue mauris rhoncus aenean.
+Crafting with Money is a simplistic model of crafting where the player simply pays money or other resources to perform crafting activities. This contrasts typical crafting systems where the player might need crafting materials, recipes, crafting stations, skills, etc to complete a crafting activity. It commonly does not provide much in the way of expression or depth, but it is easy and low-risk to implement.
 
-Donec et odio pellentesque diam volutpat commodo sed egestas egestas. Vel facilisis volutpat est velit egestas dui id. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Lacus vestibulum sed arcu non odio euismod. Diam vulputate ut pharetra sit amet aliquam id diam. Id velit ut tortor pretium. Dolor purus non enim praesent elementum. Viverra nam libero justo laoreet sit. At varius vel pharetra vel turpis. Tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque. Diam maecenas sed enim ut sem.
+Thematically, Crafting with Money is frequently represented as the player paying an artisan for their work instead of the player acting as the artisan.
 
-Elementum facilisis leo vel fringilla est ullamcorper. Aliquet bibendum enim facilisis gravida neque convallis a cras semper. Varius morbi enim nunc faucibus a pellentesque sit amet. Vel pharetra vel turpis nunc. Duis convallis convallis tellus id interdum velit laoreet id donec. Tempus imperdiet nulla malesuada pellentesque elit. Pellentesque elit eget gravida cum sociis natoque penatibus. Viverra nibh cras pulvinar mattis. Sagittis aliquam malesuada bibendum arcu vitae elementum. Est velit egestas dui id ornare. Dolor sit amet consectetur adipiscing elit ut aliquam purus sit. Pellentesque habitant morbi tristique senectus. Orci nulla pellentesque dignissim enim sit amet venenatis urna. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies.
+Crafting with Money can provide a basic layer of customization to the player. Spending resources on upgrading a favored item might increase a player's attachment to it. It can also act as a knob for fine-tuning performance, especially when the player controls a number of characters. [url="https://www.youtube.com/watch?v=JIX1CK4cgUk"][color=cyan]Fire Emblem forging[/color][/url] is a good example. If the player controls five knights, "crafting" three silver lances and two steel lances for them might produce a slightly different performance profile than five steel lances or five silver lances.
 
-Donec pretium vulputate sapien nec. Parturient montes nascetur ridiculus mus mauris vitae. Erat imperdiet sed euismod nisi porta. Mattis pellentesque id nibh tortor. Magna sit amet purus gravida quis blandit. Posuere lorem ipsum dolor sit amet. At risus viverra adipiscing at. Vitae auctor eu augue ut lectus arcu bibendum. Sit amet mattis vulputate enim nulla. Eget sit amet tellus cras adipiscing enim eu turpis. Vestibulum sed arcu non odio euismod. Quam elementum pulvinar etiam non quam. Eget est lorem ipsum dolor sit amet consectetur adipiscing. Venenatis tellus in metus vulputate eu scelerisque felis imperdiet proin. Sit amet cursus sit amet dictum sit. Rutrum quisque non tellus orci ac auctor augue mauris. Eu sem integer vitae justo eget magna fermentum.
+[url="https://https://www.youtube.com/watch?v=7nZpLK_EfDw&t=103s"][color=cyan]Dark Souls[/color][/url] also uses Crafting with Money for weapon upgrades. This game presents a number of different resources used to perform different functions, such as adding an element or requiring different resources to continue upgrading past a certain point.
 
-Non odio euismod lacinia at quis risus sed vulputate odio. Morbi non arcu risus quis varius quam. Lacus sed viverra tellus in hac habitasse platea. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Volutpat blandit aliquam etiam erat velit. Purus viverra accumsan in nisl. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Lacus vel facilisis volutpat est velit egestas dui. Metus aliquam eleifend mi in nulla posuere sollicitudin. Mi ipsum faucibus vitae aliquet nec ullamcorper sit. Placerat duis ultricies lacus sed turpis tincidunt id aliquet. In nibh mauris cursus mattis molestie a iaculis at erat. Etiam tempor orci eu lobortis elementum. Libero id faucibus nisl tincidunt eget nullam. Senectus et netus et malesuada fames ac turpis. Amet facilisis magna etiam tempor orci. Tortor consequat id porta nibh. Egestas egestas fringilla phasellus faucibus. In egestas erat imperdiet sed. Risus feugiat in ante metus dictum at tempor.
+Note - comments like "typically" are based on the experiences of the author, not based on an exhaustive survey of games implementing Crafting with Money.
+
+[font size="20"]GMDB Implementation[/font]
+
+In this implementation of Crafting with Money, the player can use coins to purchase new items or upgrade the modifier on existing ones. Coins are earned by adventuring, where coins earned are proportional to the level of enemies defeated.
+
+There is a lightweight system of types (elements). Each type is strong against another type, meaning that a multiplier applies when opposing that type. For example, the "flaming" type might be strong against the "living wood" type and thus get a bonus.
+
+Each adventure is set up with a random enemy that is generated based on the average of the player's highest level items. Enemies do not have weapons and armor, instead having a single type and level to represent both. The enemy's level is obscured from the player with a descriptor. The game automatically picks the player's best weapon and armor for an enemy's type. Finally, the initial attacker is randomly determined.
+
+Once setup is done, the game begins combat checks. If the player is first, their weapon is tested against the enemy. The player is victorious if their weapon level, adjusted for types, is higher than the enemy's level. If the enemy attacks first, the player is defeated if player's adjusted armor level is lower than the enemy's level. If the attacker fails, the defender gets a chance to attack. If neither side's attack succeeds, a stalemate occurs.
+
+[font size="20"]Crafting in Games[/font]
+
+[url="https://www.digitalhumanities.org/dhq/vol/11/4/000339/000339.html"][color=cyan]Crafting in Games[/color][/url]¹ provides seven facets of crafting systems that are useful in evaluating a crafting system. This table rates Crafting with Money on those facets based on what is commonly implemented.
+
+[table=2]
+[cell]Recipe Definition[/cell][cell]Strong[/cell]
+[cell]Fidelity of Action[/cell][cell]Low[/cell]
+[cell]Completion Constraints[/cell][cell]Low[/cell]
+[cell]Variable Outcome[/cell][cell]Varies[/cell]
+[cell]Recognition of Outcome    [/cell][cell]Varies[/cell]
+[cell]Player Expressiveness[/cell][cell]Low[/cell]
+[cell]Progression[/cell][cell]Low[/cell]
+[/table]
+
+Recipe definition is typically strong - a certain outcome usually has a very specific set of requirements. Some systems will introduce some level of parametric recipes, or the ability to swap in different resources to achieve different outcomes.
+
+Fidelity of action is arguably low - the player gets little to none of the experience to crafting. There is an argument, however, that Crafting with Money has some level of fidelity to the experience of paying a craftsman for service. To fully replicate that experience, however, the player would need to experience endless delays, shoddy work, failure to pull a permit, promising a quote and then ghosting, and other joys of working with contractors and service providers. No one is bitter here, no one!
+
+Completion constraints are variable, but Crafting with Money typically has a low number of constraints - one or two. Resources are typically grouped as a single constraint and location is commonly a second, such as talking to an artisan or using a crafting station (see Fire Emblem and Dark Souls, above).
+
+Variable outcomes can be a part of Crafting with Money. Fire Emblem (above) does not have variable outcomes, nor does Dark Souls. While Terraria's crafting is generally more complex than Crafting with Money, [url="https://terraria-archive.fandom.com/wiki/Reforging"][color=cyan]Terraria Reforging[/color][/url] is an example of Crafting with Money that has a variable outcome.
+
+Recognition of outcome varies depending on the game, tending towards the low side due to Crafting with Money's frequent focus on stat changes. The GMDB implementation does not have high recognition of the outcome, but Terria's Reforging will produce stat changes that are noticable during gameplay.
+
+Player expressiveness is typically low. There is nothing stopping a Crafting with Money system from providing a high level of player expressiveness through color, material, etc, but frequently these crafting systems are simplistic and change numbers rather than providing a creative outlet for players.
+
+Progression is typically low because there usually aren't recipes, skills, or other indicators that you as a player have progressed in some way. Typically a player might be able to continue increasing an item's modifier (+2 stick to +3 stick) or, as in the case of Dark Souls, the recipe might change as higher modifiers are achieved.
+
+[1] Grow et al., "Crafting in Games", Digital Humanities (2017) 11-4

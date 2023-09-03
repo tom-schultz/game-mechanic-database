@@ -82,7 +82,7 @@ func _build_mechanic_scene():
 	config_res.set_script(new_config_script)
 	ResourceSaver.save(config_res, mechanic_path + mechanic_name + " Config.tres")
 	mechanic.config = config_res
-	var library = mechanic.get_node("Library UI")
+	var library = mechanic.get_node("Core UI")
 	library.mechanic_config = config_res
 	
 	library.mechanic_controls_scene = controls_scene
