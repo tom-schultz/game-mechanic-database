@@ -1,4 +1,4 @@
-class_name CWM_EntityType
+class_name CAAS_EntityType
 
 var id : String
 var strong : Array

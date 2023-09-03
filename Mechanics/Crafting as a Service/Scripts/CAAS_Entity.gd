@@ -1,11 +1,11 @@
-class_name CWM_Entity	
+class_name CAAS_Entity	
 
 var name : String
-var type : CWM_EntityType
+var type : CAAS_EntityType
 var level : int
-var _config : CraftingWithMoneyConfig
+var _config : CraftingAsAServiceConfig
 
-func _init(config : CraftingWithMoneyConfig, new_name : String, new_type : CWM_EntityType,
+func _init(config : CraftingAsAServiceConfig, new_name : String, new_type : CAAS_EntityType,
 		new_level : int):
 	self.name = new_name
 	self.type = new_type
@@ -25,7 +25,7 @@ func to_str(use_level_string = false):
 func level_str():
 	return _config.enemy_levels[level]
 
-func get_adjusted_level(opposing_type : CWM_EntityType):
+func get_adjusted_level(opposing_type : CAAS_EntityType):
 	if type.strong.has(opposing_type.id):
 		return level * _config.strong_modifier
 	

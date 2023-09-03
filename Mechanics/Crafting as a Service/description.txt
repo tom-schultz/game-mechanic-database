@@ -1,0 +1,51 @@
+[font size="20"]Overview[/font]
+
+Crafting as a Service is a simplistic model of crafting where the player simply pays money or other resources to perform crafting activities. This contrasts typical crafting systems where the player might need crafting materials, recipes, crafting stations, skills, etc to complete a crafting activity. It commonly does not provide much in the way of expression or depth, but it is easy and low-risk to implement.
+
+Thematically, Crafting as a Service is frequently represented as the player paying an artisan for their work instead of the player acting as the artisan.
+
+Crafting as a Service can provide a basic layer of customization to the player. Spending resources on upgrading a favored item might increase a player's attachment to it. It can also act as a knob for fine-tuning performance, especially when the player controls a number of characters. [url="https://www.youtube.com/watch?v=JIX1CK4cgUk"][color=cyan]Fire Emblem forging[/color][/url] is a good example. If the player controls five knights, "crafting" three silver lances and two steel lances for them might produce a slightly different performance profile than five steel lances or five silver lances.
+
+[url="https://https://www.youtube.com/watch?v=7nZpLK_EfDw&t=103s"][color=cyan]Dark Souls[/color][/url] also uses Crafting as a Service for weapon upgrades. This game presents a number of different resources used to perform different functions, such as adding an element or requiring different resources to continue upgrading past a certain point.
+
+Note - comments like "typically" are based on the experiences of the author, not based on an exhaustive survey of games implementing Crafting as a Service.
+
+[font size="20"]GMDB Implementation[/font]
+
+In this implementation of Crafting as a Service, the player can use coins to purchase new items or upgrade the modifier on existing ones. Coins are earned by adventuring, where coins earned are proportional to the level of enemies defeated.
+
+There is a lightweight system of types (elements). Each type is strong against another type, meaning that a multiplier applies when opposing that type. For example, the "flaming" type might be strong against the "living wood" type and thus get a bonus.
+
+Each adventure is set up with a random enemy that is generated based on the average of the player's highest level items. Enemies do not have weapons and armor, instead having a single type and level to represent both. The enemy's level is obscured from the player with a descriptor. The game automatically picks the player's best weapon and armor for an enemy's type. Finally, the initial attacker is randomly determined.
+
+Once setup is done, the game begins combat checks. If the player is first, their weapon is tested against the enemy. The player is victorious if their weapon level, adjusted for types, is higher than the enemy's level. If the enemy attacks first, the player is defeated if player's adjusted armor level is lower than the enemy's level. If the attacker fails, the defender gets a chance to attack. If neither side's attack succeeds, a stalemate occurs.
+
+[font size="20"]Crafting in Games[/font]
+
+[url="https://www.digitalhumanities.org/dhq/vol/11/4/000339/000339.html"][color=cyan]Crafting in Games[/color][/url]¹ provides seven facets of crafting systems that are useful in evaluating a crafting system. This table rates Crafting as a Service on those facets based on what is commonly implemented.
+
+[table=2]
+[cell]Recipe Definition[/cell][cell]Strong[/cell]
+[cell]Fidelity of Action[/cell][cell]Low[/cell]
+[cell]Completion Constraints[/cell][cell]Low[/cell]
+[cell]Variable Outcome[/cell][cell]Varies[/cell]
+[cell]Recognition of Outcome    [/cell][cell]Varies[/cell]
+[cell]Player Expressiveness[/cell][cell]Low[/cell]
+[cell]Progression[/cell][cell]Low[/cell]
+[/table]
+
+Recipe definition is typically strong - a certain outcome usually has a very specific set of requirements. Some systems will introduce some level of parametric recipes, or the ability to swap in different resources to achieve different outcomes.
+
+Fidelity of action is arguably low - the player gets little to none of the experience to crafting. There is an argument, however, that Crafting as a Service has some level of fidelity to the experience of paying a craftsman for service. To fully replicate that experience, however, the player would need to experience endless delays, shoddy work, failure to pull a permit, promising a quote and then ghosting, and other joys of working with contractors and service providers. No one is bitter here, no one!
+
+Completion constraints are variable, but Crafting as a Service typically has a low number of constraints - one or two. Resources are typically grouped as a single constraint and location is commonly a second, such as talking to an artisan or using a crafting station (see Fire Emblem and Dark Souls, above).
+
+Variable outcomes can be a part of Crafting as a Service. Fire Emblem (above) does not have variable outcomes, nor does Dark Souls. While Terraria's crafting is generally more complex than Crafting as a Service, [url="https://terraria-archive.fandom.com/wiki/Reforging"][color=cyan]Terraria Reforging[/color][/url] is an example of Crafting as a Service that has a variable outcome.
+
+Recognition of outcome varies depending on the game, tending towards the low side due to Crafting as a Service's frequent focus on stat changes. The GMDB implementation does not have high recognition of the outcome, but Terria's Reforging will produce stat changes that are noticable during gameplay.
+
+Player expressiveness is typically low. There is nothing stopping a Crafting as a Service system from providing a high level of player expressiveness through color, material, etc, but frequently these crafting systems are simplistic and change numbers rather than providing a creative outlet for players.
+
+Progression is typically low because there usually aren't recipes, skills, or other indicators that you as a player have progressed in some way. Typically a player might be able to continue increasing an item's modifier (+2 stick to +3 stick) or, as in the case of Dark Souls, the recipe might change as higher modifiers are achieved.
+
+[1] Grow et al., "Crafting in Games", Digital Humanities (2017) 11-4

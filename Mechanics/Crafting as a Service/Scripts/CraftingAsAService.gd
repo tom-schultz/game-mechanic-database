@@ -1,31 +1,34 @@
 extends Node
-class_name CraftingWithMoney
+class_name CraftingAsAService
 
-@export var config : CraftingWithMoneyConfig
+@export var config : CraftingAsAServiceConfig
 @export var adv_text : RichTextLabel
 @export var coins_label : Label
 @export var inventory_grid : GridContainer
 @export var weapon_store_grid : GridContainer
 @export var armor_store_grid : GridContainer
-@export var btn_scene : PackedScene
+@export var button_scene : PackedScene
 
-var weapons : Array[CWM_Entity]
-var armors : Array[CWM_Entity]
-var weapon_store : Array[CWM_Entity]
-var armor_store : Array[CWM_Entity]
+var weapons : Array[CAAS_Entity]
+var armors : Array[CAAS_Entity]
+var weapon_store : Array[CAAS_Entity]
+var armor_store : Array[CAAS_Entity]
 var coins = 3
 var types : Dictionary
 
 func _ready():
-	config.types_changed.connect(_update_types)
+	config.types_changed.connect(_reset)
+	_reset()
+
+func _reset():
 	_update_types()
 	
 	weapons = [
-		CWM_Entity.new(config, config.weapons.pick_random(), rand_type(), 1),
+		CAAS_Entity.new(config, config.weapons.pick_random(), rand_type(), 1),
 	]
 	
 	armors = [
-		CWM_Entity.new(config, config.armors.pick_random(), rand_type(), 1),
+		CAAS_Entity.new(config, config.armors.pick_random(), rand_type(), 1),
 	]
 	
 	_update_inventory()
@@ -33,9 +36,10 @@ func _ready():
 
 func _update_types():
 	var types_data = JSON.parse_string(config.types)
+	types.clear()
 	
 	for key in types_data:
-		types[key] = CWM_EntityType.new(key, types_data[key])
+		types[key] = CAAS_EntityType.new(key, types_data[key])
 
 func _update_inventory():
 	coins_label.text = "Coins: " + String.num(coins)
@@ -54,14 +58,14 @@ func _update_store():
 		var item_name = config.weapons.pick_random()
 		var item_type = rand_type()
 		var item_level = randi_range(0, _player_level())
-		var item = CWM_Entity.new(config, item_name, item_type, item_level)
+		var item = CAAS_Entity.new(config, item_name, item_type, item_level)
 		weapon_store.append(item)
 		
 	for i in range(0, config.items_per_store):
 		var item_name = config.armors.pick_random()
 		var item_type = rand_type()
 		var item_level = randi_range(0, _player_level())
-		var item = CWM_Entity.new(config, item_name, item_type, item_level)
+		var item = CAAS_Entity.new(config, item_name, item_type, item_level)
 		armor_store.append(item)
 	
 	_redraw_store(true)
@@ -84,7 +88,7 @@ func _redraw_store(is_weapon : bool):
 		label.bbcode_enabled = true
 		store_grid.add_child(label)
 		
-		var btn : Button = btn_scene.instantiate()
+		var btn : Button = button_scene.instantiate()
 		btn.text = "Buy: " + String.num(item_store[i].purchase_cost())
 		btn.pressed.connect(_on_buy_btn_pressed.bind(is_weapon, i))
 		btn.disabled = coins < item_store[i].purchase_cost()
@@ -113,14 +117,14 @@ func _add_items_to_inv_grid(collection, is_weapon):
 		label.bbcode_enabled = true
 		inventory_grid.add_child(label)
 		
-		var btn : Button = btn_scene.instantiate()
+		var btn : Button = button_scene.instantiate()
 		btn.text = "Upgrade: " + String.num(collection[i].upgrade_cost())
 		btn.pressed.connect(_on_upgrade_btn_pressed.bind(is_weapon, i))
 		btn.disabled = coins < collection[i].upgrade_cost()
 		inventory_grid.add_child(btn)
 
 func _on_upgrade_btn_pressed(is_weapon : bool, index : int):
-	var items : Array[CWM_Entity] = weapons if is_weapon else armors
+	var items : Array[CAAS_Entity] = weapons if is_weapon else armors
 	
 	if coins >= items[index].upgrade_cost():
 		coins -= items[index].upgrade_cost()
@@ -129,7 +133,7 @@ func _on_upgrade_btn_pressed(is_weapon : bool, index : int):
 		_redraw_store(true)
 		_redraw_store(false)
 
-func _get_best_item(collection : Array[CWM_Entity], enemy : CWM_Entity):
+func _get_best_item(collection : Array[CAAS_Entity], enemy : CAAS_Entity):
 	var best_level = collection[0].get_adjusted_level(enemy.type)
 	var best_item = collection[0]
 	
@@ -163,7 +167,7 @@ func _generate_enemy():
 	var enemy_level =  roundi(clampf(rand, 0, max_level))
 	var enemy_type = rand_type()
 	var enemy_name = config.enemies.pick_random()
-	var enemy = CWM_Entity.new(config, enemy_name, enemy_type, enemy_level)
+	var enemy = CAAS_Entity.new(config, enemy_name, enemy_type, enemy_level)
 	return enemy
 
 func _get_result(enemy, weapon, armor, initiative):
@@ -226,7 +230,7 @@ func _on_adventure_pressed():
 	adv_text.text = outcome
 	_update_store()
 
-func _test_item(item : CWM_Entity, enemy : CWM_Entity):	
+func _test_item(item : CAAS_Entity, enemy : CAAS_Entity):	
 	return item.get_adjusted_level(enemy.type) > enemy.level
 
 func rand_type():

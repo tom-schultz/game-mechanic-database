@@ -16,17 +16,17 @@ var mechanics : Array = [
 		"Category": "Crafting Systems",
 		"Tags": [ "crafting" ],
 		"Implementations": [ "Minecraft" ],
-		"Related Mechanics": [ "Crafting with Money" ],
+		"Related Mechanics": [ "Crafting as a Service" ],
 		"Scene" : "res://Mechanics/Pattern Crafting/Scenes/pattern_crafting.tscn",
 		"Thumbnail" : "res://Mechanics/Pattern Crafting/thumbnail.png",
 	},
 	{
-		"Id": "Crafting with Money",
+		"Id": "Crafting as a Service",
 		"Category": "Crafting Systems",
 		"Tags": [ "crafting" ],
-		"Implementations": [ "Fire Emblem Games" ],
+		"Implementations": [ "Fire Emblem Games", "Terraria", "Dark Souls" ],
 		"Related Mechanics": [ "Pattern Crafting" ],
-		"Scene" : "res://Mechanics/Crafting with Money/Scenes/crafting_with_money.tscn",
+		"Scene" : "res://Mechanics/Crafting as a Service/Scenes/crafting_as_a_service.tscn",
 		"Thumbnail" : "res://Core/Textures/mechanic_frame.png",
 	},
 ]
@@ -62,4 +62,3 @@ func _append_single(mechanic_id, index, index_key):
 		return
 	
 	index[index_key].append(mechanic_id)
-

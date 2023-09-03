@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CraftingAsAServiceConfig" load_steps=2 format=3 uid="uid://ml7c6ciajhpy"]
+
+[ext_resource type="Script" path="res://Mechanics/Crafting as a Service/Scripts/CraftingAsAServiceConfig.gd" id="1_5urs8"]
+
+[resource]
+script = ExtResource("1_5urs8")
+types = "{
+	\"flaming\": {
+		\"strong\": [\"living wood\"],
+		\"color\": \"crimson\"
+	},
+	\"living wood\": {
+		\"strong\": [\"earthen\"],
+		\"color\": \"peru\"
+	},
+	\"aqueous\": {
+		\"strong\": [\"flaming\"],
+		\"color\": \"deep sky blue\"
+	},
+	\"earthen\": {
+		\"strong\": [\"skyborn\"],
+		\"color\": \"saddle brown\"
+	},
+	\"skyborn\": {
+		\"strong\": [\"aqueous\"],
+		\"color\": \"light steel blue\"
+	}
+}"
+items_per_store = 5
+upgrade_cost_multiplier = 3
+purchase_cost_multiplier = 4
+strong_modifier = 2
+weapons = Array[String](["axe", "sword", "bow", "table leg", "crossbow", "wand", "wizard Staff", "quarterstaff", "sling", "dagger", "scimitar", "keyboard", "flail", "mace", "morningstar", "palm strike", "pinky hold", "baleful glare", "stink eye"])
+armors = Array[String](["apathy", "platemail", "leather jerkin", "round shield", "tower shield", "kite shield", "trash can lid", "great helm", "trucker hat", "cuirass", "mage armor", "greaves", "codpiece", "pauldrons", "sneakers", "short shorts", "chainmail", "scalemail", "origami breastplate"])
+enemies = Array[String](["lizardfolk", "eagle", "beagle", "goblin", "teenager", "programmer", "artist", "producer", "tester", "audio Engineer", "MBA", "writer", "gamer", "monkey", "bear", "bug", "bugbear", "bearbug"])
+enemy_levels = Array[String](["sickly", "weak", "young", "juvenile", "adult", "strong", "greater", "intelligent", "powerful", "ancient", "giant", "massive", "gargantuan", "titanic", "apocalyptic", "godlike"])

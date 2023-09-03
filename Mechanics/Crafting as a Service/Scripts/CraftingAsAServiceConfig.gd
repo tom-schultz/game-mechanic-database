@@ -1,5 +1,5 @@
 extends Resource
-class_name CraftingWithMoneyConfig
+class_name CraftingAsAServiceConfig
 
 signal types_changed
 
