@@ -8,6 +8,11 @@ class_name CraftingAsAService
 @export var weapon_store_grid : GridContainer
 @export var armor_store_grid : GridContainer
 @export var button_scene : PackedScene
+@export var buy_sfx : AudioStream
+@export var upgrade_sfx : AudioStream
+@export var stalemate_sfx : AudioStream
+@export var victory_sfx : AudioStream
+@export var defeat_sfx : AudioStream
 
 var weapons : Array[CAAS_Entity]
 var armors : Array[CAAS_Entity]
@@ -105,6 +110,7 @@ func _on_buy_btn_pressed(is_weapon : bool, store_index : int):
 		_update_inventory()
 		_redraw_store(true)
 		_redraw_store(false)
+		AudioPlayer.play_sfx(buy_sfx)
 
 func _add_items_to_inv_grid(collection, is_weapon):
 	for i in range(0, collection.size()):
@@ -132,6 +138,7 @@ func _on_upgrade_btn_pressed(is_weapon : bool, index : int):
 		_update_inventory()
 		_redraw_store(true)
 		_redraw_store(false)
+		AudioPlayer.play_sfx(upgrade_sfx)
 
 func _get_best_item(collection : Array[CAAS_Entity], enemy : CAAS_Entity):
 	var best_level = collection[0].get_adjusted_level(enemy.type)
@@ -229,6 +236,14 @@ func _on_adventure_pressed():
 	print(outcome)
 	adv_text.text = outcome
 	_update_store()
+	
+	match (result):
+		"Victory":
+			AudioPlayer.play_sfx(victory_sfx)
+		"Defeat":
+			AudioPlayer.play_sfx(defeat_sfx)
+		"Stalemate":
+			AudioPlayer.play_sfx(stalemate_sfx)
 
 func _test_item(item : CAAS_Entity, enemy : CAAS_Entity):	
 	return item.get_adjusted_level(enemy.type) > enemy.level
