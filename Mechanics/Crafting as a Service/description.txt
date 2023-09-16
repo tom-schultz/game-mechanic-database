@@ -8,7 +8,7 @@ Crafting as a Service can provide a basic layer of customization to the player. 
 
 [url="https://https://www.youtube.com/watch?v=7nZpLK_EfDw&t=103s"][color=cyan]Dark Souls[/color][/url] also uses Crafting as a Service for weapon upgrades. This game presents a number of different resources used to perform different functions, such as adding an element or requiring different resources to continue upgrading past a certain point.
 
-Note - comments like "typically" are based on the experiences of the author, not based on an exhaustive survey of games implementing Crafting as a Service.
+Note - comments like "typically" are based on the experiences of the author, not an exhaustive survey of games implementing Crafting as a Service.
 
 [font size="20"]GMDB Implementation[/font]
 

@@ -27,7 +27,7 @@ var mechanics : Array = [
 		"Implementations": [ "Fire Emblem Games", "Terraria", "Dark Souls" ],
 		"Related Mechanics": [ "Pattern Crafting" ],
 		"Scene" : "res://Mechanics/Crafting as a Service/Scenes/crafting_as_a_service.tscn",
-		"Thumbnail" : "res://Core/Textures/mechanic_frame.png",
+		"Thumbnail" : "res://Mechanics/Crafting as a Service/thumbnail.png",
 	},
 ]
 
