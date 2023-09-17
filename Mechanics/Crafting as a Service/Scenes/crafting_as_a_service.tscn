@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dmux0wvyty2qb"]
+[gd_scene load_steps=15 format=3 uid="uid://dmux0wvyty2qb"]
 
 [ext_resource type="Script" path="res://Mechanics/Crafting as a Service/Scripts/CraftingAsAService.gd" id="1_vuhhx"]
 [ext_resource type="PackedScene" uid="uid://fvp4m5iloy6b" path="res://Mechanics/Crafting as a Service/Scenes/button.tscn" id="3_tegtp"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cb1bj3tl133jv" path="res://Shared/Audio/SFX/snoring.wav" id="6_0bd7l"]
 [ext_resource type="AudioStream" uid="uid://cisu2u6gcwuab" path="res://Shared/Audio/SFX/fanfare.wav" id="7_ama5r"]
 [ext_resource type="AudioStream" uid="uid://ogt6gitka1t7" path="res://Shared/Audio/SFX/wilhelm.wav" id="8_s3lbq"]
+[ext_resource type="Theme" uid="uid://drqh2pokmm6ka" path="res://Mechanics/Crafting as a Service/button_theme.tres" id="9_ye2lk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_557wj"]
 bg_color = Color(0.133333, 0.137255, 0.137255, 1)
@@ -37,10 +38,12 @@ victory_sfx = ExtResource("7_ama5r")
 defeat_sfx = ExtResource("8_s3lbq")
 
 [node name="Adventure Button" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
 offset_left = 804.0
 offset_top = 568.0
 offset_right = 891.0
 offset_bottom = 599.0
+theme = ExtResource("9_ye2lk")
 text = "Adventure"
 
 [node name="Adventure Text" type="RichTextLabel" parent="."]

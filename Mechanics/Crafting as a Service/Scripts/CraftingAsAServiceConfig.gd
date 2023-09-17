@@ -88,7 +88,7 @@ signal types_changed
 	"artist",
 	"producer",
 	"tester",
-	"audio Engineer",
+	"audio engineer",
 	"MBA",
 	"writer",
 	"gamer",

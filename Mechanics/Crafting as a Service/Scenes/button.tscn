@@ -1,14 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://fvp4m5iloy6b"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jx3o"]
-bg_color = Color(0.941176, 0.964706, 0.941176, 1)
+[ext_resource type="Theme" uid="uid://drqh2pokmm6ka" path="res://Mechanics/Crafting as a Service/button_theme.tres" id="1_n6qd5"]
 
 [node name="Upgrade" type="Button"]
+custom_minimum_size = Vector2(100, 0)
 offset_right = 74.0
 offset_bottom = 31.0
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.133333, 0.137255, 0.137255, 1)
-theme_override_colors/font_disabled_color = Color(0.447059, 0.458824, 0.458824, 1)
-theme_override_styles/disabled = SubResource("StyleBoxFlat_6jx3o")
+theme = ExtResource("1_n6qd5")
 disabled = true
 text = "Upgrade"
