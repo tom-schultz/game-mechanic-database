@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg2ncjft13r41"]
+[gd_scene load_steps=10 format=3 uid="uid://bg2ncjft13r41"]
 
 [ext_resource type="Script" path="res://Core/Scripts/AudioPlayer.gd" id="1_71kbk"]
 [ext_resource type="AudioStream" uid="uid://cm0nokknkmdx0" path="res://Shared/Audio/SFX/interface/Simple Click Sound 1.wav" id="2_ap08p"]
-[ext_resource type="AudioStream" uid="uid://8jaidc1aninr" path="res://Shared/Audio/Music/park_ambience_birds.wav" id="2_bjdd2"]
 [ext_resource type="AudioStream" uid="uid://ma0anllmwf0a" path="res://Shared/Audio/SFX/interface/Simple Click Sound 2.wav" id="3_fomgg"]
+[ext_resource type="AudioStream" uid="uid://8jaidc1aninr" path="res://Shared/Audio/Music/Birbs/Birbs in the Park.wav" id="4_2hsnl"]
+[ext_resource type="AudioStream" uid="uid://cgysu8p3bqx5r" path="res://Shared/Audio/Music/Koi-Discovery/Cyborg Travel.mp3" id="5_ilmn4"]
+[ext_resource type="AudioStream" uid="uid://dmlgluaou6k6y" path="res://Shared/Audio/Music/Koi-Discovery/Kollectart.mp3" id="6_1jmx2"]
+[ext_resource type="AudioStream" uid="uid://b20sclv24qhs5" path="res://Shared/Audio/Music/Koi-Discovery/Split-Brain.mp3" id="7_p7a4x"]
+[ext_resource type="AudioStream" uid="uid://cx2fcqiigy5w6" path="res://Shared/Audio/Music/Koi-Discovery/This-is-not-Philemon.mp3" id="8_xq5me"]
+[ext_resource type="AudioStream" uid="uid://bimdpj33k80k7" path="res://Shared/Audio/Music/Koi-Discovery/Toxic.mp3" id="9_bjtk7"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_71kbk")
@@ -11,11 +16,16 @@ _button_press_sfx = ExtResource("2_ap08p")
 _button_press_volume = 0.8
 _tab_click_sfx = ExtResource("3_fomgg")
 _tab_click_volume = 0.8
+playlists = {
+"Birbs": [ExtResource("4_2hsnl")],
+"Koi-Discovery": [ExtResource("5_ilmn4"), ExtResource("6_1jmx2"), ExtResource("7_p7a4x"), ExtResource("8_xq5me"), ExtResource("9_bjtk7")]
+}
 
-[node name="Music Player Blue" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_bjdd2")
+[node name="Music Player" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
 autoplay = true
 
 [node name="SFX Player" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
+
+[connection signal="finished" from="Music Player" to="." method="_on_music_player_finished"]

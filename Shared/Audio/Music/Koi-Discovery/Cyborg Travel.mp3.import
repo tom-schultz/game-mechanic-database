@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cgysu8p3bqx5r"
+path="res://.godot/imported/Cyborg Travel.mp3-127426be449c30beeaed3ec9db980531.mp3str"
+
+[deps]
+
+source_file="res://Shared/Audio/Music/Koi-Discovery/Cyborg Travel.mp3"
+dest_files=["res://.godot/imported/Cyborg Travel.mp3-127426be449c30beeaed3ec9db980531.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
